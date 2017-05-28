@@ -21,7 +21,7 @@ or add
 
 ## Configuration
 
-### 1. Update yii2 newsletters database schema
+### 1. Update yii2-contacts database schema
 
 Make sure that you have properly configured `db` application component
 and run the following command:
@@ -45,9 +45,6 @@ Set on your configuration file
 	
 ]	
 ```
-
-### 3. Add Essentials Countries Table
-[countries-code.sql] (docs/countries-code.sql)  
 
 ### URLS
 <ul> 
