@@ -1,0 +1,27 @@
+{
+    "name": "cinghie/yii2-contacts",
+    "description": "Yii2 Contacts",
+    "keywords": ["yii2", "yii2 contacts", "yii2 contacts form", "yii2 contacts manager", "yii2 contacts create"],
+    "homepage": "https://github.com/cinghie/yii2-crm",
+    "type": "yii2-extension",
+    "authors": [
+        {
+            "name": "Gogodigital.it",
+            "email": "info@gogodigital.it",
+            "homepage": "http://www.gogodigital.it/"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+        "kartik-v/yii2-detail-view": "*",
+        "kartik-v/yii2-grid": "*",
+        "kartik-v/yii2-helpers": "*",
+        "kartik-v/yii2-mpdf": "*",
+        "kartik-v/yii2-widgets": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "cinghie\\contacts\\": ""
+        }
+    }
+}
