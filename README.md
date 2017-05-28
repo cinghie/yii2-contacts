@@ -37,11 +37,11 @@ Set on your configuration file
 ```	
 'modules' => [ 
 
-	  // Yii2 Contacts
+    // Yii2 Contacts
     'contacts' => [
         'class' => 'cinghie\contacts\Contacts',
-		    'roles' => ['admin']
-    ],
+        'roles' => ['admin']
+     ],
 	
 ]	
 ```
