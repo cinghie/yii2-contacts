@@ -28,7 +28,7 @@ class m170528_101629_create_countries_phonecode_table extends Migration
      */
     public function down()
     {
-        $this->dropTable('{{%contacts}}');
+        $this->dropTable('{{%countries_phonecode}}');
     }
 
 }
