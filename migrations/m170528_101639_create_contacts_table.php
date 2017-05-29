@@ -3,7 +3,7 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `news`.
+ * Handles the creation of table `contacts`.
  */
 class m170528_101639_create_contacts_table extends Migration
 {
