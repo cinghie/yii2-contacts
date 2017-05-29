@@ -4,11 +4,13 @@
  * @copyright Copyright &copy; Gogodigital Srls
  * @company Gogodigital Srls - Wide ICT Solutions
  * @website http://www.gogodigital.it
- * @package yii2-crm
- * @version 0.2.5
+ * @github https://github.com/cinghie/yii2-contacts
+ * @license GNU GENERAL PUBLIC LICENSE VERSION 3
+ * @package yii2-contacts
+ * @version 0.1.0
  */
 
-namespace cinghie\crm\models;
+namespace cinghie\contacts\models;
 
 use yii\db\ActiveRecord;
 
@@ -54,13 +56,13 @@ class Countriescodes extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => \Yii::t('crm', 'ID'),
-            'iso' => \Yii::t('crm', 'Iso'),
-            'name' => \Yii::t('crm', 'Name'),
-            'nicename' => \Yii::t('crm', 'Nicename'),
-            'iso3' => \Yii::t('crm', 'Iso3'),
-            'numcode' => \Yii::t('crm', 'Numcode'),
-            'phonecode' => \Yii::t('crm', 'Phonecode'),
+            'id' => \Yii::t('contacts', 'ID'),
+            'iso' => \Yii::t('contacts', 'Iso'),
+            'name' => \Yii::t('contacts', 'Name'),
+            'nicename' => \Yii::t('contacts', 'Nicename'),
+            'iso3' => \Yii::t('contacts', 'Iso3'),
+            'numcode' => \Yii::t('contacts', 'Numcode'),
+            'phonecode' => \Yii::t('contacts', 'Phonecode'),
         ];
     }
 
