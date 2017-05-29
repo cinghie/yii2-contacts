@@ -2,7 +2,7 @@
     "name": "cinghie/yii2-contacts",
     "description": "Yii2 Contacts",
     "keywords": ["yii2", "yii2 contacts", "yii2 contacts form", "yii2 contacts manager", "yii2 contacts create"],
-    "homepage": "https://github.com/cinghie/yii2-crm",
+    "homepage": "https://github.com/cinghie/yii2-contacts",
     "type": "yii2-extension",
     "authors": [
         {
