@@ -5,7 +5,7 @@
  * @company Gogodigital Srls - Wide ICT Solutions
  * @website http://www.gogodigital.it
  * @package yii2-contacts
- * @version 1.0.0
+ * @version 0.9.0
  */
 
 use kartik\detail\DetailView;
