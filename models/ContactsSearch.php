@@ -33,7 +33,7 @@ class ContactsSearch extends Contacts
     public function rules()
     {
         return [
-            [['id', 'userid', 'state'], 'integer'],
+            [['id', 'user_id', 'state'], 'integer'],
             [['name','firstname', 'lastname', 'account', 'email', 'email_secondary', 'phone', 'phone_code', 'phone_secondary', 'phone_secondary_code', 'mobile', 'mobile_code', 'mobile_secondary', 'mobile_secondary_code', 'skype', 'created', 'modified'], 'safe'],
         ];
     }
@@ -96,7 +96,7 @@ class ContactsSearch extends Contacts
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'userid' => $this->userid,
+            'user_id' => $this->user_id,
             'state' => $this->state,
             'created' => $this->created,
             'modified' => $this->modified,

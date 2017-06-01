@@ -19,7 +19,7 @@ use cinghie\yii2userextended\models\User;
  * This is the model class for table "{{%contacts}}".
  *
  * @property int $id
- * @property int $userid
+ * @property int $user_id
  * @property string $firstname
  * @property string $lastname
  * @property string $email
@@ -113,7 +113,7 @@ class Contacts extends ActiveRecord
                     return $('#contacts-fax_secondary').val() != '';
             }"],
             [['created', 'modified'], 'safe'],
-            [['userid', 'phone_code', 'phone_secondary_code', 'mobile_code', 'mobile_secondary_code', 'fax_code', 'fax_secondary_code', 'state', 'created_by', 'modified_by'], 'integer'],
+            [['user_id', 'phone_code', 'phone_secondary_code', 'mobile_code', 'mobile_secondary_code', 'fax_code', 'fax_secondary_code', 'state', 'created_by', 'modified_by'], 'integer'],
             [['phone', 'phone_secondary', 'mobile', 'mobile_secondary', 'fax', 'fax_secondary'], 'string', 'max' => 50],
             [['firstname', 'lastname', 'email', 'email_secondary'], 'string', 'max' => 100],
             [['website', 'skype', 'facebook', 'gplus', 'twitter', 'linkedin'], 'string', 'max' => 255],
@@ -136,7 +136,7 @@ class Contacts extends ActiveRecord
     {
         return [
             'id' => \Yii::t('contacts', 'ID'),
-            'userid' => \Yii::t('contacts', 'Userid'),
+            'user_id' => \Yii::t('contacts', 'Userid'),
             'firstname' => \Yii::t('contacts', 'Firstname'),
             'lastname' => \Yii::t('contacts', 'Lastname'),
             'email' => \Yii::t('contacts', 'Email'),
@@ -227,7 +227,7 @@ class Contacts extends ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'userid']);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
     /**
@@ -278,7 +278,7 @@ class Contacts extends ActiveRecord
     }
 
     /**
-     * Get the userid By user email
+     * Get the user_id By user email
      * @param $email
      * @return integer
      */

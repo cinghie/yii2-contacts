@@ -196,10 +196,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'attributes' => [
                     [
-                        'attribute' => 'userid',
+                        'attribute' => 'user_id',
                         'label' => \Yii::t('contacts', 'Userid'),
                         'format' => 'raw',
-                        'value' => $model->userid ? Html::a($model->user->username,urldecode(Url::toRoute(['/user/admin/update', 'id' => $model->userid]))) : \Yii::t('contacts', 'Nobody'),
+                        'value' => $model->user_id ? Html::a($model->user->username,urldecode(Url::toRoute(['/user/admin/update', 'id' => $model->user_id]))) : \Yii::t('contacts', 'Nobody'),
                         'type' => DetailView::INPUT_SWITCH,
                         'valueColOptions'=> [
                             'style'=>'width:30%'

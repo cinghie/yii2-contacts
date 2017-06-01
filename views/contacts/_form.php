@@ -20,12 +20,12 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 
 // Get current user
 $user     = \Yii::$app->user->identity;
-$userid   = $user->id;
+$user_id   = $user->id;
 $username = $user->username;
 
 if($model->isNewRecord) {
     $created = date("Y-m-d H:i:s");
-    $created_by = $userid;
+    $created_by = $user_id;
     $created_by_username = $username;
     $modified = "0000-00-00 00:00:00";
     $modified_by = NULL;
@@ -236,16 +236,16 @@ if($model->isNewRecord) {
 
                 <div class="col-lg-6">
 
-                    <?php if($model->isNewRecord && !$model->userid || $model->userid == 0): ?>
+                    <?php if($model->isNewRecord && !$model->user_id || $model->user_id == 0): ?>
 
-                        <?= $form->field($model, 'userid')->textInput([
+                        <?= $form->field($model, 'user_id')->textInput([
                             'disabled' => true,
                             'value' => \Yii::t('contacts', 'Nobody')
                         ]) ?>
 
                     <?php else: ?>
 
-                        <?= $form->field($model, 'userid')->textInput([
+                        <?= $form->field($model, 'user_id')->textInput([
                             'disabled' => true,
                             'value' => $model->user->username
                         ]) ?>
