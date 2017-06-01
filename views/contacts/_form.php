@@ -28,13 +28,13 @@ if($model->isNewRecord) {
     $created_by = $userid;
     $created_by_username = $username;
     $modified = "0000-00-00 00:00:00";
-    $accounts = [];
+    $modified_by = NULL;
 } else {
     $created = $model->created;
     $created_by = $model->created_by;
     $created_by_username = $model->createdBy->username;
     $modified = date("Y-m-d H:i:s");
-    $accounts = $model->getAccountsIdByContactID($model->id);
+    $modified_by = $model->modified_by;
 }
 
 ?>
@@ -236,33 +236,21 @@ if($model->isNewRecord) {
 
                 <div class="col-lg-6">
 
-                    <div class="form-group field-accounts">
+                    <?php if($model->isNewRecord && !$model->userid || $model->userid == 0): ?>
 
-                        <label class="control-label"><?= \Yii::t('contacts', 'Account') ?></label>
-                        <?=  Select2::widget([
-                            'name' => 'accounts',
-                            'data' => $model->getAccountsSelect2(),
-                            'options' => [
-                                'placeholder' => \Yii::t('contacts', 'Select Account'),
-                                'multiple' => true
-                            ],
-                            'value' => $accounts,
-                            'addon' => [
-                                'append' => [
-                                    'content' => Html::button(Html::icon('plus'), [
-                                        'class' => 'btn btn-primary',
-                                        'title' => \Yii::t('contacts', 'Create Accounts'),
-                                        'href' => Url::toRoute(['/contacts/accounts/create'])
-                                    ]),
-                                    'asButton' => true
-                                ],
-                                'prepend' => [
-                                    'content'=>'<i class="fa fa-building"></i>'
-                                ]
-                            ],
-                        ]); ?>
+                        <?= $form->field($model, 'userid')->textInput([
+                            'disabled' => true,
+                            'value' => \Yii::t('contacts', 'Nobody')
+                        ]) ?>
 
-                    </div>
+                    <?php else: ?>
+
+                        <?= $form->field($model, 'userid')->textInput([
+                            'disabled' => true,
+                            'value' => $model->user->username
+                        ]) ?>
+
+                    <?php endif ?>
 
                     <div class="col-lg-6" style="padding: 0 5px 0 0">
 
@@ -426,22 +414,6 @@ if($model->isNewRecord) {
 
             <div class="col-lg-3" style="padding: 0">
 
-                <?php if($model->isNewRecord && !$model->userid || $model->userid == 0): ?>
-
-                    <?= $form->field($model, 'userid')->textInput([
-                        'disabled' => true,
-                        'value' => \Yii::t('contacts', 'Nobody')
-                    ]) ?>
-
-                <?php else: ?>
-
-                    <?= $form->field($model, 'userid')->textInput([
-                        'disabled' => true,
-                        'value' => $model->user->username
-                    ]) ?>
-
-                <?php endif ?>
-
                 <?= $form->field($model, 'state')->widget(Select2::classname(), [
                     'data' => $model->getPublishSelect2(),
                     'addon' => [
@@ -471,6 +443,17 @@ if($model->isNewRecord) {
                         'format'         => 'yyyy-mm-dd hh:ii:ss',
                         'todayHighlight' => true,
                     ]
+                ]); ?>
+
+                <?= $form->field($model, 'modified_by')->widget(Select2::classname(), [
+                    'data' => [
+                        $modified_by => $modified_by->username
+                    ],
+                    'addon' => [
+                        'prepend' => [
+                            'content'=>'<i class="glyphicon glyphicon-user"></i>'
+                        ]
+                    ],
                 ]); ?>
 
                 <?php echo $form->field($model, 'modified')->widget(DateTimePicker::classname(), [
