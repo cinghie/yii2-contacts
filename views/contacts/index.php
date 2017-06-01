@@ -25,9 +25,9 @@ $this->registerJs('
             var selectedId = $("#w0").yiiGridView("getSelectedRows");
 
             if(selectedId.length == 0) {
-                alert("'.Yii::t("contacts", "Select at least one item").'");
+                alert("'.\Yii::t("contacts", "Select at least one item").'");
             } else if(selectedId.length>1){
-                alert("'.Yii::t("contacts", "Select only 1 item").'");
+                alert("'.\Yii::t("contacts", "Select only 1 item").'");
             } else {
                 var url = "'.Url::to(['/contacts/contacts/update']).'?id="+selectedId[0];
                 window.location.href= url;
@@ -37,7 +37,7 @@ $this->registerJs('
             var selectedId = $("#w0").yiiGridView("getSelectedRows");
 
             if(selectedId.length == 0) {
-                alert("'.Yii::t("contacts", "Select at least one item").'");
+                alert("'.\Yii::t("contacts", "Select at least one item").'");
             } else {
                 $.ajax({
                     type: \'POST\',
@@ -53,7 +53,7 @@ $this->registerJs('
             var selectedId = $("#w0").yiiGridView("getSelectedRows");
 
             if(selectedId.length == 0) {
-                alert("'.Yii::t("contacts", "Select at least one item").'");
+                alert("'.\Yii::t("contacts", "Select at least one item").'");
             } else {
                 $.ajax({
                     type: \'POST\',
@@ -69,9 +69,9 @@ $this->registerJs('
             var selectedId = $("#w0").yiiGridView("getSelectedRows");
 
             if(selectedId.length == 0) {
-                alert("'.Yii::t("contacts", "Select at least one item").'");
+                alert("'.\Yii::t("contacts", "Select at least one item").'");
             } else {
-                var choose = confirm("'.Yii::t("contacts", "Do you want delete selected items?").'");
+                var choose = confirm("'.\Yii::t("contacts", "Do you want delete selected items?").'");
 
                 if (choose == true) {
                     $.ajax({
@@ -228,23 +228,23 @@ $this->registerJs('
             'heading'    => '<h3 class="panel-title"><i class="fa fa-user"></i></h3>',
             'type'       => 'success',
             'before'     => '<span style="margin-right: 5px;">'.
-                Html::a('<i class="glyphicon glyphicon-plus"></i> '.Yii::t('contacts', 'New'),
+                Html::a('<i class="glyphicon glyphicon-plus"></i> '.\Yii::t('contacts', 'New'),
                     ['create'], ['class' => 'btn btn-success']
                 ).'</span><span style="margin-right: 5px;">'.
-                Html::a('<i class="glyphicon glyphicon-pencil"></i> '.Yii::t('contacts', 'Update'),
+                Html::a('<i class="glyphicon glyphicon-pencil"></i> '.\Yii::t('contacts', 'Update'),
                     '#', ['class' => 'btn btn-update btn-warning']
                 ).'</span><span style="margin-right: 5px;">'.
-                Html::a('<i class="glyphicon glyphicon-minus-sign"></i> '.Yii::t('contacts', 'Delete'),
+                Html::a('<i class="glyphicon glyphicon-minus-sign"></i> '.\Yii::t('contacts', 'Delete'),
                     '#', ['class' => 'btn btn-delete btn-danger']
                 ).'</span><span style="float: right; margin-right: 5px;">'.
-                Html::a('<i class="glyphicon glyphicon-remove"></i> '.Yii::t('contacts', 'Deactive'),
+                Html::a('<i class="glyphicon glyphicon-remove"></i> '.\Yii::t('contacts', 'Deactive'),
                     '#', ['class' => 'btn btn-deactive btn-danger']
                 ).'</span><span style="float: right; margin-right: 5px;">'.
-                Html::a('<i class="glyphicon glyphicon-ok"></i> '.Yii::t('contacts', 'Active'),
+                Html::a('<i class="glyphicon glyphicon-ok"></i> '.\Yii::t('contacts', 'Active'),
                     ['#'], ['class' => 'btn btn-active btn-success']
                 ).'</span>',
             'after' => Html::a(
-                '<i class="glyphicon glyphicon-repeat"></i> '.Yii::t('contacts', 'Reset Grid'), ['index'], ['class' => 'btn btn-info']
+                '<i class="glyphicon glyphicon-repeat"></i> '.\Yii::t('contacts', 'Reset Grid'), ['index'], ['class' => 'btn btn-info']
             ),
             'showFooter' => false
         ],
