@@ -54,8 +54,8 @@ To access the module views the user must have this permissions:
 
  - Create: contacts-create-contacts
  - Update: contacts-update-all-contacts or contacts-update-his-contacts
- - Delete: contacts-delete-all-contacts or contacts-delete-views-contacts
- - View: contacts-views-all-contacts or contacts-views-views-contacts
+ - Delete: contacts-delete-all-contacts or contacts-delete-his-contacts
+ - View: contacts-views-all-contacts or contacts-views-his-contacts
 
 ### URLS
 <ul> 
