@@ -278,6 +278,19 @@ class Contacts extends ActiveRecord
     }
 
     /**
+     * check if current user is the author
+     * @return bool
+     */
+    public function isUserAuthor()
+    {
+        if ( \Yii::$app->user->identity->id == $this->created_by ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Get the user_id By user email
      * @param $email
      * @return integer

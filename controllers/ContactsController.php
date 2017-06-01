@@ -52,7 +52,10 @@ class ContactsController extends Controller
                     [
                         'allow' => true,
                         'actions' => ['view'],
-                        'roles' => ['contacts-view-contacts'],
+                        'roles' => ['contacts-view-his-contacts','contacts-view-all-contacts'],
+                        'matchCallback' => function ($rule, $action) {
+                            return $this->userCanView() === true;
+                        }
                     ],
                     [
                         'allow' => true,
@@ -403,6 +406,17 @@ class ContactsController extends Controller
         $model = $this->findModel(\Yii::$app->request->get('id'));
 
         return ( \Yii::$app->user->can('contacts-publish-all-contacts') || ( \Yii::$app->user->can('contacts-publish-his-contacts') && ($model->isUserAuthor()) ) );
+    }
+
+    /**
+     * Check if user can publish
+     * @return bool
+     */
+    protected function userCanView()
+    {
+        $model = $this->findModel(\Yii::$app->request->get('id'));
+
+        return ( \Yii::$app->user->can('contacts-view-all-contacts') || ( \Yii::$app->user->can('contacts-view-his-contacts') && ($model->isUserAuthor()) ) );
     }
 
 }
