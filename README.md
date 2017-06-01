@@ -30,6 +30,8 @@ and run the following command:
 $ php yii migrate/up --migrationPath=@vendor/cinghie/yii2-contacts/migrations
 ```
 
+With contacts table, will be installed also the country phonecode table 
+
 ### 2. Set configuration file
 
 Set on your configuration file
@@ -45,6 +47,15 @@ Set on your configuration file
 	
 ]	
 ```
+
+### Permissions
+
+To access the module views the user must have this permissions:
+
+ - Create: contacts-create-contacts
+ - Update: contacts-update-all-contacts or contacts-update-his-contacts
+ - Delete: contacts-delete-all-contacts or contacts-delete-views-contacts
+ - View: contacts-views-all-contacts or contacts-views-views-contacts
 
 ### URLS
 <ul> 
