@@ -178,6 +178,9 @@ class ContactsController extends Controller
 
         if ( $model->load($post) ) {
 
+            // Set Modified by User
+            $model->modified_by = \Yii::$app->user->identity->id;
+
             // Set Modified as actual date
             $model->modified = date("Y-m-d H:i:s");
 

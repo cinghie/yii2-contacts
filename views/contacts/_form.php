@@ -16,7 +16,7 @@ use yii\helpers\Url;
 use yii\web\JsExpression;
 
 // Get prefix info
-$prefix = Url::to(['/contacts/default/prefix']);
+$prefix = Url::to(['/contacts/phonecode/prefix']);
 
 // Get current user
 $user     = \Yii::$app->user->identity;

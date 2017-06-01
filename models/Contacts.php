@@ -59,18 +59,13 @@ use cinghie\yii2userextended\models\User;
  */
 class Contacts extends ActiveRecord
 {
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        //$this->on(self::EVENT_AFTER_VIEW, [$this, 'sendTestMail']);
-        //$this->on(self::EVENT_AFTER_CREATE, [$this, 'sendTestMail']);
-        //$this->on(self::EVENT_AFTER_UPDATE, [$this, 'sendTestMail']);
-        //$this->on(self::EVENT_AFTER_DELETE, [$this, 'sendTestMail']);
-        //$this->on(self::EVENT_AFTER_ACTIVE, [$this, 'sendTestMail']);
-        //$this->on(self::EVENT_AFTER_DEACTIVE, [$this, 'sendTestMail']);
-    }
+
+    const EVENT_AFTER_VIEW   = 'afterView';
+    const EVENT_AFTER_CREATE = 'afterCreate';
+    const EVENT_AFTER_UPDATE = 'afterUpdate';
+    const EVENT_AFTER_DELETE = 'afterDelete';
+    const EVENT_AFTER_ACTIVE = 'afterActive';
+    const EVENT_AFTER_DEACTIVE = 'afterDeactive';
 
     /**
      * @inheritdoc
@@ -230,6 +225,14 @@ class Contacts extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'userid']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getCreatedBy()
     {
         return $this->hasOne(User::className(), ['id' => 'created_by']);
@@ -250,6 +253,21 @@ class Contacts extends ActiveRecord
     public function getFullName()
     {
         return $this->lastname . ' ' . $this->firstname;
+    }
+
+    /**
+     * Get the userid By user email
+     * @param $email
+     * @return integer
+     */
+    public function getUserIDByEmail($email)
+    {
+        $user = User::find()
+            ->select(['*'])
+            ->where(['email' => $email])
+            ->one();
+
+        return $user['id'];
     }
 
     /**
