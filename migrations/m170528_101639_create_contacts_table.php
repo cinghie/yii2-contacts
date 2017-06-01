@@ -43,6 +43,38 @@ class m170528_101639_create_contacts_table extends Migration
             'modified_by' => $this->integer(11)->defaultValue(null),
             'modified' => $this->dateTime()->notNull()->defaultValue('0000-00-00 00:00:00'),
         ]);
+
+        // Add Foreign Key
+        $this->createIndex("index_contacts_phone_code","{{%contacts}}", "phone_code" );
+        $this->addForeignKey("fk_contacts_phone_code", "{{%contacts}}", "phone_code", "{{%countries_phonecode}}", "id", "SET NULL", "CASCADE" );
+
+        // Add Foreign Key
+        $this->createIndex("index_contacts_phone_secondary_code","{{%contacts}}", "phone_secondary_code" );
+        $this->addForeignKey("fk_contacts_phone_secondary_code", "{{%contacts}}", "phone_secondary_code", "{{%countries_phonecode}}", "id", "SET NULL", "CASCADE" );
+
+        // Add Foreign Key
+        $this->createIndex("index_contacts_mobile_code","{{%contacts}}", "mobile_code" );
+        $this->addForeignKey("fk_contacts_mobile_code", "{{%contacts}}", "mobile_code", "{{%countries_phonecode}}", "id", "SET NULL", "CASCADE" );
+
+        // Add Foreign Key
+        $this->createIndex("index_contacts_mobile_secondary_code","{{%contacts}}", "mobile_secondary_code" );
+        $this->addForeignKey("fk_contacts_mobile_secondary_code", "{{%contacts}}", "mobile_secondary_code", "{{%countries_phonecode}}", "id", "SET NULL", "CASCADE" );
+
+        // Add Foreign Key
+        $this->createIndex("index_contacts_fax_code","{{%contacts}}", "fax_code" );
+        $this->addForeignKey("fk_contacts_fax_code", "{{%contacts}}", "fax_code", "{{%countries_phonecode}}", "id", "SET NULL", "CASCADE" );
+
+        // Add Foreign Key
+        $this->createIndex("index_contacts_fax_secondary_code","{{%contacts}}", "fax_secondary_code" );
+        $this->addForeignKey("fk_contacts_fax_secondary_code", "{{%contacts}}", "fax_secondary_code", "{{%countries_phonecode}}", "id", "SET NULL", "CASCADE" );
+
+        // Add Foreign Key
+        $this->createIndex("index_contacts_created_by","{{%contacts}}", "created_by" );
+        $this->addForeignKey("fk_contacts_created_by", "{{%contacts}}", "created_by", "{{%user}}", "id", "SET NULL", "CASCADE" );
+
+        // Add Foreign Key
+        $this->createIndex("index_contacts_modified_by","{{%contacts}}", "modified_by" );
+        $this->addForeignKey("fk_contacts_modified_by", "{{%contacts}}", "modified_by", "{{%user}}", "id", "SET NULL", "CASCADE" );
     }
 
     /**
@@ -52,4 +84,5 @@ class m170528_101639_create_contacts_table extends Migration
     {
         $this->dropTable('{{%contacts}}');
     }
+
 }
