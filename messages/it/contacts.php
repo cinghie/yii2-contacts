@@ -39,6 +39,7 @@ return [
     'Yes'=>'Si',
     'Email' => 'Email Principale',
     'Email Secondary' => 'Email Secondaria',
+    'Entry Informations' => 'Informazioni d\'inserimento',
     'Fax' => 'Fax',
     'Fax Code' => 'Prefisso Fax',
     'Fax Secondary' => 'Fax 2',

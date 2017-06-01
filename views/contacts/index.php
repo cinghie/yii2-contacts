@@ -22,7 +22,7 @@ $this->registerJs('
     $(document).ready(function()
     {
         $("a.btn-update").click(function() {
-            var selectedId = $("#w1").yiiGridView("getSelectedRows");
+            var selectedId = $("#w0").yiiGridView("getSelectedRows");
 
             if(selectedId.length == 0) {
                 alert("'.Yii::t("contacts", "Select at least one item").'");
@@ -34,7 +34,7 @@ $this->registerJs('
             }
         });
         $("a.btn-active").click(function() {
-            var selectedId = $("#w1").yiiGridView("getSelectedRows");
+            var selectedId = $("#w0").yiiGridView("getSelectedRows");
 
             if(selectedId.length == 0) {
                 alert("'.Yii::t("contacts", "Select at least one item").'");
@@ -44,13 +44,13 @@ $this->registerJs('
                     url : "'.Url::to(['/contacts/contacts/activemultiple']).'?id="+selectedId,
                     data : {ids: selectedId},
                     success : function() {
-                        $.pjax.reload({container:"#w1"});
+                        $.pjax.reload({container:"#w0"});
                     }
                 });
             }
         });
         $("a.btn-deactive").click(function() {
-            var selectedId = $("#w1").yiiGridView("getSelectedRows");
+            var selectedId = $("#w0").yiiGridView("getSelectedRows");
 
             if(selectedId.length == 0) {
                 alert("'.Yii::t("contacts", "Select at least one item").'");
@@ -60,13 +60,13 @@ $this->registerJs('
                     url : "'.Url::to(['/contacts/contacts/deactivemultiple']).'?id="+selectedId,
                     data : {ids: selectedId},
                     success : function() {
-                        $.pjax.reload({container:"#w1"});
+                        $.pjax.reload({container:"#w0"});
                     }
                 });
             }
         });
         $("a.btn-delete").click(function() {
-            var selectedId = $("#w1").yiiGridView("getSelectedRows");
+            var selectedId = $("#w0").yiiGridView("getSelectedRows");
 
             if(selectedId.length == 0) {
                 alert("'.Yii::t("contacts", "Select at least one item").'");
@@ -79,22 +79,10 @@ $this->registerJs('
                         url : "'.Url::to(['/contacts/contacts/deletemultiple']).'?id="+selectedId,
                         data : {ids: selectedId},
                         success : function() {
-                            $.pjax.reload({container:"#w1"});
+                            $.pjax.reload({container:"#w0"});
                         }
                     });
                 }
-            }
-        });
-        $("a.btn-preview").click(function() {
-            var selectedId = $("#w1").yiiGridView("getSelectedRows");
-
-            if(selectedId.length == 0) {
-                alert("'.Yii::t("contacts", "Select at least one item").'");
-            } else if(selectedId.length>1){
-                alert("'.Yii::t("contacts", "Select only 1 item").'");
-            } else {
-                var url = "'.Url::to(['/contacts/contacts/view']).'?id="+selectedId[0];
-                window.open(url,"_self");
             }
         });
     });
@@ -131,7 +119,7 @@ $this->registerJs('
                 'hAlign' => 'center',
                 'label' => \Yii::t('contacts', 'Name and Surname'),
                 'value' => function ($model) {
-                    $url = urldecode(Url::toRoute(['/contacts/contacts/update', 'id' => $model->id]));
+                    $url = urldecode(Url::toRoute(['/contacts/contacts/view', 'id' => $model->id]));
                     return Html::a($model->lastname." ".$model->firstname,$url);
                 }
             ],
@@ -234,7 +222,7 @@ $this->registerJs('
                 'attribute' => 'id',
                 'hAlign' => 'center',
                 'width' => '5%',
-            ],
+            ]
         ],
         'panel' => [
             'heading'    => '<h3 class="panel-title"><i class="fa fa-user"></i></h3>',
@@ -248,9 +236,6 @@ $this->registerJs('
                 ).'</span><span style="margin-right: 5px;">'.
                 Html::a('<i class="glyphicon glyphicon-minus-sign"></i> '.Yii::t('contacts', 'Delete'),
                     '#', ['class' => 'btn btn-delete btn-danger']
-                ).'</span><span style="margin-right: 5px;">'.
-                Html::a('<i class="fa fa-eye"></i> '.Yii::t('contacts', 'Preview'),
-                    '#', ['class' => 'btn btn-preview btn-info']
                 ).'</span><span style="float: right; margin-right: 5px;">'.
                 Html::a('<i class="glyphicon glyphicon-remove"></i> '.Yii::t('contacts', 'Deactive'),
                     '#', ['class' => 'btn btn-deactive btn-danger']

@@ -256,6 +256,28 @@ class Contacts extends ActiveRecord
     }
 
     /**
+     * Active the item setting state = 1
+     * @return bool
+     */
+    public function active()
+    {
+        return (bool)$this->updateAttributes([
+            'state' => 1
+        ]);
+    }
+
+    /**
+     * Inactive the item setting state = 0
+     * @return bool
+     */
+    public function inactive()
+    {
+        return (bool)$this->updateAttributes([
+            'state' => 0
+        ]);
+    }
+
+    /**
      * Get the userid By user email
      * @param $email
      * @return integer
