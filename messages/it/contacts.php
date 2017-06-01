@@ -77,4 +77,5 @@ return [
     'Update' => 'Modifica',
     'Update {modelClass}: ' => 'Modifica {modelClass}: ',
     'Update Contacts' => 'Modifica Contatto',
+    'Userid' => 'Utente'
 ];
