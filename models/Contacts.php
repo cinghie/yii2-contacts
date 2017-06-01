@@ -13,13 +13,15 @@
 namespace cinghie\contacts\models;
 
 use yii\db\ActiveRecord;
-use cinghie\yii2userextended\models\User;
+use cinghie\traits\CreatedTrait;
+use cinghie\traits\ModifiedTrait;
+use cinghie\traits\StateTrait;
+use cinghie\traits\UserTrait;
 
 /**
  * This is the model class for table "{{%contacts}}".
  *
  * @property int $id
- * @property int $user_id
  * @property string $firstname
  * @property string $lastname
  * @property string $email
@@ -42,11 +44,6 @@ use cinghie\yii2userextended\models\User;
  * @property string $gplus
  * @property string $twitter
  * @property string $linkedin
- * @property int $state
- * @property int $created_by
- * @property string $created
- * @property int $modified_by
- * @property string $modified
  *
  * @property Countriescodes $faxCode
  * @property Countriescodes $faxSecondaryCode
@@ -54,11 +51,13 @@ use cinghie\yii2userextended\models\User;
  * @property Countriescodes $mobileSecondaryCode
  * @property Countriescodes $phoneCode
  * @property Countriescodes $phoneSecondaryCode
- * @property User $createdBy
- * @property User $modifiedBy
  */
 class Contacts extends ActiveRecord
 {
+    use CreatedTrait;
+    use ModifiedTrait;
+    use StateTrait;
+    use UserTrait;
 
     const EVENT_AFTER_VIEW   = 'afterView';
     const EVENT_AFTER_CREATE = 'afterCreate';
@@ -80,8 +79,8 @@ class Contacts extends ActiveRecord
      */
     public function rules()
     {
-        return [
-            [['firstname', 'lastname', 'created_by'], 'required'],
+        return array_merge(CreatedTrait::rules(), ModifiedTrait::rules(), StateTrait::rules(), UserTrait::rules(), [
+            [['firstname', 'lastname'], 'required'],
             ['phone_code', 'required', 'when' => function ($model) {
                     return $model->phone != '';
                 }, 'whenClient' => "function (attribute, value) {
@@ -112,8 +111,7 @@ class Contacts extends ActiveRecord
             }, 'whenClient' => "function (attribute, value) {
                     return $('#contacts-fax_secondary').val() != '';
             }"],
-            [['created', 'modified'], 'safe'],
-            [['user_id', 'phone_code', 'phone_secondary_code', 'mobile_code', 'mobile_secondary_code', 'fax_code', 'fax_secondary_code', 'state', 'created_by', 'modified_by'], 'integer'],
+            [['phone_code', 'phone_secondary_code', 'mobile_code', 'mobile_secondary_code', 'fax_code', 'fax_secondary_code'], 'integer'],
             [['phone', 'phone_secondary', 'mobile', 'mobile_secondary', 'fax', 'fax_secondary'], 'string', 'max' => 50],
             [['firstname', 'lastname', 'email', 'email_secondary'], 'string', 'max' => 100],
             [['website', 'skype', 'facebook', 'gplus', 'twitter', 'linkedin'], 'string', 'max' => 255],
@@ -121,12 +119,9 @@ class Contacts extends ActiveRecord
             [['fax_secondary_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['fax_secondary_code' => 'id']],
             [['mobile_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['mobile_code' => 'id']],
             [['mobile_secondary_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['mobile_secondary_code' => 'id']],
-            [['modified_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['modified_by' => 'id']],
             [['phone_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['phone_code' => 'id']],
             [['phone_secondary_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['phone_secondary_code' => 'id']],
-            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
-            [['modified_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['modified_by' => 'id']],
-        ];
+        ]);
     }
 
     /**
@@ -134,9 +129,8 @@ class Contacts extends ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
+        return array_merge(CreatedTrait::attributeLabels(), ModifiedTrait::attributeLabels(), StateTrait::attributeLabels(), UserTrait::attributeLabels(), [
             'id' => \Yii::t('contacts', 'ID'),
-            'user_id' => \Yii::t('contacts', 'Userid'),
             'firstname' => \Yii::t('contacts', 'Firstname'),
             'lastname' => \Yii::t('contacts', 'Lastname'),
             'email' => \Yii::t('contacts', 'Email'),
@@ -159,11 +153,8 @@ class Contacts extends ActiveRecord
             'gplus' => \Yii::t('contacts', 'Gplus'),
             'linkedin' => \Yii::t('contacts', 'Linkedin'),
             'twitter' => \Yii::t('contacts', 'Twitter'),
-            'state' => \Yii::t('contacts', 'State'),
-            'created' => \Yii::t('contacts', 'Created'),
-            'created_by' => \Yii::t('contacts', 'Created By'),
-            'modified' => \Yii::t('contacts', 'Modified'),
-        ];
+            'twitter' => \Yii::t('contacts', 'Twitter'),
+        ]);
     }
 
     /**
@@ -223,86 +214,12 @@ class Contacts extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser()
-    {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCreatedBy()
-    {
-        return $this->hasOne(User::className(), ['id' => 'created_by']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getModifiedBy()
-    {
-        return $this->hasOne(User::className(), ['id' => 'modified_by']);
-    }
-
-    /**
      * Return Contact Full Name
      * @return string
      */
     public function getFullName()
     {
         return $this->lastname . ' ' . $this->firstname;
-    }
-
-    /**
-     * Active the item setting state = 1
-     * @return bool
-     */
-    public function active()
-    {
-        return (bool)$this->updateAttributes([
-            'state' => 1
-        ]);
-    }
-
-    /**
-     * Inactive the item setting state = 0
-     * @return bool
-     */
-    public function inactive()
-    {
-        return (bool)$this->updateAttributes([
-            'state' => 0
-        ]);
-    }
-
-    /**
-     * check if current user is the author
-     * @return bool
-     */
-    public function isUserAuthor()
-    {
-        if ( \Yii::$app->user->identity->id == $this->created_by ) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Get the user_id By user email
-     * @param $email
-     * @return integer
-     */
-    public function getUserIDByEmail($email)
-    {
-        $user = User::find()
-            ->select(['*'])
-            ->where(['email' => $email])
-            ->one();
-
-        return $user['id'];
     }
 
     /**

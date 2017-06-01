@@ -197,7 +197,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attributes' => [
                     [
                         'attribute' => 'user_id',
-                        'label' => \Yii::t('contacts', 'Userid'),
                         'format' => 'raw',
                         'value' => $model->user_id ? Html::a($model->user->username,urldecode(Url::toRoute(['/user/admin/update', 'id' => $model->user_id]))) : \Yii::t('contacts', 'Nobody'),
                         'type' => DetailView::INPUT_SWITCH,
@@ -223,7 +222,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'created_by',
-                        'label' => \Yii::t('contacts', 'Created By'),
                         'format' => 'raw',
                         'value' => $model->created_by ? Html::a($model->createdBy->username,urldecode(Url::toRoute(['/user/admin/update', 'id' => $model->createdBy]))) : \Yii::t('contacts', 'Nobody'),
                         'type' => DetailView::INPUT_SWITCH,
@@ -231,10 +229,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             'style'=>'width:30%'
                         ]
                     ],
-                    'created',
+                    [
+                        'attribute' => 'created',
+                    ],
                     [
                         'attribute' => 'modified_by',
-                        'label' => \Yii::t('contacts', 'Modified By'),
                         'format' => 'raw',
                         'value' => $model->created_by ? Html::a($model->modifiedBy->username,urldecode(Url::toRoute(['/user/admin/update', 'id' => $model->modifiedBy]))) : \Yii::t('contacts', 'Nobody'),
                         'type' => DetailView::INPUT_SWITCH,
@@ -242,7 +241,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             'style'=>'width:30%'
                         ]
                     ],
-                    'modified'
+                    [
+                        'attribute' => 'modified',
+                    ],
                 ]
             ]); ?>
 

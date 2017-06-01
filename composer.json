@@ -4,7 +4,7 @@
     "keywords": ["yii2", "yii2 contacts", "yii2 contacts form", "yii2 contacts manager", "yii2 contacts create"],
     "type": "yii2-extension",
     "homepage": "https://github.com/cinghie/yii2-contacts",
-     "license": "BSD-3-Clause",
+    "license": "GNU GENERAL PUBLIC LICENSE VERSION 3",
     "authors": [
         {
             "name": "Gogodigital.it",
@@ -14,6 +14,7 @@
     ],
     "require": {
         "yiisoft/yii2": "*",
+        "cinghie/yii2-traits": "*",
         "kartik-v/yii2-detail-view": "*",
         "kartik-v/yii2-grid": "*",
         "kartik-v/yii2-helpers": "*",

@@ -50,7 +50,7 @@ Set on your configuration file
 
 ### Permissions
 
-To access the module views the user must have this permissions:
+To access the module actions the user must have this permissions:
 
  - Create: contacts-create-contacts
  - Update: contacts-update-all-contacts or contacts-update-his-contacts

@@ -383,7 +383,7 @@ class ContactsController extends Controller
     {
         $model = $this->findModel(\Yii::$app->request->get('id'));
 
-        return ( \Yii::$app->user->can('contacts-update-all-contacts') || ( \Yii::$app->user->can('contacts-update-his-contacts') && ($model->isUserAuthor()) ) );
+        return ( \Yii::$app->user->can('contacts-update-all-contacts') || ( \Yii::$app->user->can('contacts-update-his-contacts') && ($model->isCurrentUserCreator()) ) );
     }
 
     /**
@@ -394,7 +394,7 @@ class ContactsController extends Controller
     {
         $model = $this->findModel(\Yii::$app->request->get('id'));
 
-        return ( \Yii::$app->user->can('contacts-delete-all-contacts') || ( \Yii::$app->user->can('contacts-delete-his-contacts') && ($model->isUserAuthor()) ) );
+        return ( \Yii::$app->user->can('contacts-delete-all-contacts') || ( \Yii::$app->user->can('contacts-delete-his-contacts') && ($model->isCurrentUserCreator()) ) );
     }
 
     /**
@@ -405,7 +405,7 @@ class ContactsController extends Controller
     {
         $model = $this->findModel(\Yii::$app->request->get('id'));
 
-        return ( \Yii::$app->user->can('contacts-publish-all-contacts') || ( \Yii::$app->user->can('contacts-publish-his-contacts') && ($model->isUserAuthor()) ) );
+        return ( \Yii::$app->user->can('contacts-publish-all-contacts') || ( \Yii::$app->user->can('contacts-publish-his-contacts') && ($model->isCurrentUserCreator()) ) );
     }
 
     /**
@@ -416,7 +416,7 @@ class ContactsController extends Controller
     {
         $model = $this->findModel(\Yii::$app->request->get('id'));
 
-        return ( \Yii::$app->user->can('contacts-view-all-contacts') || ( \Yii::$app->user->can('contacts-view-his-contacts') && ($model->isUserAuthor()) ) );
+        return ( \Yii::$app->user->can('contacts-view-all-contacts') || ( \Yii::$app->user->can('contacts-view-his-contacts') && ($model->isCurrentUserCreator()) ) );
     }
 
 }

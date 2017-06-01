@@ -31,8 +31,6 @@ return [
     'Contacts Informations' => 'Informazioni Contatto',
     'Create' => 'Crea',
     'Create Contacts' => 'Crea Contatto',
-    'Created' => 'Data creazione',
-    'Created By' => 'Creato da',
     'Dashboard'=>'Dashboard',
     'Deactive' => 'Disattiva',
     'Delete' => 'Cancella',
@@ -53,8 +51,6 @@ return [
     'Mobile Code' => 'Prefisso Cellulare',
     'Mobile Secondary' => 'Cellulare 2',
     'Mobile Secondary Code' => 'Prefisso Cellulare 2',
-    'Modified' => 'Data modifica',
-    'Modified By' => 'Modificato da',
     'Name' => 'Nome',
     'Name and Surname' => 'Nome e Cognome',
     'New' => 'Nuovo',
@@ -71,11 +67,10 @@ return [
     'Select only 1 item' => 'Seleziona solo 1 elemento!',
     'Select at least one item' => 'Seleziona almeno 1 elemento!',
     'Social Informations' => 'Informazioni Social',
-    'State' => 'Stato',
     'Text' => 'Testo',
     'Title' => 'Titolo',
     'Update' => 'Modifica',
     'Update {modelClass}: ' => 'Modifica {modelClass}: ',
     'Update Contacts' => 'Modifica Contatto',
-    'Userid' => 'Utente'
+    'Website' => 'Sito Web'
 ];
