@@ -13,7 +13,6 @@ use kartik\helpers\Html;
 use yii\helpers\Url;
 
 $this->title = $model->lastname." ".$model->firstname;
-$this->params['breadcrumbs'][] = ['label' => \Yii::t('contacts', 'CRM'), 'url' => ['/contacts/default/index']];
 $this->params['breadcrumbs'][] = ['label' => \Yii::t('contacts', 'Contacts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

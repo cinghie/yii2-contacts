@@ -11,7 +11,6 @@
 use kartik\helpers\Html;
 
 $this->title = \Yii::t('contacts', 'Create Contacts');
-$this->params['breadcrumbs'][] = ['label' => \Yii::t('contacts', 'CRM'), 'url' => ['/contacts/default/index']];
 $this->params['breadcrumbs'][] = ['label' => \Yii::t('contacts', 'Contacts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

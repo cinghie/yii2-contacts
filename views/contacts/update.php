@@ -11,7 +11,6 @@
 use kartik\helpers\Html;
 
 $this->title = \Yii::t('contacts', 'Update Contacts') . ": " .$model->firstname ." ". $model->lastname;
-$this->params['breadcrumbs'][] = ['label' => \Yii::t('contacts', 'CRM'), 'url' => ['/contacts/default/index']];
 $this->params['breadcrumbs'][] = ['label' => \Yii::t('contacts', 'Contacts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->firstname, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = \Yii::t('contacts', 'Update');
