@@ -12,6 +12,7 @@
 
 namespace cinghie\contacts\models;
 
+use cinghie\traits\UserHelperTrait;
 use yii\db\ActiveRecord;
 use cinghie\traits\CreatedTrait;
 use cinghie\traits\ModifiedTrait;
@@ -58,6 +59,7 @@ class Contacts extends ActiveRecord
     use ModifiedTrait;
     use StateTrait;
     use UserTrait;
+    use UserHelperTrait;
 
     const EVENT_AFTER_VIEW   = 'afterView';
     const EVENT_AFTER_CREATE = 'afterCreate';
