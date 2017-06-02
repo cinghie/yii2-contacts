@@ -26,24 +26,6 @@ class ContactsQuery extends ActiveQuery
      * @inheritdoc
      * @return Contacts[]|array
      */
-    public function active()
-    {
-        return $this->andWhere('[[state]]=1');
-    }
-
-    /**
-     * @inheritdoc
-     * @return Contacts[]|array
-     */
-    public function inactive()
-    {
-        return $this->andWhere('[[state]]=0');
-    }
-
-    /**
-     * @inheritdoc
-     * @return Contacts[]|array
-     */
     public function last($limit, $orderby = "id", $order = "DESC")
     {
         return $this->orderBy([$orderby => $order])->limit($limit);
