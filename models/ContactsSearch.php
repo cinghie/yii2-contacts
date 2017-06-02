@@ -32,8 +32,8 @@ class ContactsSearch extends Contacts
     public function rules()
     {
         return [
-            [['id', 'user_id',  'created_by', 'modified_by', 'state'], 'integer'],
-            [['name','firstname', 'lastname', 'email', 'email_secondary', 'phone', 'phone_code', 'phone_secondary', 'phone_secondary_code', 'mobile', 'mobile_code', 'mobile_secondary', 'mobile_secondary_code', 'skype', 'created', 'modified'], 'safe'],
+            [['id', 'state'], 'integer'],
+            [['name','firstname', 'lastname', 'email', 'email_secondary', 'phone', 'phone_code', 'phone_secondary', 'phone_secondary_code', 'mobile', 'mobile_code', 'mobile_secondary', 'mobile_secondary_code', 'skype', 'created', 'modified', 'user_id',  'created_by', 'modified_by'], 'safe'],
         ];
     }
 
@@ -54,6 +54,9 @@ class ContactsSearch extends Contacts
     public function search($params)
     {
         $query = Contacts::find();
+
+        // Adding JOIN Tables
+        $query->joinWith('user');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query
@@ -91,7 +94,6 @@ class ContactsSearch extends Contacts
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'user_id' => $this->user_id,
             'state' => $this->state,
             'created' => $this->created,
             'modified' => $this->modified,
@@ -101,6 +103,9 @@ class ContactsSearch extends Contacts
             ->andFilterWhere(['like', 'concat(firstname, " " , lastname) ', $this->name])
             ->andFilterWhere(['like', 'firstname', $this->firstname])
             ->andFilterWhere(['like', 'lastname', $this->lastname])
+            ->andFilterWhere(['like', 'user.username', $this->user_id])
+            ->andFilterWhere(['like', 'user.username', $this->created])
+            ->andFilterWhere(['like', 'user.username', $this->modified])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'email_secondary', $this->email_secondary])
             ->andFilterWhere(['like', 'phone', $this->phone])
