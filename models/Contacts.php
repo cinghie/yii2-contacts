@@ -155,7 +155,6 @@ class Contacts extends ActiveRecord
             'gplus' => \Yii::t('contacts', 'Gplus'),
             'linkedin' => \Yii::t('contacts', 'Linkedin'),
             'twitter' => \Yii::t('contacts', 'Twitter'),
-            'twitter' => \Yii::t('contacts', 'Twitter'),
         ]);
     }
 

@@ -82,8 +82,8 @@ class ContactsController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'activemultiple' => ['POST'],
-                    'changestate' => ['POST'],
                     'deactivemultiple' => ['POST'],
+                    'changestate' => ['POST'],
                     'delete' => ['POST'],
                     'deletemultiple' => ['POST'],
                 ],

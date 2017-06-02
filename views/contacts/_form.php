@@ -15,12 +15,12 @@ use kartik\widgets\Select2;
 use yii\helpers\Url;
 use yii\web\JsExpression;
 
-// Get prefix info
+// Get Phonecode Prefix
 $prefix = Url::to(['/contacts/phonecode/prefix']);
 
 // Get current user
 $user     = \Yii::$app->user->identity;
-$user_id   = $user->id;
+$user_id  = $user->id;
 $username = $user->username;
 
 if($model->isNewRecord) {

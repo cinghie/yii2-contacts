@@ -43,6 +43,7 @@ return [
     'Fax Secondary' => 'Fax 2',
     'Fax Secondary Code' => 'Prefisso Fax 2',
     'Firstname' => 'Nome',
+    'Gplus' => 'Google Plus',
     'Inactived' => 'Disattivo',
     'Last Contacts' => 'Ultimi Contatti',
     'Lastname' => 'Cognome',
