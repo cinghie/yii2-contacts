@@ -21,10 +21,14 @@ use yii\data\ActiveDataProvider;
 class ContactsSearch extends Contacts
 {
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $name;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $account;
 
     /**
@@ -33,7 +37,7 @@ class ContactsSearch extends Contacts
     public function rules()
     {
         return [
-            [['id', 'user_id', 'state'], 'integer'],
+            [['id', 'user_id',  'created_by', 'modified_by', 'state'], 'integer'],
             [['name','firstname', 'lastname', 'account', 'email', 'email_secondary', 'phone', 'phone_code', 'phone_secondary', 'phone_secondary_code', 'mobile', 'mobile_code', 'mobile_secondary', 'mobile_secondary_code', 'skype', 'created', 'modified'], 'safe'],
         ];
     }
