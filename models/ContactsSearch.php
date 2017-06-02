@@ -27,18 +27,13 @@ class ContactsSearch extends Contacts
     public $name;
 
     /**
-     * @var string
-     */
-    public $account;
-
-    /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
             [['id', 'user_id',  'created_by', 'modified_by', 'state'], 'integer'],
-            [['name','firstname', 'lastname', 'account', 'email', 'email_secondary', 'phone', 'phone_code', 'phone_secondary', 'phone_secondary_code', 'mobile', 'mobile_code', 'mobile_secondary', 'mobile_secondary_code', 'skype', 'created', 'modified'], 'safe'],
+            [['name','firstname', 'lastname', 'email', 'email_secondary', 'phone', 'phone_code', 'phone_secondary', 'phone_secondary_code', 'mobile', 'mobile_code', 'mobile_secondary', 'mobile_secondary_code', 'skype', 'created', 'modified'], 'safe'],
         ];
     }
 
@@ -71,10 +66,6 @@ class ContactsSearch extends Contacts
                     'asc' => [ 'lastname' => SORT_ASC, 'firstname' => SORT_ASC ],
                     'desc' => [ 'lastname' => SORT_DESC, 'firstname' => SORT_DESC ],
                     'default' => SORT_ASC
-                ],
-                'account' => [
-                    'asc' => [ '{{%contacts_accounts}}.name' => SORT_ASC],
-                    'desc' => [ '{{%contacts_accounts}}.name'  => SORT_DESC]
                 ],
                 'email',
                 'email_secondary',
