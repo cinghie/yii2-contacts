@@ -12,7 +12,7 @@ use kartik\detail\DetailView;
 use kartik\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = $model->lastname." ".$model->firstname;
+$this->title = $model->getFullname();
 $this->params['breadcrumbs'][] = ['label' => \Yii::t('contacts', 'Contacts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
