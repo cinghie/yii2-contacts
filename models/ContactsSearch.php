@@ -98,7 +98,7 @@ class ContactsSearch extends Contacts
         ]);
 
         $query->andFilterWhere(['OR',['like', 'firstname', $this->name],['like', 'lastname', $this->name]])
-            ->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'concat(firstname, " " , lastname) ', $this->name])
             ->andFilterWhere(['like', 'firstname', $this->firstname])
             ->andFilterWhere(['like', 'lastname', $this->lastname])
             ->andFilterWhere(['like', 'email', $this->email])
