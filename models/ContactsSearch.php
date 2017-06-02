@@ -95,8 +95,6 @@ class ContactsSearch extends Contacts
         $query->andFilterWhere([
             'id' => $this->id,
             'state' => $this->state,
-            'created' => $this->created,
-            'modified' => $this->modified,
         ]);
 
         $query->andFilterWhere(['OR',['like', 'firstname', $this->name],['like', 'lastname', $this->name]])
@@ -104,8 +102,10 @@ class ContactsSearch extends Contacts
             ->andFilterWhere(['like', 'firstname', $this->firstname])
             ->andFilterWhere(['like', 'lastname', $this->lastname])
             ->andFilterWhere(['like', 'user.username', $this->user_id])
-            ->andFilterWhere(['like', 'user.username', $this->created])
-            ->andFilterWhere(['like', 'user.username', $this->modified])
+            ->andFilterWhere(['like', 'created', $this->created])
+            ->andFilterWhere(['like', 'user.username', $this->created_by])
+            ->andFilterWhere(['like', 'modified', $this->modified])
+            ->andFilterWhere(['like', 'user.username', $this->modified_by])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'email_secondary', $this->email_secondary])
             ->andFilterWhere(['like', 'phone', $this->phone])
