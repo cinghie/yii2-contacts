@@ -43,8 +43,10 @@ use cinghie\traits\UserTrait;
  * @property string $skype
  * @property string $facebook
  * @property string $gplus
- * @property string $twitter
+ * @property string $instagram
  * @property string $linkedin
+ * @property string $twitter
+ * @property string $youtube
  *
  * @property Countriescodes $faxCode
  * @property Countriescodes $faxSecondaryCode
@@ -116,7 +118,7 @@ class Contacts extends ActiveRecord
             [['phone_code', 'phone_secondary_code', 'mobile_code', 'mobile_secondary_code', 'fax_code', 'fax_secondary_code'], 'integer'],
             [['phone', 'phone_secondary', 'mobile', 'mobile_secondary', 'fax', 'fax_secondary'], 'string', 'max' => 50],
             [['firstname', 'lastname', 'email', 'email_secondary'], 'string', 'max' => 100],
-            [['website', 'skype', 'facebook', 'gplus', 'twitter', 'linkedin'], 'string', 'max' => 255],
+            [['website', 'skype', 'facebook', 'gplus', 'instagram', 'linkedin', 'twitter', 'youtube'], 'string', 'max' => 255],
             [['fax_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['fax_code' => 'id']],
             [['fax_secondary_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['fax_secondary_code' => 'id']],
             [['mobile_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['mobile_code' => 'id']],
@@ -153,8 +155,10 @@ class Contacts extends ActiveRecord
             'skype' => \Yii::t('contacts', 'Skype'),
             'facebook' => \Yii::t('contacts', 'Facebook'),
             'gplus' => \Yii::t('contacts', 'Gplus'),
+            'instagram' => \Yii::t('contacts', 'Instagram'),
             'linkedin' => \Yii::t('contacts', 'Linkedin'),
             'twitter' => \Yii::t('contacts', 'Twitter'),
+            'youtube' => \Yii::t('contacts', 'Youtube'),
         ]);
     }
 

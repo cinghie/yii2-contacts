@@ -73,5 +73,6 @@ return [
     'Update' => 'Modifica',
     'Update {modelClass}: ' => 'Modifica {modelClass}: ',
     'Update Contacts' => 'Modifica Contatto',
+    'Youtube' => 'YouTube',
     'Website' => 'Sito Web'
 ];

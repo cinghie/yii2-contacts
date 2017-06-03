@@ -210,6 +210,14 @@ if($model->isNewRecord) {
                             ]
                         ])->textInput(['maxlength' => true]) ?>
 
+                        <?= $form->field($model, 'linkedin', [
+                            'addon' => [
+                                'prepend' => [
+                                    'content'=>'<i class="fa fa-linkedin"></i>'
+                                ]
+                            ]
+                        ])->textInput(['maxlength' => true]) ?>
+
                     </div>
 
                     <div class="col-lg-6" style="padding: 0 0 0 5px">
@@ -226,6 +234,14 @@ if($model->isNewRecord) {
                             'addon' => [
                                 'prepend' => [
                                     'content'=>'<i class="fa fa-google-plus"></i>'
+                                ]
+                            ]
+                        ])->textInput(['maxlength' => true]) ?>
+
+                        <?= $form->field($model, 'youtube', [
+                            'addon' => [
+                                'prepend' => [
+                                    'content'=>'<i class="fa fa-youtube"></i>'
                                 ]
                             ]
                         ])->textInput(['maxlength' => true]) ?>
@@ -378,10 +394,10 @@ if($model->isNewRecord) {
                             ]
                         ]); ?>
 
-                        <?= $form->field($model, 'twitter', [
+                        <?= $form->field($model, 'instagram', [
                             'addon' => [
                                 'prepend' => [
-                                    'content'=>'<i class="fa fa-twitter"></i>'
+                                    'content'=>'<i class="fa fa-instagram"></i>'
                                 ]
                             ]
                         ])->textInput(['maxlength' => true]) ?>
@@ -398,10 +414,10 @@ if($model->isNewRecord) {
                             ]
                         ])->textInput(['maxlength' => true]) ?>
 
-                        <?= $form->field($model, 'linkedin', [
+                        <?= $form->field($model, 'twitter', [
                             'addon' => [
                                 'prepend' => [
-                                    'content'=>'<i class="fa fa-linkedin"></i>'
+                                    'content'=>'<i class="fa fa-twitter"></i>'
                                 ]
                             ]
                         ])->textInput(['maxlength' => true]) ?>

@@ -163,18 +163,28 @@ $this->params['breadcrumbs'][] = $this->title;
                         'format' => 'raw',
                         'hAlign' => 'center',
                         'value' => Html::a($model->gplus, $model->gplus, ['target' => 'blank'])
-                    ],
-                    [
-                        'attribute' => 'twitter',
+                    ],[
+                        'attribute' => 'instagram',
                         'format' => 'raw',
                         'hAlign' => 'center',
-                        'value' => Html::a($model->twitter, $model->twitter, ['target' => 'blank'])
+                        'value' => Html::a($model->instagram, $model->instagram, ['target' => 'blank'])
                     ],
                     [
                         'attribute' => 'linkedin',
                         'format' => 'raw',
                         'hAlign' => 'center',
                         'value' => Html::a($model->linkedin, $model->linkedin, ['target' => 'blank'])
+                    ],
+                    [
+                        'attribute' => 'twitter',
+                        'format' => 'raw',
+                        'hAlign' => 'center',
+                        'value' => Html::a($model->twitter, $model->twitter, ['target' => 'blank'])
+                    ],[
+                        'attribute' => 'youtube',
+                        'format' => 'raw',
+                        'hAlign' => 'center',
+                        'value' => Html::a($model->youtube, $model->youtube, ['target' => 'blank'])
                     ]
                 ]
             ]); ?>
