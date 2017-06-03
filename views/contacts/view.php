@@ -217,7 +217,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'state',
                         'format' => 'raw',
-                        'value' => $model->state ? '<span class="label label-success">'.\Yii::t('contacts', 'Actived').'</span>' : '<span class="label label-danger">'.\Yii::t('contacts', 'Disactived').'</span>',
+                        'value' => $model->state ? '<span class="label label-success">'.\Yii::t('contacts', 'Actived').'</span>' : '<span class="label label-danger">'.\Yii::t('contacts', 'Deactivated').'</span>',
                         'type' => DetailView::INPUT_SWITCH,
                         'widgetOptions' => [
                             'pluginOptions' => [

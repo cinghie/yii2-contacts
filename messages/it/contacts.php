@@ -33,6 +33,7 @@ return [
     'Create Contacts' => 'Crea Contatto',
     'Dashboard'=>'Dashboard',
     'Deactive' => 'Disattiva',
+    'Deactivated' => 'Disattivato',
     'Delete' => 'Cancella',
     'Yes'=>'Si',
     'Email' => 'Email Principale',
