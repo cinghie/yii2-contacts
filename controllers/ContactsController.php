@@ -34,7 +34,7 @@ class ContactsController extends Controller
                     [
                         'allow' => true,
                         'actions' => ['index'],
-                        'roles' => ['@'],
+                        'roles' => ['contacts-index-contacts'],
                     ],
                     [
                         'allow' => true,

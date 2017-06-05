@@ -18,11 +18,6 @@ class Contacts extends \yii\base\Module
     public $controllerNamespace = 'cinghie\contacts\controllers';
 
     /**
-     * @var boolean Captcha
-     */
-    public $captcha = true;
-
-    /**
      * @var boolean showTitles in views
      */
     public $showTitles = true;
