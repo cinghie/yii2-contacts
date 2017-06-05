@@ -85,46 +85,22 @@ class Contacts extends ActiveRecord
     {
         return array_merge(CreatedTrait::rules(), ModifiedTrait::rules(), StateTrait::rules(), UserTrait::rules(), [
             [['firstname', 'lastname'], 'required'],
-            ['phone_code', 'required', 'when' => function ($model) {
-                    return $model->phone != '';
-                }, 'whenClient' => "function (attribute, value) {
-                    return $('#contacts-phone').val() != '';
-            }"],
-            ['phone_secondary_code', 'required', 'when' => function ($model) {
-                    return $model->phone_secondary != '';
-                }, 'whenClient' => "function (attribute, value) {
-                    return $('#contacts-phone_secondary').val() != '';
-            }"],
-            ['mobile_code', 'required', 'when' => function ($model) {
-                    return $model->mobile != '';
-                }, 'whenClient' => "function (attribute, value) {
-                    return $('#contacts-mobile').val() != '';
-            }"],
-            ['mobile_secondary_code', 'required', 'when' => function ($model) {
-                    return $model->mobile_secondary != '';
-                }, 'whenClient' => "function (attribute, value) {
-                    return $('#contacts-mobile_secondary').val() != '';
-            }"],
-            ['fax_code', 'required', 'when' => function ($model) {
-                return $model->fax != '';
-            }, 'whenClient' => "function (attribute, value) {
-                    return $('#contacts-fax').val() != '';
-            }"],
-            ['fax_secondary_code', 'required', 'when' => function ($model) {
-                return $model->fax_secondary != '';
-            }, 'whenClient' => "function (attribute, value) {
-                    return $('#contacts-fax_secondary').val() != '';
-            }"],
-            [['phone_code', 'phone_secondary_code', 'mobile_code', 'mobile_secondary_code', 'fax_code', 'fax_secondary_code'], 'integer'],
             [['phone', 'phone_secondary', 'mobile', 'mobile_secondary', 'fax', 'fax_secondary'], 'string', 'max' => 50],
             [['firstname', 'lastname', 'email', 'email_secondary'], 'string', 'max' => 100],
             [['website', 'skype', 'facebook', 'gplus', 'instagram', 'linkedin', 'twitter', 'youtube'], 'string', 'max' => 255],
+            [['phone_code', 'phone_secondary_code', 'mobile_code', 'mobile_secondary_code', 'fax_code', 'fax_secondary_code'], 'integer'],
             [['fax_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['fax_code' => 'id']],
+            [['fax_code'], 'required', 'when' => function ($model) { return $model->fax != ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() != ''; }"],
             [['fax_secondary_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['fax_secondary_code' => 'id']],
+            [['fax_secondary_code'], 'required', 'when' => function ($model) { return $model->fax_secondary != ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() != ''; }"],
             [['mobile_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['mobile_code' => 'id']],
+            [['mobile_code'], 'required', 'when' => function ($model) { return $model->mobile != ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() != ''; }"],
             [['mobile_secondary_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['mobile_secondary_code' => 'id']],
+            [['mobile_secondary_code'], 'required', 'when' => function ($model) { return $model->mobile_secondary != ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() != ''; }"],
             [['phone_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['phone_code' => 'id']],
+            [['phone_code'], 'required', 'when' => function ($model) { return $model->phone != ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() != ''; }"],
             [['phone_secondary_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['phone_secondary_code' => 'id']],
+            [['phone_secondary_code'], 'required', 'when' => function ($model) { return $model->phone_secondary != ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() != ''; }"],
         ]);
     }
 
