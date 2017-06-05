@@ -53,12 +53,12 @@ Set on your configuration file
 To access the module actions the user must have this permissions:
 
  - Create: contacts-create-contacts
- - Update: contacts-update-all-contacts or contacts-update-his-contacts
  - Delete: contacts-delete-all-contacts or contacts-delete-his-contacts
+ - Index: contacts-index-contacts 
+ - Update: contacts-update-all-contacts or contacts-update-his-contacts
  - View: contacts-views-all-contacts or contacts-views-his-contacts
 
 ### URLS
-<ul> 
-  <li>Contacts: PathToApp/index.php?r=contacts/contacts/index</li>
-  <li>Contacts with Pretty Urls: PathToApp/contacts/contacts/index</li>
-</ul>
+
+ - Contacts: PathToApp/index.php?r=contacts/contacts/index
+ - Contacts with Pretty Urls: PathToApp/contacts/contacts/index
