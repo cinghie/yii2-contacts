@@ -117,7 +117,7 @@ $this->registerJs('
                 'attribute' => 'name',
                 'format' => 'html',
                 'hAlign' => 'center',
-                'label' => \Yii::t('contacts', 'Name and Surname'),
+                'label' => \Yii::t('contacts', 'Contact'),
                 'value' => function ($model) {
                     $url = urldecode(Url::toRoute(['/contacts/contacts/view', 'id' => $model->id]));
                     return Html::a($model->lastname." ".$model->firstname,$url);
