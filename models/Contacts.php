@@ -18,6 +18,7 @@ use cinghie\traits\ModifiedTrait;
 use cinghie\traits\StateTrait;
 use cinghie\traits\UserTrait;
 use cinghie\traits\UserHelperTrait;
+use cinghie\traits\ViewsHelper;
 
 /**
  * This is the model class for table "{{%contacts}}".
@@ -63,6 +64,7 @@ class Contacts extends ActiveRecord
     use StateTrait;
     use UserHelperTrait;
     use UserTrait;
+    use ViewsHelper;
 
     const EVENT_AFTER_VIEW   = 'afterView';
     const EVENT_AFTER_CREATE = 'afterCreate';

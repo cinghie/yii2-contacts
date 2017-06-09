@@ -25,9 +25,9 @@ $this->registerJs('
             var selectedId = $("#w0").yiiGridView("getSelectedRows");
 
             if(selectedId.length == 0) {
-                alert("'.\Yii::t("contacts", "Select at least one item").'");
+                alert("'.\Yii::t("traits", "Select at least one item").'");
             } else if(selectedId.length>1){
-                alert("'.\Yii::t("contacts", "Select only 1 item").'");
+                alert("'.\Yii::t("traits", "Select only 1 item").'");
             } else {
                 var url = "'.Url::to(['/contacts/contacts/update']).'?id="+selectedId[0];
                 window.location.href= url;
@@ -37,7 +37,7 @@ $this->registerJs('
             var selectedId = $("#w0").yiiGridView("getSelectedRows");
 
             if(selectedId.length == 0) {
-                alert("'.\Yii::t("contacts", "Select at least one item").'");
+                alert("'.\Yii::t("traits", "Select at least one item").'");
             } else {
                 $.ajax({
                     type: \'POST\',
@@ -53,7 +53,7 @@ $this->registerJs('
             var selectedId = $("#w0").yiiGridView("getSelectedRows");
 
             if(selectedId.length == 0) {
-                alert("'.\Yii::t("contacts", "Select at least one item").'");
+                alert("'.\Yii::t("traits", "Select at least one item").'");
             } else {
                 $.ajax({
                     type: \'POST\',
@@ -69,9 +69,9 @@ $this->registerJs('
             var selectedId = $("#w0").yiiGridView("getSelectedRows");
 
             if(selectedId.length == 0) {
-                alert("'.\Yii::t("contacts", "Select at least one item").'");
+                alert("'.\Yii::t("traits", "Select at least one item").'");
             } else {
-                var choose = confirm("'.\Yii::t("contacts", "Do you want delete selected items?").'");
+                var choose = confirm("'.\Yii::t("traits", "Do you want delete selected items?").'");
 
                 if (choose == true) {
                     $.ajax({
@@ -143,8 +143,7 @@ $this->registerJs('
                     }
                     else if($model->mobile && !$model->mobileCode) {
                         return $model->mobile;
-                    }
-                    else {
+                    } else {
                         return "";
                     }
                 },
@@ -157,11 +156,9 @@ $this->registerJs('
                 'value' => function ($model) {
                     if($model->mobile_secondary && $model->mobileSecondaryCode) {
                         return "+".$model->mobileSecondaryCode->phonecode." ".$model->mobile_secondary;
-                    }
-                    else if($model->mobile_secondary && !$model->mobileSecondaryCode) {
+                    } else if($model->mobile_secondary && !$model->mobileSecondaryCode) {
                         return $model->mobile_secondary;
-                    }
-                    else {
+                    } else {
                         return "";
                     }
                 },
@@ -174,11 +171,9 @@ $this->registerJs('
                 'value' => function ($model) {
                     if($model->phone && $model->phoneCode) {
                         return "+".$model->phoneCode->phonecode." ".$model->phone;
-                    }
-                    else if($model->phone && !$model->phoneCode) {
+                    } else if($model->phone && !$model->phoneCode) {
                         return $model->phone;
-                    }
-                    else {
+                    } else {
                         return "";
                     }
                 },
@@ -191,11 +186,9 @@ $this->registerJs('
                 'value' => function ($model) {
                     if($model->phone_secondary && $model->phoneSecondaryCode) {
                         return "+".$model->phoneSecondaryCode->phonecode." ".$model->phone_secondary;
-                    }
-                    else if($model->phone_secondary && !$model->phoneSecondaryCode) {
+                    } else if($model->phone_secondary && !$model->phoneSecondaryCode) {
                         return $model->phone_secondary;
-                    }
-                    else {
+                    } else {
                         return "";
                     }
                 },
@@ -207,15 +200,7 @@ $this->registerJs('
                 'hAlign' => 'center',
                 'width' => '5%',
                 'value' => function ($model) {
-                    if($model->state) {
-                        return Html::a('<span class="glyphicon glyphicon-ok text-success"></span>', ['changestate', 'id' => $model->id], [
-                            'data-method' => 'post',
-                        ]);
-                    } else {
-                        return Html::a('<span class="glyphicon glyphicon-remove text-danger"></span>', ['changestate', 'id' => $model->id], [
-                            'data-method' => 'post',
-                        ]);
-                    }
+                    return $model->getStateGridView($model);
                 }
             ],
             [
@@ -228,23 +213,23 @@ $this->registerJs('
             'heading'    => '<h3 class="panel-title"><i class="fa fa-user"></i></h3>',
             'type'       => 'success',
             'before'     => '<span style="margin-right: 5px;">'.
-                Html::a('<i class="glyphicon glyphicon-plus"></i> '.\Yii::t('contacts', 'New'),
+                Html::a('<i class="glyphicon glyphicon-plus"></i> '.\Yii::t('traits', 'New'),
                     ['create'], ['class' => 'btn btn-success']
                 ).'</span><span style="margin-right: 5px;">'.
-                Html::a('<i class="glyphicon glyphicon-pencil"></i> '.\Yii::t('contacts', 'Update'),
+                Html::a('<i class="glyphicon glyphicon-pencil"></i> '.\Yii::t('traits', 'Update'),
                     '#', ['class' => 'btn btn-update btn-warning']
                 ).'</span><span style="margin-right: 5px;">'.
-                Html::a('<i class="glyphicon glyphicon-minus-sign"></i> '.\Yii::t('contacts', 'Delete'),
+                Html::a('<i class="glyphicon glyphicon-minus-sign"></i> '.\Yii::t('traits', 'Delete'),
                     '#', ['class' => 'btn btn-delete btn-danger']
                 ).'</span><span style="float: right; margin-right: 5px;">'.
-                Html::a('<i class="glyphicon glyphicon-remove"></i> '.\Yii::t('contacts', 'Deactive'),
+                Html::a('<i class="glyphicon glyphicon-remove"></i> '.\Yii::t('traits', 'Deactive'),
                     '#', ['class' => 'btn btn-deactive btn-danger']
                 ).'</span><span style="float: right; margin-right: 5px;">'.
-                Html::a('<i class="glyphicon glyphicon-ok"></i> '.\Yii::t('contacts', 'Active'),
+                Html::a('<i class="glyphicon glyphicon-ok"></i> '.\Yii::t('traits', 'Active'),
                     ['#'], ['class' => 'btn btn-active btn-success']
                 ).'</span>',
             'after' => Html::a(
-                '<i class="glyphicon glyphicon-repeat"></i> '.\Yii::t('contacts', 'Reset Grid'), ['index'], ['class' => 'btn btn-info']
+                '<i class="glyphicon glyphicon-repeat"></i> '.\Yii::t('traits', 'Reset Grid'), ['index'], ['class' => 'btn btn-info']
             ),
             'showFooter' => false
         ],
