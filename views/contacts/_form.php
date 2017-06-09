@@ -264,21 +264,7 @@ if($model->isNewRecord) {
 
                                 <div class="col-lg-12">
 
-                                    <?php if($model->isNewRecord && !$model->user_id || $model->user_id == 0): ?>
-
-                                        <?= $form->field($model, 'user_id')->textInput([
-                                            'disabled' => true,
-                                            'value' => \Yii::t('newsletters', 'Nobody')
-                                        ]) ?>
-
-                                    <?php else: ?>
-
-                                        <?= $form->field($model, 'user_id')->textInput([
-                                            'disabled' => true,
-                                            'value' => $model->user->username
-                                        ]) ?>
-
-                                    <?php endif ?>
+                                    <?= $model->getUserWidget($form,$model) ?>
 
                                 </div>
 
@@ -448,59 +434,15 @@ if($model->isNewRecord) {
 
                 <div class="col-lg-3">
 
-                    <?= $form->field($model, 'state')->widget(Select2::classname(), [
-                        'data' => $model->getPublishSelect2(),
-                        'addon' => [
-                            'prepend' => [
-                                'content'=>'<i class="glyphicon glyphicon-check"></i>'
-                            ]
-                        ],
-                    ]); ?>
+                    <?= $model->getStateWidget($form,$model) ?>
 
-                    <?= $form->field($model, 'created_by')->widget(Select2::classname(), [
-                        'data' => [
-                            $created_by => $created_by_username
-                        ],
-                        'addon' => [
-                            'prepend' => [
-                                'content'=>'<i class="glyphicon glyphicon-user"></i>'
-                            ]
-                        ],
-                    ]); ?>
+                    <?= $model->getCreatedByWidget($form,$model) ?>
 
-                    <?php echo $form->field($model, 'created')->widget(DateTimePicker::classname(), [
-                        'options' => [
-                            'value' => $created,
-                        ],
-                        'pluginOptions' => [
-                            'autoclose'      => true,
-                            'format'         => 'yyyy-mm-dd hh:ii:ss',
-                            'todayHighlight' => true,
-                        ]
-                    ]); ?>
+                    <?= $model->getCreatedWidget($form,$model) ?>
 
-                    <?= $form->field($model, 'modified_by')->widget(Select2::classname(), [
-                        'data' => [
-                            $modified_by => $modified_by->username
-                        ],
-                        'addon' => [
-                            'prepend' => [
-                                'content'=>'<i class="glyphicon glyphicon-user"></i>'
-                            ]
-                        ],
-                    ]); ?>
+                    <?= $model->getModifiedByWidget($form,$model) ?>
 
-                    <?php echo $form->field($model, 'modified')->widget(DateTimePicker::classname(), [
-                        'disabled' => true,
-                        'options' => [
-                            'value' => $modified,
-                        ],
-                        'pluginOptions' => [
-                            'autoclose'      => true,
-                            'format'         => 'yyyy-mm-dd hh:ii:ss',
-                            'todayHighlight' => true,
-                        ]
-                    ]); ?>
+                    <?= $model->getModifiedWidget($form,$model) ?>
 
                 </div>
 
