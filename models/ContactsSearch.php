@@ -48,15 +48,14 @@ class ContactsSearch extends Contacts
 
     /**
      * Creates data provider instance with search query applied
+     *
      * @param array $params
      * @return ActiveDataProvider
      */
     public function search($params)
     {
         $query = Contacts::find();
-
-        // Adding JOIN Tables
-        $query->joinWith('user');
+        $query->joinWith(['createdBy', 'modifiedBy','user']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query
@@ -76,7 +75,12 @@ class ContactsSearch extends Contacts
                 'phone_secondary',
                 'mobile',
                 'mobile_secondary',
-                'state'
+                'state',
+                'user_id',
+                'created',
+                'created_by',
+                'modified',
+                'modified_by',
             ],
             'defaultOrder' => [
                 'id' => SORT_DESC
@@ -103,10 +107,10 @@ class ContactsSearch extends Contacts
             ->andFilterWhere(['like', 'lastname', $this->lastname])
             ->andFilterWhere(['like', 'user.username', $this->user_id])
             ->andFilterWhere(['like', 'created', $this->created])
-            ->andFilterWhere(['like', 'user.username', $this->created_by])
+            ->andFilterWhere(['like', 'createdby.username', $this->created_by])
             ->andFilterWhere(['like', 'modified', $this->modified])
-            ->andFilterWhere(['like', 'user.username', $this->modified_by])
-            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'modifiedby.username', $this->modified_by])
+            ->andFilterWhere(['like', '{{%contacts}}.email', $this->email])
             ->andFilterWhere(['like', 'email_secondary', $this->email_secondary])
             ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', 'phone_code', $this->phone_code])
@@ -135,10 +139,14 @@ class ContactsSearch extends Contacts
 
     /**
      * Creates data provider instance with last contacts
-     * @param integer $count
+     *
+     * @param $limit
+     * @param string $orderby
+     * @param int $order
      * @return ActiveDataProvider
+     * @internal param int $count
      */
-    public function last($limit, $orderby = "id", $order = SORT_DESC)
+    public function last($limit = 5, $orderby = "id", $order = SORT_DESC)
     {
         $query = Contacts::find()->limit($limit);
 
