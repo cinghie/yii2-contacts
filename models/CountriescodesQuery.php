@@ -23,6 +23,7 @@ class CountriescodesQuery extends ActiveQuery
 {
     /**
      * @inheritdoc
+     *
      * @return Countriescodes[]|array
      */
     public function all($db = null)
@@ -32,6 +33,7 @@ class CountriescodesQuery extends ActiveQuery
 
     /**
      * @inheritdoc
+     *
      * @return Countriescodes|array|null
      */
     public function one($db = null)

@@ -68,6 +68,7 @@ class Countriescodes extends ActiveRecord
 
     /**
      * @inheritdoc
+     *
      * @return CountriescodesQuery the active query used by this AR class.
      */
     public static function find()

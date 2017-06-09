@@ -197,6 +197,7 @@ class Contacts extends ActiveRecord
 
     /**
      * Return Contact Full Name
+     *
      * @return string
      */
     public function getFullName()
@@ -206,6 +207,7 @@ class Contacts extends ActiveRecord
 
     /**
      * Return array for Publish Status
+     *
      * @return array
      */
     public function getPublishSelect2()
@@ -219,6 +221,7 @@ class Contacts extends ActiveRecord
 
     /**
      * @inheritdoc
+     *
      * @return ContactsQuery the active query used by this AR class.
      */
     public static function find()

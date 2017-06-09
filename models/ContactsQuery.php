@@ -24,6 +24,7 @@ class ContactsQuery extends ActiveQuery
 
     /**
      * @inheritdoc
+     *
      * @return Contacts[]|array
      */
     public function last($limit, $orderby = "id", $order = "DESC")
@@ -33,6 +34,7 @@ class ContactsQuery extends ActiveQuery
 
     /**
      * @inheritdoc
+     *
      * @return Contacts[]|array
      */
     public function all($db = null)
@@ -42,6 +44,7 @@ class ContactsQuery extends ActiveQuery
 
     /**
      * @inheritdoc
+     *
      * @return Contacts|array|null
      */
     public function one($db = null)
