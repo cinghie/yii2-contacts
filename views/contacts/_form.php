@@ -18,25 +18,6 @@ use yii\web\JsExpression;
 // Get Phonecode Prefix
 $prefix = Url::to(['/contacts/phonecode/prefix']);
 
-// Get current user
-$user     = \Yii::$app->user->identity;
-$user_id  = $user->id;
-$username = $user->username;
-
-if($model->isNewRecord) {
-    $created = date("Y-m-d H:i:s");
-    $created_by = $user_id;
-    $created_by_username = $username;
-    $modified = "0000-00-00 00:00:00";
-    $modified_by = NULL;
-} else {
-    $created = $model->created;
-    $created_by = $model->created_by;
-    $created_by_username = $model->createdBy->username;
-    $modified = date("Y-m-d H:i:s");
-    $modified_by = $model->modified_by;
-}
-
 ?>
 
 <div class="contacts-form">
@@ -57,7 +38,7 @@ if($model->isNewRecord) {
 
                             <div class="row">
 
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
 
                                     <?= $form->field($model, 'firstname', [
                                         'addon' => [
@@ -69,7 +50,7 @@ if($model->isNewRecord) {
 
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
 
                                     <?= $form->field($model, 'lastname', [
                                         'addon' => [
@@ -81,7 +62,7 @@ if($model->isNewRecord) {
 
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
 
                                     <?= $form->field($model, 'email', [
                                         'addon' => [
@@ -93,7 +74,7 @@ if($model->isNewRecord) {
 
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
 
                                     <?= $form->field($model, 'email_secondary', [
                                         'addon' => [
@@ -105,7 +86,7 @@ if($model->isNewRecord) {
 
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
 
                                     <?= $form->field($model, 'phone_code')->widget(Select2::classname(), [
                                         'initValueText' => $model->phoneCode ? $model->phoneCode->nicename : "",
@@ -132,7 +113,7 @@ if($model->isNewRecord) {
 
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
 
                                     <?= $form->field($model, 'phone', [
                                         'addon' => [
@@ -144,7 +125,7 @@ if($model->isNewRecord) {
 
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
 
                                     <?= $form->field($model, 'mobile_code')->widget(Select2::classname(), [
                                         'initValueText' => $model->mobileCode ? $model->mobileCode->nicename : "",
@@ -171,7 +152,7 @@ if($model->isNewRecord) {
 
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
 
                                     <?= $form->field($model, 'mobile', [
                                         'addon' => [
@@ -183,7 +164,7 @@ if($model->isNewRecord) {
 
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
 
                                     <?= $form->field($model, 'fax_code')->widget(Select2::classname(), [
                                         'initValueText' => $model->faxCode ? $model->faxCode->nicename : "",
@@ -226,7 +207,7 @@ if($model->isNewRecord) {
 
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
 
                                     <?= $form->field($model, 'fax', [
                                         'addon' => [
@@ -268,7 +249,7 @@ if($model->isNewRecord) {
 
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
 
                                     <?= $form->field($model, 'skype', [
                                         'addon' => [
@@ -280,7 +261,7 @@ if($model->isNewRecord) {
 
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
 
                                     <?= $form->field($model, 'website', [
                                         'addon' => [
@@ -291,7 +272,7 @@ if($model->isNewRecord) {
                                     ])->textInput(['maxlength' => true]) ?>
 
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
 
                                     <?= $form->field($model, 'phone_secondary_code')->widget(Select2::classname(), [
                                         'initValueText' => $model->phoneSecondaryCode ? $model->phoneSecondaryCode->nicename : "",
@@ -318,7 +299,7 @@ if($model->isNewRecord) {
 
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
 
                                     <?= $form->field($model, 'phone_secondary', [
                                         'addon' => [
@@ -330,7 +311,7 @@ if($model->isNewRecord) {
 
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
 
                                     <?= $form->field($model, 'mobile_secondary_code')->widget(Select2::classname(), [
                                         'initValueText' => $model->mobileSecondaryCode ? $model->mobileSecondaryCode->nicename : "",
@@ -357,7 +338,7 @@ if($model->isNewRecord) {
 
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
 
                                     <?= $form->field($model, 'mobile_secondary', [
                                         'addon' => [
@@ -369,7 +350,7 @@ if($model->isNewRecord) {
 
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
 
                                     <?= $form->field($model, 'fax_secondary_code')->widget(Select2::classname(), [
                                         'initValueText' => $model->faxSecondaryCode ? $model->faxSecondaryCode->nicename : "",
@@ -404,7 +385,7 @@ if($model->isNewRecord) {
 
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-md-6">
 
                                     <?= $form->field($model, 'fax_secondary', [
                                         'addon' => [
@@ -432,7 +413,7 @@ if($model->isNewRecord) {
 
                 </div>
 
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-md-12">
 
                     <?= $model->getStateWidget($form,$model) ?>
 
@@ -449,7 +430,7 @@ if($model->isNewRecord) {
                 <div class="col-lg-12">
 
                     <div class="form-group">
-                        <?= Html::submitButton($model->isNewRecord ? \Yii::t('newsletters', 'Create') : \Yii::t('newsletters', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                        <?= Html::submitButton($model->isNewRecord ? \Yii::t('traits', 'Create') : \Yii::t('newsletters', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
                     </div>
 
                 </div>
