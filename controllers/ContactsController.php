@@ -129,6 +129,7 @@ class ContactsController extends Controller
     /**
      * Creates a new Contacts model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * 
      * @return mixed
      */
     public function actionCreate()
@@ -174,6 +175,7 @@ class ContactsController extends Controller
     /**
      * Updates an existing Contacts model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
      * @return mixed
      */
@@ -224,6 +226,7 @@ class ContactsController extends Controller
     /**
      * Deletes an existing Contacts model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
      * @return mixed
      */
@@ -241,6 +244,7 @@ class ContactsController extends Controller
     /**
      * Deletes selected Contacts models.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @return mixed
      */
     public function actionDeletemultiple()
@@ -273,6 +277,7 @@ class ContactsController extends Controller
 
     /**
      * Change Contacts state: active or inactive
+     *
      * @param int $id
      * @return mixed
      */
@@ -307,6 +312,7 @@ class ContactsController extends Controller
     /**
      * Active selected Contacts models.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @return mixed
      */
     public function actionActivemultiple()
@@ -339,6 +345,7 @@ class ContactsController extends Controller
     /**
      * Active selected Contacts models.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @return mixed
      */
     public function actionDeactivemultiple()
@@ -371,8 +378,9 @@ class ContactsController extends Controller
     /**
      * Finds the Contacts model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
-     * @return Contacts the loaded model
+     * @return Contacts $model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
@@ -386,6 +394,7 @@ class ContactsController extends Controller
 
     /**
      * Check if user can update
+     *
      * @return bool
      */
     protected function userCanUpdate()
@@ -397,6 +406,7 @@ class ContactsController extends Controller
 
     /**
      * Check if user can delete
+     *
      * @return bool
      */
     protected function userCanDelete()
@@ -408,6 +418,7 @@ class ContactsController extends Controller
 
     /**
      * Check if user can publish
+     *
      * @return bool
      */
     protected function userCanPublish()
@@ -419,6 +430,7 @@ class ContactsController extends Controller
 
     /**
      * Check if user can publish
+     *
      * @return bool
      */
     protected function userCanView()
