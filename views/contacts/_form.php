@@ -245,7 +245,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 
                                 <div class="col-lg-12">
 
-                                    <?= $model->getUserWidget($form,$model) ?>
+                                    <?= $model->getUserWidget($form) ?>
 
                                 </div>
 
@@ -415,15 +415,15 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 
                 <div class="col-lg-3 col-md-12">
 
-                    <?= $model->getStateWidget($form,$model) ?>
+                    <?= $model->getStateWidget($form) ?>
 
-                    <?= $model->getCreatedByWidget($form,$model) ?>
+                    <?= $model->getCreatedByWidget($form) ?>
 
-                    <?= $model->getCreatedWidget($form,$model) ?>
+                    <?= $model->getCreatedWidget($form) ?>
 
-                    <?= $model->getModifiedByWidget($form,$model) ?>
+                    <?= $model->getModifiedByWidget($form) ?>
 
-                    <?= $model->getModifiedWidget($form,$model) ?>
+                    <?= $model->getModifiedWidget($form) ?>
 
                 </div>
 

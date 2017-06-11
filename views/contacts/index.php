@@ -200,7 +200,7 @@ $this->registerJs('
                 'hAlign' => 'center',
                 'width' => '5%',
                 'value' => function ($model) {
-                    return $model->getStateGridView($model);
+                    return $model->getStateGridView();
                 }
             ],
             [
