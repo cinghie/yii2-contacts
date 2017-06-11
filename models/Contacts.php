@@ -87,7 +87,7 @@ class Contacts extends ActiveRecord
      */
     public function rules()
     {
-        return array_merge(CreatedTrait->rules(), ModifiedTrait->rules(), StateTrait->rules(), UserTrait->rules(), [
+        return array_merge(CreatedTrait::rules(), ModifiedTrait::rules(), StateTrait::rules(), UserTrait::rules(), [
             [['firstname', 'lastname'], 'required'],
             [['email', 'email_secondary'], 'email'],
             [['email'], 'unique', 'targetAttribute' => ['email']],
@@ -119,7 +119,7 @@ class Contacts extends ActiveRecord
      */
     public function attributeLabels()
     {
-        return array_merge(CreatedTrait->attributeLabels(), ModifiedTrait->attributeLabels(), StateTrait->attributeLabels(), UserTrait->attributeLabels(), [
+        return array_merge(CreatedTrait::attributeLabels(), ModifiedTrait::attributeLabels(), StateTrait::attributeLabels(), UserTrait::attributeLabels(), [
             'id' => Yii::t('contacts', 'ID'),
             'firstname' => Yii::t('contacts', 'Firstname'),
             'lastname' => Yii::t('contacts', 'Lastname'),
