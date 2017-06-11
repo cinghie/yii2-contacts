@@ -68,14 +68,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             'columns' => [
                                 [
                                     'attribute' => 'phone',
-                                    'format' => 'html',
+                                    'format' => 'raw',
                                     'hAlign' => 'center',
                                     'value' => $model->phone ? "+".$model->phoneCode->phonecode." ".$model->phone : '',
                                     'valueColOptions' => ['style'=>'width:30%']
                                 ],
                                 [
                                     'attribute' => 'phone_secondary',
-                                    'format' => 'html',
+                                    'format' => 'raw',
                                     'hAlign' => 'center',
                                     'value' => $model->phone_secondary ? "+".$model->phoneSecondaryCode->phonecode." ".$model->phone_secondary : '',
                                     'valueColOptions' => ['style'=>'width:30%']
@@ -86,14 +86,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             'columns' => [
                                 [
                                     'attribute' => 'mobile',
-                                    'format' => 'html',
+                                    'format' => 'raw',
                                     'hAlign' => 'center',
                                     'value' => $model->mobile ? "+".$model->mobileCode->phonecode." ".$model->mobile : '',
                                     'valueColOptions' => ['style'=>'width:30%']
                                 ],
                                 [
                                     'attribute' => 'mobile_secondary',
-                                    'format' => 'html',
+                                    'format' => 'raw',
                                     'hAlign' => 'center',
                                     'value' => $model->mobile_secondary ? "+".$model->mobileSecondaryCode->phonecode." ".$model->mobile_secondary : '',
                                     'valueColOptions' => ['style'=>'width:30%']
@@ -104,14 +104,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             'columns' => [
                                 [
                                     'attribute' => 'fax',
-                                    'format' => 'html',
+                                    'format' => 'raw',
                                     'hAlign' => 'center',
                                     'value' => $model->fax ? "+".$model->faxcode->phonecode." ".$model->fax : '',
                                     'valueColOptions' => ['style'=>'width:30%']
                                 ],
                                 [
                                     'attribute' => 'fax_secondary',
-                                    'format' => 'html',
+                                    'format' => 'raw',
                                     'hAlign' => 'center',
                                     'value' => $model->fax_secondary ? "+".$model->faxSecondaryCode->phonecode." ".$model->fax_secondary : '',
                                     'valueColOptions' => ['style'=>'width:30%']

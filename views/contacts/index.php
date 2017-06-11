@@ -114,7 +114,7 @@ $this->registerJs('
                 ],
                 [
                     'attribute' => 'name',
-                    'format' => 'html',
+                    'format' => 'raw',
                     'hAlign' => 'center',
                     'label' => Yii::t('contacts', 'Contact'),
                     'value' => function ($model) {
@@ -134,7 +134,7 @@ $this->registerJs('
                 ],
                 [
                     'attribute' => 'mobile',
-                    'format' => 'html',
+                    'format' => 'raw',
                     'hAlign' => 'center',
                     'value' => function ($model) {
                         if($model->mobile && $model->mobileCode) {
@@ -150,7 +150,7 @@ $this->registerJs('
                 ],
                 [
                     'attribute' => 'mobile_secondary',
-                    'format' => 'html',
+                    'format' => 'raw',
                     'hAlign' => 'center',
                     'value' => function ($model) {
                         if($model->mobile_secondary && $model->mobileSecondaryCode) {
@@ -165,7 +165,7 @@ $this->registerJs('
                 ],
                 [
                     'attribute' => 'phone',
-                    'format' => 'html',
+                    'format' => 'raw',
                     'hAlign' => 'center',
                     'value' => function ($model) {
                         if($model->phone && $model->phoneCode) {
@@ -180,7 +180,7 @@ $this->registerJs('
                 ],
                 [
                     'attribute' => 'phone_secondary',
-                    'format' => 'html',
+                    'format' => 'raw',
                     'hAlign' => 'center',
                     'value' => function ($model) {
                         if($model->phone_secondary && $model->phoneSecondaryCode) {
