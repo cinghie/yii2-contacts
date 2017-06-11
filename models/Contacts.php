@@ -12,14 +12,15 @@
 
 namespace cinghie\contacts\models;
 
+use cinghie\traits\EditorTrait;
 use Yii;
 use yii\db\ActiveRecord;
 use cinghie\traits\CreatedTrait;
 use cinghie\traits\ModifiedTrait;
 use cinghie\traits\StateTrait;
 use cinghie\traits\UserTrait;
-use cinghie\traits\UserHelperTrait;
-use cinghie\traits\ViewsHelper;
+use cinghie\traits\UserHelpersTrait;
+use cinghie\traits\ViewsHelpersTrait;
 
 /**
  * This is the model class for table "{{%contacts}}".
@@ -60,12 +61,7 @@ use cinghie\traits\ViewsHelper;
 class Contacts extends ActiveRecord
 {
     
-    use CreatedTrait;
-    use ModifiedTrait;
-    use StateTrait;
-    use UserHelperTrait;
-    use UserTrait;
-    use ViewsHelper;
+    use CreatedTrait, ModifiedTrait, StateTrait, UserHelpersTrait, UserTrait, ViewsHelpersTrait;
 
     const EVENT_AFTER_VIEW   = 'afterView';
     const EVENT_AFTER_CREATE = 'afterCreate';
