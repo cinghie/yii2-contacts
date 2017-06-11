@@ -21,6 +21,7 @@ use yii\db\ActiveQuery;
  */
 class CountriescodesQuery extends ActiveQuery
 {
+
     /**
      * @inheritdoc
      *

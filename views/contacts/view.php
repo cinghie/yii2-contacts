@@ -4,21 +4,22 @@
  * @copyright Copyright &copy; Gogodigital Srls
  * @company Gogodigital Srls - Wide ICT Solutions
  * @website http://www.gogodigital.it
+ * @github https://github.com/cinghie/yii2-contacts
+ * @license GNU GENERAL PUBLIC LICENSE VERSION 3
  * @package yii2-contacts
  * @version 0.9.3
  */
 
 use kartik\detail\DetailView;
 use kartik\helpers\Html;
-use yii\helpers\Url;
 
 $this->title = $model->getFullname();
-$this->params['breadcrumbs'][] = ['label' => \Yii::t('contacts', 'Contacts'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('contacts', 'Contacts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row contacts-view">
 
-    <?php if(\Yii::$app->getModule('contacts')->showTitles): ?>
+    <?php if(Yii::$app->getModule('contacts')->showTitles): ?>
         <div class="page-header">
             <h1><?= Html::encode($this->title) ?></h1>
         </div>
@@ -37,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'hover' => true,
                     'mode' => DetailView::MODE_VIEW,
                     'panel' => [
-                        'heading' => \Yii::t('contacts', 'Contacts Informations'),
+                        'heading' => Yii::t('contacts', 'Contacts Informations'),
                         'type' => DetailView::TYPE_INFO,
                     ],
                     'attributes'=> [
@@ -143,7 +144,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'hover' => true,
                     'mode' => DetailView::MODE_VIEW,
                     'panel' => [
-                        'heading' => \Yii::t('contacts', 'Social Informations'),
+                        'heading' => Yii::t('contacts', 'Social Informations'),
                         'type' => DetailView::TYPE_INFO,
                     ],
                     'deleteOptions' => false,

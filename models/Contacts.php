@@ -12,6 +12,7 @@
 
 namespace cinghie\contacts\models;
 
+use Yii;
 use yii\db\ActiveRecord;
 use cinghie\traits\CreatedTrait;
 use cinghie\traits\ModifiedTrait;
@@ -86,8 +87,14 @@ class Contacts extends ActiveRecord
      */
     public function rules()
     {
-        return array_merge(CreatedTrait::rules(), ModifiedTrait::rules(), StateTrait::rules(), UserTrait::rules(), [
+        return array_merge(CreatedTrait->rules(), ModifiedTrait->rules(), StateTrait->rules(), UserTrait->rules(), [
             [['firstname', 'lastname'], 'required'],
+            [['email', 'email_secondary'], 'email'],
+            [['email'], 'unique', 'targetAttribute' => ['email']],
+            [['email'], 'unique', 'targetAttribute' => ['email_secondary']],
+            [['email_secondary'], 'unique', 'targetAttribute' => ['email']],
+            [['email_secondary'], 'unique', 'targetAttribute' => ['email_secondary']],
+            [['website'], 'url', 'defaultScheme' => 'http'],
             [['phone', 'phone_secondary', 'mobile', 'mobile_secondary', 'fax', 'fax_secondary'], 'string', 'max' => 50],
             [['firstname', 'lastname', 'email', 'email_secondary'], 'string', 'max' => 100],
             [['website', 'skype', 'facebook', 'gplus', 'instagram', 'linkedin', 'twitter', 'youtube'], 'string', 'max' => 255],
@@ -112,32 +119,32 @@ class Contacts extends ActiveRecord
      */
     public function attributeLabels()
     {
-        return array_merge(CreatedTrait::attributeLabels(), ModifiedTrait::attributeLabels(), StateTrait::attributeLabels(), UserTrait::attributeLabels(), [
-            'id' => \Yii::t('contacts', 'ID'),
-            'firstname' => \Yii::t('contacts', 'Firstname'),
-            'lastname' => \Yii::t('contacts', 'Lastname'),
-            'email' => \Yii::t('contacts', 'Email'),
-            'email_secondary' => \Yii::t('contacts', 'Email Secondary'),
-            'phone' => \Yii::t('contacts', 'Phone'),
-            'phone_code' => \Yii::t('contacts', 'Phone Code'),
-            'phone_secondary' => \Yii::t('contacts', 'Phone Secondary'),
-            'phone_secondary_code' => \Yii::t('contacts', 'Phone Secondary Code'),
-            'mobile' => \Yii::t('contacts', 'Mobile'),
-            'mobile_code' => \Yii::t('contacts', 'Mobile Code'),
-            'mobile_secondary' => \Yii::t('contacts', 'Mobile Secondary'),
-            'mobile_secondary_code' => \Yii::t('contacts', 'Mobile Secondary Code'),
-            'fax' => \Yii::t('contacts', 'Fax'),
-            'fax_code' => \Yii::t('contacts', 'Fax Code'),
-            'fax_secondary' => \Yii::t('contacts', 'Fax Secondary'),
-            'fax_secondary_code' => \Yii::t('contacts', 'Fax Secondary Code'),
-            'website' => \Yii::t('contacts', 'Website'),
-            'skype' => \Yii::t('contacts', 'Skype'),
-            'facebook' => \Yii::t('contacts', 'Facebook'),
-            'gplus' => \Yii::t('contacts', 'Gplus'),
-            'instagram' => \Yii::t('contacts', 'Instagram'),
-            'linkedin' => \Yii::t('contacts', 'Linkedin'),
-            'twitter' => \Yii::t('contacts', 'Twitter'),
-            'youtube' => \Yii::t('contacts', 'Youtube'),
+        return array_merge(CreatedTrait->attributeLabels(), ModifiedTrait->attributeLabels(), StateTrait->attributeLabels(), UserTrait->attributeLabels(), [
+            'id' => Yii::t('contacts', 'ID'),
+            'firstname' => Yii::t('contacts', 'Firstname'),
+            'lastname' => Yii::t('contacts', 'Lastname'),
+            'email' => Yii::t('contacts', 'Email'),
+            'email_secondary' => Yii::t('contacts', 'Email Secondary'),
+            'phone' => Yii::t('contacts', 'Phone'),
+            'phone_code' => Yii::t('contacts', 'Phone Code'),
+            'phone_secondary' => Yii::t('contacts', 'Phone Secondary'),
+            'phone_secondary_code' => Yii::t('contacts', 'Phone Secondary Code'),
+            'mobile' => Yii::t('contacts', 'Mobile'),
+            'mobile_code' => Yii::t('contacts', 'Mobile Code'),
+            'mobile_secondary' => Yii::t('contacts', 'Mobile Secondary'),
+            'mobile_secondary_code' => Yii::t('contacts', 'Mobile Secondary Code'),
+            'fax' => Yii::t('contacts', 'Fax'),
+            'fax_code' => Yii::t('contacts', 'Fax Code'),
+            'fax_secondary' => Yii::t('contacts', 'Fax Secondary'),
+            'fax_secondary_code' => Yii::t('contacts', 'Fax Secondary Code'),
+            'website' => Yii::t('contacts', 'Website'),
+            'skype' => Yii::t('contacts', 'Skype'),
+            'facebook' => Yii::t('contacts', 'Facebook'),
+            'gplus' => Yii::t('contacts', 'Gplus'),
+            'instagram' => Yii::t('contacts', 'Instagram'),
+            'linkedin' => Yii::t('contacts', 'Linkedin'),
+            'twitter' => Yii::t('contacts', 'Twitter'),
+            'youtube' => Yii::t('contacts', 'Youtube'),
         ]);
     }
 
@@ -214,10 +221,10 @@ class Contacts extends ActiveRecord
      */
     public function getPublishSelect2()
     {
-        if ( \Yii::$app->user->can('contacts-publish-all-contacts') || \Yii::$app->user->can('contacts-publish-his-contacts') ) {
-            return [ 1 => \Yii::t('contacts', 'Actived'), 0 => \Yii::t('contacts', 'Inactived') ];
+        if ( Yii::$app->user->can('contacts-publish-all-contacts') || Yii::$app->user->can('contacts-publish-his-contacts') ) {
+            return [ 1 => Yii::t('contacts', 'Actived'), 0 => Yii::t('contacts', 'Inactived') ];
         } else {
-            return [ 0 => \Yii::t('contacts', 'Inactived') ];
+            return [ 0 => Yii::t('contacts', 'Inactived') ];
         }
     }
 

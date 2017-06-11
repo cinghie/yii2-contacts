@@ -14,6 +14,7 @@ namespace cinghie\contacts\controllers;
 
 use cinghie\contacts\models\Contacts;
 use cinghie\contacts\models\ContactsSearch;
+use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -45,7 +46,7 @@ class ContactsController extends Controller
                         'allow' => true,
                         'actions' => ['update'],
                         'roles' => ['contacts-update-his-contacts','contacts-update-all-contacts'],
-                        'matchCallback' => function ($rule, $action) {
+                        'matchCallback' => function () {
                             return $this->userCanUpdate() === true;
                         }
                     ],
@@ -53,7 +54,7 @@ class ContactsController extends Controller
                         'allow' => true,
                         'actions' => ['view'],
                         'roles' => ['contacts-view-his-contacts','contacts-view-all-contacts'],
-                        'matchCallback' => function ($rule, $action) {
+                        'matchCallback' => function () {
                             return $this->userCanView() === true;
                         }
                     ],
@@ -61,7 +62,7 @@ class ContactsController extends Controller
                         'allow' => true,
                         'actions' => ['delete','deletemultiple'],
                         'roles' => ['contacts-delete-his-contacts','contacts-delete-all-contacts'],
-                        'matchCallback' => function ($rule, $action) {
+                        'matchCallback' => function () {
                             return $this->userCanDelete() === true;
                         }
                     ],
@@ -69,7 +70,7 @@ class ContactsController extends Controller
                         'allow' => true,
                         'actions' => ['changestate','activemultiple','deactivemultiple'],
                         'roles' => ['contacts-publish-his-contacts','contacts-publish-all-contacts'],
-                        'matchCallback' => function ($rule, $action) {
+                        'matchCallback' => function () {
                             return $this->userCanPublish() === true;
                         }
                     ]
@@ -93,12 +94,13 @@ class ContactsController extends Controller
 
     /**
      * Lists all Contacts models.
+     *
      * @return mixed
      */
     public function actionIndex()
     {
         $searchModel = new ContactsSearch();
-        $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -108,6 +110,7 @@ class ContactsController extends Controller
 
     /**
      * Displays a single Contacts model.
+     *
      * @param integer $id
      * @return mixed
      */
@@ -130,7 +133,7 @@ class ContactsController extends Controller
      */
     public function actionCreate()
     {
-        $post  = \Yii::$app->request->post();
+        $post  = Yii::$app->request->post();
         $model = new Contacts();
 
         if ( $model->load($post) ) {
@@ -151,14 +154,14 @@ class ContactsController extends Controller
                 $model->trigger(Contacts::EVENT_AFTER_CREATE);
 
                 // Set Success Message
-                \Yii::$app->session->setFlash('success', \Yii::t('contacts', 'Contact has been created!'));
+                Yii::$app->session->setFlash('success', Yii::t('contacts', 'Contact has been created!'));
 
                 return $this->redirect(['index']);
 
             } else {
 
                 // Set Error Message
-                \Yii::$app->session->setFlash('error', \Yii::t('contacts', 'Contact could not be saved!'));
+                Yii::$app->session->setFlash('error', Yii::t('contacts', 'Contact could not be saved!'));
 
                 return $this->render('create', [ 'model' => $model, ]);
 
@@ -176,13 +179,13 @@ class ContactsController extends Controller
      */
     public function actionUpdate($id)
     {
-        $post  = \Yii::$app->request->post();
+        $post  = Yii::$app->request->post();
         $model = $this->findModel($id);
 
         if ( $model->load($post) ) {
 
             // Set Modified by User
-            $model->modified_by = \Yii::$app->user->identity->id;
+            $model->modified_by = Yii::$app->user->identity->id;
 
             // Set Modified as actual date
             $model->modified = date("Y-m-d H:i:s");
@@ -200,14 +203,14 @@ class ContactsController extends Controller
                 $model->trigger(Contacts::EVENT_AFTER_UPDATE);
 
                 // Set Success Message
-                \Yii::$app->session->setFlash('success', \Yii::t('contacts', 'Contact has been updated!'));
+                Yii::$app->session->setFlash('success', Yii::t('contacts', 'Contact has been updated!'));
 
                 return $this->redirect(['index']);
 
             } else {
 
                 // Set Error Message
-                \Yii::$app->session->setFlash('error', \Yii::t('contacts', 'Contact could not be saved!'));
+                Yii::$app->session->setFlash('error', Yii::t('contacts', 'Contact could not be saved!'));
 
                 return $this->render('update', [ 'model' => $model, ]);
             }
@@ -242,7 +245,7 @@ class ContactsController extends Controller
      */
     public function actionDeletemultiple()
     {
-        $ids = \Yii::$app->request->post('ids');
+        $ids = Yii::$app->request->post('ids');
 
         if (!$ids) {
             return;
@@ -255,15 +258,17 @@ class ContactsController extends Controller
             if ($model->delete()) {
 
                 // Set Success Message
-                \Yii::$app->session->setFlash('success', \Yii::t('contacts', 'Contact has been deleted'));
+                Yii::$app->session->setFlash('success', Yii::t('contacts', 'Contact has been deleted'));
 
             } else {
 
                 // Set Error Message
-                \Yii::$app->session->setFlash('error', \Yii::t('contacts', 'Error deleting Contact'));
+                Yii::$app->session->setFlash('error', Yii::t('contacts', 'Error deleting Contact'));
 
             }
         }
+
+        return;
     }
 
     /**
@@ -283,7 +288,7 @@ class ContactsController extends Controller
             $model->trigger(Contacts::EVENT_AFTER_DEACTIVE);
 
             // Set Success Message
-            \Yii::$app->getSession()->setFlash('warning', \Yii::t('contacts', 'Contact inactived'));
+            Yii::$app->getSession()->setFlash('warning', Yii::t('contacts', 'Contact inactived'));
 
         } else {
 
@@ -293,7 +298,7 @@ class ContactsController extends Controller
             $model->trigger(Contacts::EVENT_AFTER_ACTIVE);
 
             // Set Success Message
-            \Yii::$app->getSession()->setFlash('success', \Yii::t('contacts', 'Contact actived'));
+            Yii::$app->getSession()->setFlash('success', Yii::t('contacts', 'Contact actived'));
         }
 
         return $this->redirect(['index']);
@@ -306,7 +311,7 @@ class ContactsController extends Controller
      */
     public function actionActivemultiple()
     {
-        $ids = \Yii::$app->request->post('ids');
+        $ids = Yii::$app->request->post('ids');
 
         if (!$ids) {
             return;
@@ -324,9 +329,11 @@ class ContactsController extends Controller
                 $model->trigger(Contacts::EVENT_AFTER_ACTIVE);
 
                 // Set Success Message
-                \Yii::$app->getSession()->setFlash('success', \Yii::t('contacts', 'Contacts actived'));
+                Yii::$app->getSession()->setFlash('success', Yii::t('contacts', 'Contacts actived'));
             }
         }
+
+        return;
     }
 
     /**
@@ -336,7 +343,7 @@ class ContactsController extends Controller
      */
     public function actionDeactivemultiple()
     {
-        $ids = \Yii::$app->request->post('ids');
+        $ids = Yii::$app->request->post('ids');
 
         if (!$ids) {
             return;
@@ -354,9 +361,11 @@ class ContactsController extends Controller
                 $model->trigger(Contacts::EVENT_AFTER_DEACTIVE);
 
                 // Set Success Message
-                \Yii::$app->getSession()->setFlash('warning', \Yii::t('contacts', 'Contacts inactived'));
+                Yii::$app->getSession()->setFlash('warning', Yii::t('contacts', 'Contacts inactived'));
             }
         }
+
+        return;
     }
 
     /**
@@ -381,9 +390,9 @@ class ContactsController extends Controller
      */
     protected function userCanUpdate()
     {
-        $model = $this->findModel(\Yii::$app->request->get('id'));
+        $model = $this->findModel(Yii::$app->request->get('id'));
 
-        return ( \Yii::$app->user->can('contacts-update-all-contacts') || ( \Yii::$app->user->can('contacts-update-his-contacts') && ($model->isCurrentUserCreator()) ) );
+        return ( Yii::$app->user->can('contacts-update-all-contacts') || ( Yii::$app->user->can('contacts-update-his-contacts') && ($model->isCurrentUserCreator()) ) );
     }
 
     /**
@@ -392,9 +401,9 @@ class ContactsController extends Controller
      */
     protected function userCanDelete()
     {
-        $model = $this->findModel(\Yii::$app->request->get('id'));
+        $model = $this->findModel(Yii::$app->request->get('id'));
 
-        return ( \Yii::$app->user->can('contacts-delete-all-contacts') || ( \Yii::$app->user->can('contacts-delete-his-contacts') && ($model->isCurrentUserCreator()) ) );
+        return ( Yii::$app->user->can('contacts-delete-all-contacts') || ( Yii::$app->user->can('contacts-delete-his-contacts') && ($model->isCurrentUserCreator()) ) );
     }
 
     /**
@@ -403,9 +412,9 @@ class ContactsController extends Controller
      */
     protected function userCanPublish()
     {
-        $model = $this->findModel(\Yii::$app->request->get('id'));
+        $model = $this->findModel(Yii::$app->request->get('id'));
 
-        return ( \Yii::$app->user->can('contacts-publish-all-contacts') || ( \Yii::$app->user->can('contacts-publish-his-contacts') && ($model->isCurrentUserCreator()) ) );
+        return ( Yii::$app->user->can('contacts-publish-all-contacts') || ( Yii::$app->user->can('contacts-publish-his-contacts') && ($model->isCurrentUserCreator()) ) );
     }
 
     /**
@@ -414,9 +423,9 @@ class ContactsController extends Controller
      */
     protected function userCanView()
     {
-        $model = $this->findModel(\Yii::$app->request->get('id'));
+        $model = $this->findModel(Yii::$app->request->get('id'));
 
-        return ( \Yii::$app->user->can('contacts-view-all-contacts') || ( \Yii::$app->user->can('contacts-view-his-contacts') && ($model->isCurrentUserCreator()) ) );
+        return ( Yii::$app->user->can('contacts-view-all-contacts') || ( Yii::$app->user->can('contacts-view-his-contacts') && ($model->isCurrentUserCreator()) ) );
     }
 
 }

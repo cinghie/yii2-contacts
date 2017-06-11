@@ -4,14 +4,16 @@
  * @copyright Copyright &copy; Gogodigital Srls
  * @company Gogodigital Srls - Wide ICT Solutions
  * @website http://www.gogodigital.it
+ * @github https://github.com/cinghie/yii2-contacts
+ * @license GNU GENERAL PUBLIC LICENSE VERSION 3
  * @package yii2-contacts
  * @version 0.9.3
  */
 
 use kartik\helpers\Html;
 use kartik\widgets\ActiveForm;
-use kartik\widgets\DateTimePicker;
 use kartik\widgets\Select2;
+use Yii;
 use yii\helpers\Url;
 use yii\web\JsExpression;
 
@@ -430,7 +432,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
                 <div class="col-lg-12">
 
                     <div class="form-group">
-                        <?= Html::submitButton($model->isNewRecord ? \Yii::t('traits', 'Create') : \Yii::t('newsletters', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                        <?= Html::submitButton($model->isNewRecord ? Yii::t('traits', 'Create') : Yii::t('newsletters', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
                     </div>
 
                 </div>

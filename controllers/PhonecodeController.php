@@ -12,6 +12,7 @@
 
 namespace cinghie\contacts\controllers;
 
+use Yii;
 use yii\filters\AccessControl;
 use yii\db\Query;
 use yii\web\Controller;
@@ -32,7 +33,7 @@ class PhonecodeController extends Controller
                         'roles' => ['@']
                     ],
                 ],
-                'denyCallback' => function ($rule, $action) {
+                'denyCallback' => function () {
                     throw new \Exception('You are not allowed to access this page');
                 }
             ],
@@ -41,13 +42,14 @@ class PhonecodeController extends Controller
 
     /**
      * Renders Countries Phone Prefix
+     *
      * @param null $q
      * @param null $id
      * @return array
      */
     public function actionPrefix($q = null, $id = null)
     {
-        \Yii::$app->response->format = Response::FORMAT_JSON;
+        Yii::$app->response->format = Response::FORMAT_JSON;
         $out = ['results' => ['name' => '', 'phonecode' => '']];
         $query = new Query;
 
@@ -80,13 +82,14 @@ class PhonecodeController extends Controller
 
     /**
      * Renders Countries Code
+     *
      * @param null $q
      * @param null $id
      * @return array
      */
     public function actionCountries($q = null, $id = null)
     {
-        \Yii::$app->response->format = Response::FORMAT_JSON;
+        Yii::$app->response->format = Response::FORMAT_JSON;
         $out = ['results' => ['iso' => '', 'nicename' => '']];
         $query = new Query;
 

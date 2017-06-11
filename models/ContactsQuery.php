@@ -25,7 +25,10 @@ class ContactsQuery extends ActiveQuery
     /**
      * @inheritdoc
      *
-     * @return Contacts[]|array
+     * @param int $limit
+     * @param string $order
+     * @param string $orderby
+     * @return ContactsQuery
      */
     public function last($limit, $orderby = "id", $order = "DESC")
     {

@@ -12,6 +12,7 @@
 
 namespace cinghie\contacts\models;
 
+use Yii;
 use yii\db\ActiveRecord;
 
 /**
@@ -56,13 +57,13 @@ class Countriescodes extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => \Yii::t('contacts', 'ID'),
-            'iso' => \Yii::t('contacts', 'Iso'),
-            'name' => \Yii::t('contacts', 'Name'),
-            'nicename' => \Yii::t('contacts', 'Nicename'),
-            'iso3' => \Yii::t('contacts', 'Iso3'),
-            'numcode' => \Yii::t('contacts', 'Numcode'),
-            'phonecode' => \Yii::t('contacts', 'Phonecode'),
+            'id' => Yii::t('contacts', 'ID'),
+            'iso' => Yii::t('contacts', 'Iso'),
+            'name' => Yii::t('contacts', 'Name'),
+            'nicename' => Yii::t('contacts', 'Nicename'),
+            'iso3' => Yii::t('contacts', 'Iso3'),
+            'numcode' => Yii::t('contacts', 'Numcode'),
+            'phonecode' => Yii::t('contacts', 'Phonecode'),
         ];
     }
 
