@@ -1,13 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright &copy; Gogodigital Srls
- * @company Gogodigital Srls - Wide ICT Solutions
- * @website http://www.gogodigital.it
- * @github https://github.com/cinghie/yii2-contacts
- * @license GNU GENERAL PUBLIC LICENSE VERSION 3
- * @package yii2-contacts
- * @version 0.9.3
+ * @var $form kartik\widgets\ActiveForm
+ * @var $model cinghie\contacts\models\Contacts
+ * @var $this yii\web\View
  */
 
 use kartik\helpers\Html;
