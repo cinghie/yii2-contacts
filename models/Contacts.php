@@ -12,7 +12,6 @@
 
 namespace cinghie\contacts\models;
 
-use cinghie\traits\EditorTrait;
 use Yii;
 use yii\db\ActiveRecord;
 use cinghie\traits\CreatedTrait;
