@@ -13,13 +13,8 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "*",
-        "cinghie/yii2-traits": "*",
-        "kartik-v/yii2-detail-view": "*",
-        "kartik-v/yii2-grid": "*",
-        "kartik-v/yii2-helpers": "*",
-        "kartik-v/yii2-mpdf": "*",
-        "kartik-v/yii2-widgets": "*"
+        "yiisoft/yii2": "^2.0.10",
+        "cinghie/yii2-traits": "*"
     },
     "autoload": {
         "psr-4": {
