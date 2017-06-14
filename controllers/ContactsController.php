@@ -143,11 +143,7 @@ class ContactsController extends Controller
             $model->modified = "0000-00-00 00:00:00";
 
             // If exist an user with the email, adding user_id
-            if($model->getUserIdByEmail($model->email)) {
-                $model->user_id = $model->getUserIdByEmail($model->email);
-            } else {
-                $model->user_id = NULL;
-            }
+            $model->user_id = $model->getUserByEmail();
 
             if ( $model->save() ) {
 
@@ -193,11 +189,7 @@ class ContactsController extends Controller
             $model->modified = date("Y-m-d H:i:s");
 
             // If exist an user with the email, adding user_id
-            if($model->getUserIdByEmail($model->email)) {
-                $model->user_id = $model->getUserIdByEmail($model->email);
-            } else {
-                $model->user_id = NULL;
-            }
+            $model->user_id = $model->getUserByEmail();
 
             if( $model->save() ) {
 
