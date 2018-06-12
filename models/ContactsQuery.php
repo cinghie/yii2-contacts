@@ -28,9 +28,10 @@ class ContactsQuery extends ActiveQuery
      * @param int $limit
      * @param string $order
      * @param string $orderby
+     *
      * @return ContactsQuery
      */
-    public function last($limit, $orderby = "id", $order = "DESC")
+    public function last($limit, $orderby = 'id', $order = 'DESC' )
     {
         return $this->orderBy([$orderby => $order])->limit($limit);
     }

@@ -56,6 +56,10 @@ use cinghie\traits\ViewsHelpersTrait;
  * @property Countriescodes $mobileSecondaryCode
  * @property Countriescodes $phoneCode
  * @property Countriescodes $phoneSecondaryCode
+ *
+ * @property string $fullName
+ * @property array $publishSelect2
+ * @property \yii\db\ActiveQuery $vatCodePrefix
  */
 class Contacts extends ActiveRecord
 {
@@ -91,17 +95,17 @@ class Contacts extends ActiveRecord
             [['firstname', 'lastname', 'email', 'email_secondary'], 'string', 'max' => 100],
             [['website', 'skype', 'facebook', 'gplus', 'instagram', 'linkedin', 'twitter', 'youtube'], 'string', 'max' => 255],
             [['phone_code', 'phone_secondary_code', 'mobile_code', 'mobile_secondary_code', 'fax_code', 'fax_secondary_code'], 'integer'],
-            [['fax_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['fax_code' => 'id']],
+            [['fax_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['fax_code' => 'id']],
             [['fax_code'], 'required', 'when' => function ($model) { return $model->fax != ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() != ''; }"],
-            [['fax_secondary_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['fax_secondary_code' => 'id']],
+            [['fax_secondary_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['fax_secondary_code' => 'id']],
             [['fax_secondary_code'], 'required', 'when' => function ($model) { return $model->fax_secondary != ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() != ''; }"],
-            [['mobile_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['mobile_code' => 'id']],
+            [['mobile_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['mobile_code' => 'id']],
             [['mobile_code'], 'required', 'when' => function ($model) { return $model->mobile != ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() != ''; }"],
-            [['mobile_secondary_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['mobile_secondary_code' => 'id']],
+            [['mobile_secondary_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['mobile_secondary_code' => 'id']],
             [['mobile_secondary_code'], 'required', 'when' => function ($model) { return $model->mobile_secondary != ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() != ''; }"],
-            [['phone_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['phone_code' => 'id']],
+            [['phone_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['phone_code' => 'id']],
             [['phone_code'], 'required', 'when' => function ($model) { return $model->phone != ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() != ''; }"],
-            [['phone_secondary_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::className(), 'targetAttribute' => ['phone_secondary_code' => 'id']],
+            [['phone_secondary_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['phone_secondary_code' => 'id']],
             [['phone_secondary_code'], 'required', 'when' => function ($model) { return $model->phone_secondary != ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() != ''; }"],
         ]);
     }
@@ -145,7 +149,7 @@ class Contacts extends ActiveRecord
      */
     public function getVatCodePrefix()
     {
-        return $this->hasOne(Countriescodes::className(), ['id' => 'vat_code_prefix']);
+        return $this->hasOne(Countriescodes::class, ['id' => 'vat_code_prefix']);
     }
 
     /**
@@ -153,7 +157,7 @@ class Contacts extends ActiveRecord
      */
     public function getPhoneCode()
     {
-        return $this->hasOne(Countriescodes::className(), ['id' => 'phone_code']);
+        return $this->hasOne(Countriescodes::class, ['id' => 'phone_code']);
     }
 
     /**
@@ -161,7 +165,7 @@ class Contacts extends ActiveRecord
      */
     public function getPhoneSecondaryCode()
     {
-        return $this->hasOne(Countriescodes::className(), ['id' => 'phone_secondary_code']);
+        return $this->hasOne(Countriescodes::class, ['id' => 'phone_secondary_code']);
     }
 
     /**
@@ -169,7 +173,7 @@ class Contacts extends ActiveRecord
      */
     public function getMobileCode()
     {
-        return $this->hasOne(Countriescodes::className(), ['id' => 'mobile_code']);
+        return $this->hasOne(Countriescodes::class, ['id' => 'mobile_code']);
     }
 
     /**
@@ -177,7 +181,7 @@ class Contacts extends ActiveRecord
      */
     public function getMobileSecondaryCode()
     {
-        return $this->hasOne(Countriescodes::className(), ['id' => 'mobile_secondary_code']);
+        return $this->hasOne(Countriescodes::class, ['id' => 'mobile_secondary_code']);
     }
 
     /**
@@ -185,7 +189,7 @@ class Contacts extends ActiveRecord
      */
     public function getFaxCode()
     {
-        return $this->hasOne(Countriescodes::className(), ['id' => 'fax_code']);
+        return $this->hasOne(Countriescodes::class, ['id' => 'fax_code']);
     }
 
     /**
@@ -193,7 +197,7 @@ class Contacts extends ActiveRecord
      */
     public function getFaxSecondaryCode()
     {
-        return $this->hasOne(Countriescodes::className(), ['id' => 'fax_secondary_code']);
+        return $this->hasOne(Countriescodes::class, ['id' => 'fax_secondary_code']);
     }
 
     /**
@@ -204,20 +208,6 @@ class Contacts extends ActiveRecord
     public function getFullName()
     {
         return $this->lastname . ' ' . $this->firstname;
-    }
-
-    /**
-     * Return array for Publish Status
-     *
-     * @return array
-     */
-    public function getPublishSelect2()
-    {
-        if ( Yii::$app->user->can('contacts-publish-all-contacts') || Yii::$app->user->can('contacts-publish-his-contacts') ) {
-            return [ 1 => Yii::t('contacts', 'Actived'), 0 => Yii::t('contacts', 'Inactived') ];
-        } else {
-            return [ 0 => Yii::t('contacts', 'Inactived') ];
-        }
     }
 
     /**

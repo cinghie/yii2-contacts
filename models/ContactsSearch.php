@@ -143,10 +143,10 @@ class ContactsSearch extends Contacts
      * @param $limit
      * @param string $orderby
      * @param int $order
+     *
      * @return ActiveDataProvider
-     * @internal param int $count
      */
-    public function last($limit = 5, $orderby = "id", $order = SORT_DESC)
+    public function last($limit = 5, $orderby = 'id', $order = SORT_DESC)
     {
         $query = Contacts::find()->limit($limit);
 

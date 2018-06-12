@@ -12,10 +12,10 @@
 
 namespace cinghie\contacts;
 
+use yii\i18n\PhpMessageSource;
+
 class Contacts extends \yii\base\Module
 {
-
-    public $controllerNamespace = 'cinghie\contacts\controllers';
 
     /**
      * @var boolean showTitles in views
@@ -41,7 +41,7 @@ class Contacts extends \yii\base\Module
         if (empty(\Yii::$app->i18n->translations['contacts']))
         {
             \Yii::$app->i18n->translations['contacts'] = [
-                'class' => 'yii\i18n\PhpMessageSource',
+                'class' => PhpMessageSource::class,
                 'basePath' => __DIR__ . '/messages',
             ];
         }

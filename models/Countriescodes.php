@@ -23,8 +23,8 @@ use yii\db\ActiveRecord;
  * @property string $name
  * @property string $nicename
  * @property string $iso3
- * @property integer $numcode
- * @property integer $phonecode
+ * @property int $numcode
+ * @property int $phonecode
  */
 class Countriescodes extends ActiveRecord
 {
@@ -74,7 +74,7 @@ class Countriescodes extends ActiveRecord
      */
     public static function find()
     {
-        return new CountriescodesQuery(get_called_class());
+        return new CountriescodesQuery( static::class );
     }
 
 }

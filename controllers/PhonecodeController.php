@@ -25,7 +25,7 @@ class PhonecodeController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'allow' => true,
@@ -34,26 +34,28 @@ class PhonecodeController extends Controller
                     ],
                 ],
                 'denyCallback' => function () {
-                    throw new \Exception('You are not allowed to access this page');
+                    throw new \RuntimeException('traits','You are not allowed to access this page');
                 }
             ],
         ];
     }
 
-    /**
-     * Renders Countries Phone Prefix
-     *
-     * @param null $q
-     * @param null $id
-     * @return array
-     */
+	/**
+	 * Renders Countries Phone Prefix
+	 *
+	 * @param null $q
+	 * @param null $id
+	 *
+	 * @return array
+	 * @throws \yii\db\Exception
+	 */
     public function actionPrefix($q = null, $id = null)
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $out = ['results' => ['name' => '', 'phonecode' => '']];
         $query = new Query;
 
-        if (!is_null($q)) {
+        if ( null !== $q ) {
 
             $query->select('id, nicename AS text')
                 ->from('{{%countries_phonecode}}')
@@ -80,20 +82,22 @@ class PhonecodeController extends Controller
         return $out;
     }
 
-    /**
-     * Renders Countries Code
-     *
-     * @param null $q
-     * @param null $id
-     * @return array
-     */
+	/**
+	 * Renders Countries Code
+	 *
+	 * @param string $q
+	 * @param int $id
+	 *
+	 * @return array
+	 * @throws \yii\db\Exception
+	 */
     public function actionCountries($q = null, $id = null)
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $out = ['results' => ['iso' => '', 'nicename' => '']];
         $query = new Query;
 
-        if (!is_null($q)) {
+        if ( null !== $q ) {
 
             $query->select('id, iso AS text')
                 ->from('{{%countries_phonecode}}')

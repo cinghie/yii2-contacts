@@ -30,7 +30,7 @@ class ContactsController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'allow' => true,
@@ -80,7 +80,7 @@ class ContactsController extends Controller
                 }
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'activemultiple' => ['POST'],
                     'deactivemultiple' => ['POST'],
@@ -108,12 +108,14 @@ class ContactsController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Contacts model.
-     *
-     * @param integer $id
-     * @return mixed
-     */
+	/**
+	 * Displays a single Contacts model.
+	 *
+	 * @param integer $id
+	 *
+	 * @return mixed
+	 * @throws NotFoundHttpException
+	 */
     public function actionView($id)
     {
         $model = $this->findModel($id);
@@ -140,7 +142,7 @@ class ContactsController extends Controller
         if ( $model->load($post) ) {
 
             // Set Modified as actual date
-            $model->modified = "0000-00-00 00:00:00";
+            $model->modified = '0000-00-00 00:00:00';
 
             // If exist an user with the email, adding user_id
             $model->user_id = $model->getUserByEmail();
@@ -155,26 +157,27 @@ class ContactsController extends Controller
 
                 return $this->redirect(['index']);
 
-            } else {
-
-                // Set Error Message
-                Yii::$app->session->setFlash('error', Yii::t('contacts', 'Contact could not be saved!'));
-
-                return $this->render('create', [ 'model' => $model, ]);
-
             }
-        } else {
-            return $this->render('create', [ 'model' => $model, ]);
+
+	        // Set Error Message
+	        Yii::$app->session->setFlash('error', Yii::t('contacts', 'Contact could not be saved!'));
+
+	        return $this->render('create', [ 'model' => $model, ]);
+
         }
+
+	    return $this->render('create', [ 'model' => $model, ]);
     }
 
-    /**
-     * Updates an existing Contacts model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     *
-     * @param integer $id
-     * @return mixed
-     */
+	/**
+	 * Updates an existing Contacts model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 *
+	 * @param integer $id
+	 *
+	 * @return mixed
+	 * @throws NotFoundHttpException
+	 */
     public function actionUpdate($id)
     {
         $post  = Yii::$app->request->post();
@@ -201,13 +204,12 @@ class ContactsController extends Controller
 
                 return $this->redirect(['index']);
 
-            } else {
-
-                // Set Error Message
-                Yii::$app->session->setFlash('error', Yii::t('contacts', 'Contact could not be saved!'));
-
-                return $this->render('update', [ 'model' => $model, ]);
             }
+
+	        // Set Error Message
+	        Yii::$app->session->setFlash('error', Yii::t('contacts', 'Contact could not be saved!'));
+
+	        return $this->render('update', [ 'model' => $model, ]);
 
         } else {
 
@@ -215,13 +217,17 @@ class ContactsController extends Controller
         }
     }
 
-    /**
-     * Deletes an existing Contacts model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     *
-     * @param integer $id
-     * @return mixed
-     */
+	/**
+	 * Deletes an existing Contacts model.
+	 * If deletion is successful, the browser will be redirected to the 'index' page.
+	 *
+	 * @param integer $id
+	 *
+	 * @return mixed
+	 * @throws NotFoundHttpException
+	 * @throws \Throwable
+	 * @throws \yii\db\StaleObjectException
+	 */
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
@@ -233,12 +239,15 @@ class ContactsController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Deletes selected Contacts models.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     *
-     * @return mixed
-     */
+	/**
+	 * Deletes selected Contacts models.
+	 * If deletion is successful, the browser will be redirected to the 'index' page.
+	 *
+	 * @return mixed
+	 * @throws NotFoundHttpException
+	 * @throws \Throwable
+	 * @throws \yii\db\StaleObjectException
+	 */
     public function actionDeletemultiple()
     {
         $ids = Yii::$app->request->post('ids');
@@ -254,25 +263,26 @@ class ContactsController extends Controller
             if ($model->delete()) {
 
                 // Set Success Message
-                Yii::$app->session->setFlash('success', Yii::t('contacts', 'Contact has been deleted'));
+                Yii::$app->session->setFlash('success', Yii::t('contacts', 'Contact has been deleted!'));
 
             } else {
 
                 // Set Error Message
-                Yii::$app->session->setFlash('error', Yii::t('contacts', 'Error deleting Contact'));
-
+                Yii::$app->session->setFlash('error', Yii::t('contacts', 'Error deleting Contact!'));
             }
         }
 
-        return;
+	    return $this->redirect(['index']);
     }
 
-    /**
-     * Change Contacts state: active or inactive
-     *
-     * @param int $id
-     * @return mixed
-     */
+	/**
+	 * Change Contacts state: active or inactive
+	 *
+	 * @param int $id
+	 *
+	 * @return mixed
+	 * @throws NotFoundHttpException
+	 */
     public function actionChangestate($id)
     {
         $model = $this->findModel($id);
@@ -301,12 +311,13 @@ class ContactsController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Active selected Contacts models.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     *
-     * @return mixed
-     */
+	/**
+	 * Active selected Contacts models.
+	 * If deletion is successful, the browser will be redirected to the 'index' page.
+	 *
+	 * @return mixed
+	 * @throws NotFoundHttpException
+	 */
     public function actionActivemultiple()
     {
         $ids = Yii::$app->request->post('ids');
@@ -331,15 +342,16 @@ class ContactsController extends Controller
             }
         }
 
-        return;
+	    return $this->redirect(['index']);
     }
 
-    /**
-     * Active selected Contacts models.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     *
-     * @return mixed
-     */
+	/**
+	 * Active selected Contacts models.
+	 * If deletion is successful, the browser will be redirected to the 'index' page.
+	 *
+	 * @return mixed
+	 * @throws NotFoundHttpException
+	 */
     public function actionDeactivemultiple()
     {
         $ids = Yii::$app->request->post('ids');
@@ -364,7 +376,7 @@ class ContactsController extends Controller
             }
         }
 
-        return;
+	    return $this->redirect(['index']);
     }
 
     /**
@@ -379,57 +391,61 @@ class ContactsController extends Controller
     {
         if (($model = Contacts::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+	    throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    /**
-     * Check if user can update
-     *
-     * @return bool
-     */
+	/**
+	 * Check if user can update
+	 *
+	 * @return bool
+	 * @throws NotFoundHttpException
+	 */
     protected function userCanUpdate()
     {
         $model = $this->findModel(Yii::$app->request->get('id'));
 
-        return ( Yii::$app->user->can('contacts-update-all-contacts') || ( Yii::$app->user->can('contacts-update-his-contacts') && ($model->isCurrentUserCreator()) ) );
+        return ( Yii::$app->user->can('contacts-update-all-contacts') || ( Yii::$app->user->can('contacts-update-his-contacts') && $model->isCurrentUserCreator() ) );
     }
 
-    /**
-     * Check if user can delete
-     *
-     * @return bool
-     */
+	/**
+	 * Check if user can delete
+	 *
+	 * @return bool
+	 * @throws NotFoundHttpException
+	 */
     protected function userCanDelete()
     {
         $model = $this->findModel(Yii::$app->request->get('id'));
 
-        return ( Yii::$app->user->can('contacts-delete-all-contacts') || ( Yii::$app->user->can('contacts-delete-his-contacts') && ($model->isCurrentUserCreator()) ) );
+        return ( Yii::$app->user->can('contacts-delete-all-contacts') || ( Yii::$app->user->can('contacts-delete-his-contacts') && $model->isCurrentUserCreator() ) );
     }
 
-    /**
-     * Check if user can publish
-     *
-     * @return bool
-     */
+	/**
+	 * Check if user can publish
+	 *
+	 * @return bool
+	 * @throws NotFoundHttpException
+	 */
     protected function userCanPublish()
     {
         $model = $this->findModel(Yii::$app->request->get('id'));
 
-        return ( Yii::$app->user->can('contacts-publish-all-contacts') || ( Yii::$app->user->can('contacts-publish-his-contacts') && ($model->isCurrentUserCreator()) ) );
+        return ( Yii::$app->user->can('contacts-publish-all-contacts') || ( Yii::$app->user->can('contacts-publish-his-contacts') && $model->isCurrentUserCreator() ) );
     }
 
-    /**
-     * Check if user can publish
-     *
-     * @return bool
-     */
+	/**
+	 * Check if user can publish
+	 *
+	 * @return bool
+	 * @throws NotFoundHttpException
+	 */
     protected function userCanView()
     {
         $model = $this->findModel(Yii::$app->request->get('id'));
 
-        return ( Yii::$app->user->can('contacts-view-all-contacts') || ( Yii::$app->user->can('contacts-view-his-contacts') && ($model->isCurrentUserCreator()) ) );
+        return ( Yii::$app->user->can('contacts-view-all-contacts') || ( Yii::$app->user->can('contacts-view-his-contacts') && $model->isCurrentUserCreator() ) );
     }
 
 }

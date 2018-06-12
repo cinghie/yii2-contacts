@@ -27,6 +27,7 @@ return [
     'Create Contacts' => 'Crea Contatto',
     'Email' => 'Email Principale',
     'Email Secondary' => 'Email Secondaria',
+	'Error deleting Contact!' => 'Errore nella cancellazione del Contatto!',
     'Fax' => 'Fax',
     'Fax Code' => 'Prefisso Fax',
     'Fax Secondary' => 'Fax 2',
