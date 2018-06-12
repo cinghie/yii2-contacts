@@ -13,7 +13,7 @@
 return [
     'Contact' => 'Contatto',
     'Contact actived' => 'Contatto attivato',
-    'Contact inactived' => 'Contatto disattivato',
+    'Contact deactived' => 'Contatto disattivato',
     'Contact visible' => 'Contatto visibile',
     'Contact invisible' => 'Contatto invisibile',
     'Contact has been created!' => 'Contatto creato correttamente!',
@@ -22,7 +22,7 @@ return [
     'Contact could not be saved!' => 'Contatto non salvato!',
     'Contacts' => 'Contatti',
     'Contacts actived' => 'Contatti attivati',
-    'Contacts inactived' => 'Contatti disattivati',
+    'Contacts deactived' => 'Contatti disattivati',
     'Contacts Informations' => 'Informazioni Contatto',
     'Create Contacts' => 'Crea Contatto',
     'Email' => 'Email Principale',

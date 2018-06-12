@@ -12,9 +12,9 @@
 
 namespace cinghie\contacts\controllers;
 
+use Yii;
 use cinghie\contacts\models\Contacts;
 use cinghie\contacts\models\ContactsSearch;
-use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -289,13 +289,13 @@ class ContactsController extends Controller
 
         if($model->state) {
 
-            $model->inactive();
+            $model->deactive();
 
             // Set EVENT_AFTER_DEACTIVE
             $model->trigger(Contacts::EVENT_AFTER_DEACTIVE);
 
             // Set Success Message
-            Yii::$app->getSession()->setFlash('warning', Yii::t('contacts', 'Contact inactived'));
+            Yii::$app->getSession()->setFlash('warning', Yii::t('contacts', 'Contact deactived'));
 
         } else {
 
@@ -366,13 +366,13 @@ class ContactsController extends Controller
 
             if($model->state) {
 
-                $model->inactive();
+                $model->deactive();
 
                 // Set EVENT_AFTER_DEACTIVE
                 $model->trigger(Contacts::EVENT_AFTER_DEACTIVE);
 
                 // Set Success Message
-                Yii::$app->getSession()->setFlash('warning', Yii::t('contacts', 'Contacts inactived'));
+                Yii::$app->getSession()->setFlash('warning', Yii::t('contacts', 'Contacts deactived'));
             }
         }
 
