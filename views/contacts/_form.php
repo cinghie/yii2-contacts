@@ -206,12 +206,12 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
                                         ]
                                     ])->textInput(['maxlength' => true]) ?>
 
-                                    <?= $form->field($model, 'linkedin', [
-                                        'addon' => [
-                                            'prepend' => [
-                                                'content'=>'<i class="fa fa-linkedin"></i>'
-                                            ]
-                                        ]
+                                    <?= $form->field($model, 'youtube', [
+	                                    'addon' => [
+		                                    'prepend' => [
+			                                    'content'=>'<i class="fa fa-youtube"></i>'
+		                                    ]
+	                                    ]
                                     ])->textInput(['maxlength' => true]) ?>
 
                                 </div>
@@ -234,12 +234,12 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
                                         ]
                                     ])->textInput(['maxlength' => true]) ?>
 
-                                    <?= $form->field($model, 'youtube', [
-                                        'addon' => [
-                                            'prepend' => [
-                                                'content'=>'<i class="fa fa-youtube"></i>'
-                                            ]
-                                        ]
+                                    <?= $form->field($model, 'linkedin', [
+	                                    'addon' => [
+		                                    'prepend' => [
+			                                    'content'=>'<i class="fa fa-linkedin"></i>'
+		                                    ]
+	                                    ]
                                     ])->textInput(['maxlength' => true]) ?>
 
                                 </div>
@@ -423,6 +423,19 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
                 </div>
 
                 <div class="col-lg-3 col-md-12">
+
+	                <?= $form->field($model, 'accept')->widget(Select2::class, [
+		                'data' => [
+			                '1' => Yii::t('contacts', 'Accepted'),
+			                '0' => Yii::t('contacts', 'Not Accepted')
+                        ],
+		                'disabled' => true,
+		                'addon' => [
+			                'prepend' => [
+				                'content'=>'<i class="glyphicon glyphicon-minus-sign"></i>'
+			                ]
+		                ],
+	                ]); ?>
 
                     <?= $model->getStateWidget($form) ?>
 

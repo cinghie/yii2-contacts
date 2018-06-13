@@ -11,6 +11,7 @@
  */
 
 return [
+	'Accepted' => 'Acettato',
     'Contact' => 'Contatto',
     'Contact actived' => 'Contatto attivato',
     'Contact deactived' => 'Contatto disattivato',
@@ -42,6 +43,7 @@ return [
     'Mobile Secondary' => 'Cellulare 2',
     'Mobile Secondary Code' => 'Prefisso Cellulare 2',
     'New Contact' => 'Nuovo Contatto',
+    'Not Accepted' => 'Non Acettato',
     'Phone' => 'Telefono',
     'Phone Code' => 'Prefisso Telefono',
     'Phone Secondary' => 'Telefono 2',
