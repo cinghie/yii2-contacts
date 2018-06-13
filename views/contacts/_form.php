@@ -23,6 +23,18 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 
     <div class="row">
 
+        <div class="col-lg-6"></div>
+
+        <div class="col-lg-6">
+
+		    <?= $model->getExitButton() ?>
+
+		    <?= $model->getCancelButton() ?>
+
+		    <?= $model->getSaveButton() ?>
+
+        </div>
+
         <div class="col-lg-12">
 
             <div class="row">
@@ -421,14 +433,6 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
                     <?= $model->getModifiedByWidget($form) ?>
 
                     <?= $model->getModifiedWidget($form) ?>
-
-                </div>
-
-                <div class="col-lg-12">
-
-                    <div class="form-group">
-                        <?= Html::submitButton($model->isNewRecord ? Yii::t('traits', 'Create') : Yii::t('newsletters', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-                    </div>
 
                 </div>
 

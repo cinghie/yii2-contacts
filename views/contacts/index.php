@@ -17,77 +17,46 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('contacts', 'Contacts'), 'ur
 $this->params['breadcrumbs'][] = $this->title;
 
 // Register action buttons js
-$this->registerJs('
-    $(document).ready(function()
-    {
-        $("a.btn-update").click(function() {
-            var selectedId = $("#w0").yiiGridView("getSelectedRows");
-
-            if(selectedId.length == 0) {
-                alert("'. Yii::t("traits", "Select at least one item").'");
-            } else if(selectedId.length>1){
-                alert("'. Yii::t("traits", "Select only 1 item").'");
-            } else {
-                var url = "'.Url::to(['/contacts/contacts/update']).'?id="+selectedId[0];
-                window.location.href= url;
-            }
-        });
-        $("a.btn-active").click(function() {
-            var selectedId = $("#w0").yiiGridView("getSelectedRows");
-
-            if(selectedId.length == 0) {
-                alert("'. Yii::t("traits", "Select at least one item").'");
-            } else {
-                $.ajax({
-                    type: \'POST\',
-                    url : "'.Url::to(['/contacts/contacts/activemultiple']).'?id="+selectedId,
-                    data : {ids: selectedId},
-                    success : function() {
-                        $.pjax.reload({container:"#w0"});
-                    }
-                });
-            }
-        });
-        $("a.btn-deactive").click(function() {
-            var selectedId = $("#w0").yiiGridView("getSelectedRows");
-
-            if(selectedId.length == 0) {
-                alert("'. Yii::t("traits", "Select at least one item").'");
-            } else {
-                $.ajax({
-                    type: \'POST\',
-                    url : "'.Url::to(['/contacts/contacts/deactivemultiple']).'?id="+selectedId,
-                    data : {ids: selectedId},
-                    success : function() {
-                        $.pjax.reload({container:"#w0"});
-                    }
-                });
-            }
-        });
-        $("a.btn-delete").click(function() {
-            var selectedId = $("#w0").yiiGridView("getSelectedRows");
-
-            if(selectedId.length == 0) {
-                alert("'. Yii::t("traits", "Select at least one item").'");
-            } else {
-                var choose = confirm("'. Yii::t("traits", "Do you want delete selected items?").'");
-
-                if (choose == true) {
-                    $.ajax({
-                        type: \'POST\',
-                        url : "'.Url::to(['/contacts/contacts/deletemultiple']).'?id="+selectedId,
-                        data : {ids: selectedId},
-                        success : function() {
-                            $.pjax.reload({container:"#w0"});
-                        }
-                    });
-                }
-            }
-        });
-    });
+$this->registerJs('$(document).ready(function() 
+    {'
+	.$searchModel->getUpdateButtonJavascript('#w1')
+	.$searchModel->getDeleteButtonJavascript('#w1')
+	.$searchModel->getActiveButtonJavascript('#w1')
+	.$searchModel->getDeactiveButtonJavascript('#w1')
+	.$searchModel->getPreviewButtonJavascript('#w1').
+	'});
 ');
 
 ?>
+
+<div class="row">
+
+    <!-- action menu -->
+    <div class="col-md-6"></div>
+
+    <!-- action buttons -->
+    <div class="col-md-6">
+
+		<?= $searchModel->getDeactiveButton() ?>
+
+		<?= $searchModel->getActiveButton() ?>
+
+		<?= $searchModel->getResetButton() ?>
+
+		<?= $searchModel->getPreviewButton() ?>
+
+		<?= $searchModel->getDeleteButton() ?>
+
+		<?= $searchModel->getUpdateButton() ?>
+
+		<?= $searchModel->getCreateButton() ?>
+
+    </div>
+
+</div>
+
+<div class="separator"></div>
+
 <div class="contacts-index">
 
     <?php if(Yii::$app->getModule('contacts')->showTitles): ?>
@@ -211,25 +180,6 @@ $this->registerJs('
             'panel' => [
                 'heading'    => '<h3 class="panel-title"><i class="fa fa-user"></i></h3>',
                 'type'       => 'success',
-                'before'     => '<span style="margin-right: 5px;">'.
-                    Html::a('<i class="glyphicon glyphicon-plus"></i> '. Yii::t('traits', 'New'),
-                        ['create'], ['class' => 'btn btn-success']
-                    ).'</span><span style="margin-right: 5px;">'.
-                    Html::a('<i class="glyphicon glyphicon-pencil"></i> '. Yii::t('traits', 'Update'),
-                        '#', ['class' => 'btn btn-update btn-warning']
-                    ).'</span><span style="margin-right: 5px;">'.
-                    Html::a('<i class="glyphicon glyphicon-minus-sign"></i> '. Yii::t('traits', 'Delete'),
-                        '#', ['class' => 'btn btn-delete btn-danger']
-                    ).'</span><span style="float: right; margin-right: 5px;">'.
-                    Html::a('<i class="glyphicon glyphicon-remove"></i> '. Yii::t('traits', 'Deactive'),
-                        '#', ['class' => 'btn btn-deactive btn-danger']
-                    ).'</span><span style="float: right; margin-right: 5px;">'.
-                    Html::a('<i class="glyphicon glyphicon-ok"></i> '. Yii::t('traits', 'Active'),
-                        ['#'], ['class' => 'btn btn-active btn-success']
-                    ).'</span>',
-                'after' => Html::a(
-                    '<i class="glyphicon glyphicon-repeat"></i> '. Yii::t('traits', 'Reset Grid'), ['index'], ['class' => 'btn btn-info']
-                ),
                 'showFooter' => false
             ],
         ]); ?>
