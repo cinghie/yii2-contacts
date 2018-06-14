@@ -254,7 +254,21 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 
                                 <div class="col-lg-12">
 
-                                    <?= $model->getUserWidget($form) ?>
+	                                <?php if($model->isNewRecord && !$model->user_id || $model->user_id == 0): ?>
+
+		                                <?= $form->field($model, 'user_id')->textInput([
+			                                'disabled' => true,
+			                                'value' => \Yii::t('crm', 'Nobody')
+		                                ]) ?>
+
+	                                <?php else: ?>
+
+		                                <?= $form->field($model, 'user_id')->textInput([
+			                                'disabled' => true,
+			                                'value' => $model->user->username
+		                                ]) ?>
+
+	                                <?php endif ?>
 
                                 </div>
 
