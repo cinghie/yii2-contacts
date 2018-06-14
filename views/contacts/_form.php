@@ -23,17 +23,27 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 
     <div class="row">
 
-        <div class="col-lg-6"></div>
+        <div class="col-lg-6">
+
+			<?= \Yii::$app->view->renderFile(\Yii::$app->controller->module->tabMenu) ?>
+
+        </div>
 
         <div class="col-lg-6">
 
-		    <?= $model->getExitButton() ?>
+			<?= $model->getExitButton() ?>
 
-		    <?= $model->getCancelButton() ?>
+			<?= $model->getCancelButton() ?>
 
-		    <?= $model->getSaveButton() ?>
+			<?= $model->getSaveButton() ?>
 
         </div>
+
+    </div>
+
+    <div class="separator"></div>
+
+    <div class="row">
 
         <div class="col-lg-12">
 
