@@ -107,7 +107,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 
                                 <div class="col-md-6">
 
-                                    <?= $form->field($model, 'phone_code')->widget(Select2::classname(), [
+                                    <?= $form->field($model, 'phone_code')->widget(Select2::class, [
                                         'initValueText' => $model->phoneCode ? $model->phoneCode->nicename : "",
                                         'addon' => [
                                             'prepend' => [
@@ -146,7 +146,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 
                                 <div class="col-md-6">
 
-                                    <?= $form->field($model, 'mobile_code')->widget(Select2::classname(), [
+                                    <?= $form->field($model, 'mobile_code')->widget(Select2::class, [
                                         'initValueText' => $model->mobileCode ? $model->mobileCode->nicename : "",
                                         'addon' => [
                                             'prepend' => [
@@ -185,7 +185,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 
                                 <div class="col-md-6">
 
-                                    <?= $form->field($model, 'fax_code')->widget(Select2::classname(), [
+                                    <?= $form->field($model, 'fax_code')->widget(Select2::class, [
                                         'initValueText' => $model->faxCode ? $model->faxCode->nicename : "",
                                         'addon' => [
                                             'prepend' => [
@@ -307,7 +307,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
                                 </div>
                                 <div class="col-md-6">
 
-                                    <?= $form->field($model, 'phone_secondary_code')->widget(Select2::classname(), [
+                                    <?= $form->field($model, 'phone_secondary_code')->widget(Select2::class, [
                                         'initValueText' => $model->phoneSecondaryCode ? $model->phoneSecondaryCode->nicename : "",
                                         'addon' => [
                                             'prepend' => [
@@ -346,7 +346,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 
                                 <div class="col-md-6">
 
-                                    <?= $form->field($model, 'mobile_secondary_code')->widget(Select2::classname(), [
+                                    <?= $form->field($model, 'mobile_secondary_code')->widget(Select2::class, [
                                         'initValueText' => $model->mobileSecondaryCode ? $model->mobileSecondaryCode->nicename : "",
                                         'addon' => [
                                             'prepend' => [
@@ -385,7 +385,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 
                                 <div class="col-md-6">
 
-                                    <?= $form->field($model, 'fax_secondary_code')->widget(Select2::classname(), [
+                                    <?= $form->field($model, 'fax_secondary_code')->widget(Select2::class, [
                                         'initValueText' => $model->faxSecondaryCode ? $model->faxSecondaryCode->nicename : "",
                                         'addon' => [
                                             'prepend' => [
