@@ -11,7 +11,8 @@
  */
 
 return [
-	'Accepted' => 'Acettato',
+	'Accept' => 'Accetta',
+	'Accepted' => 'Accettato',
     'Contact' => 'Contatto',
     'Contact actived' => 'Contatto attivato',
     'Contact deactived' => 'Contatto disattivato',

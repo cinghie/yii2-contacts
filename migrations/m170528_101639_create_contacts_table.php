@@ -46,6 +46,7 @@ class m170528_101639_create_contacts_table extends Migration
             'linkedin' => $this->string(255),
             'twitter' => $this->string(255),
             'youtube' => $this->string(255),
+            'accept' => $this->boolean()->notNull()->defaultValue(1),
             'state' => $this->boolean()->notNull()->defaultValue(1),
             'user_id' => $this->integer(11)->defaultValue(null),
             'created_by' => $this->integer(11)->defaultValue(null),
