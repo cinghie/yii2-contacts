@@ -126,12 +126,14 @@ class ContactsSearch extends Contacts
             ->andFilterWhere(['like', 'fax_code', $this->fax_code])
             ->andFilterWhere(['like', 'fax_secondary', $this->fax_secondary])
             ->andFilterWhere(['like', 'fax_secondary_code', $this->fax_secondary_code])
-            ->andFilterWhere(['like', 'website', $this->website])
-            ->andFilterWhere(['like', 'facebook', $this->facebook])
-            ->andFilterWhere(['like', 'gplus', $this->gplus])
-            ->andFilterWhere(['like', 'linkedin', $this->linkedin])
-            ->andFilterWhere(['like', 'skype', $this->skype])
-            ->andFilterWhere(['like', 'twitter', $this->twitter]);
+	        ->andFilterWhere(['like', 'website', $this->website])
+	        ->andFilterWhere(['like', 'skype', $this->skype])
+	        ->andFilterWhere(['like', 'facebook', $this->facebook])
+	        ->andFilterWhere(['like', 'twitter', $this->twitter])
+	        ->andFilterWhere(['like', 'gplus', $this->gplus])
+	        ->andFilterWhere(['like', 'instagram', $this->instagram])
+	        ->andFilterWhere(['like', 'youtube', $this->youtube])
+	        ->andFilterWhere(['like', 'linkedin', $this->linkedin]);
 
         // Print SQL query
         //var_dump($query->createCommand()->sql); //exit();
