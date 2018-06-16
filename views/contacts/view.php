@@ -11,6 +11,31 @@ $this->title = $model->getFullname();
 $this->params['breadcrumbs'][] = ['label' => Yii::t('contacts', 'Contacts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<div class="row">
+
+    <!-- action menu -->
+    <div class="col-md-6"></div>
+
+    <!-- action buttons -->
+    <div class="col-md-6">
+
+		<?= $model->getDeactiveButton($model->id) ?>
+
+		<?= $model->getActiveButton($model->id) ?>
+
+		<?= $model->getDeleteButton($model->id) ?>
+
+		<?= $model->getUpdateButton($model->id) ?>
+
+		<?= $model->getCreateButton() ?>
+
+    </div>
+
+</div>
+
+<div class="separator"></div>
+
 <div class="row contacts-view">
 
     <?php if(Yii::$app->getModule('contacts')->showTitles): ?>
@@ -28,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= DetailView::widget([
                     'model' => $model,
                     'condensed' => true,
-                    'enableEditMode' => true,
+                    'enableEditMode' => false,
                     'hover' => true,
                     'mode' => DetailView::MODE_VIEW,
                     'panel' => [
@@ -134,7 +159,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= DetailView::widget([
                     'model' => $model,
                     'condensed' => true,
-                    'enableEditMode' => true,
+                    'enableEditMode' => false,
                     'hover' => true,
                     'mode' => DetailView::MODE_VIEW,
                     'panel' => [
@@ -160,18 +185,20 @@ $this->params['breadcrumbs'][] = $this->title;
                             'format' => 'raw',
                             'hAlign' => 'center',
                             'value' => Html::a($model->gplus, $model->gplus, ['target' => 'blank'])
-                        ],[
+                        ],
+	                    [
+		                    'attribute' => 'twitter',
+		                    'format' => 'raw',
+		                    'hAlign' => 'center',
+		                    'value' => Html::a($model->twitter, $model->twitter, ['target' => 'blank'])
+	                    ],
+                        [
                             'attribute' => 'instagram',
                             'format' => 'raw',
                             'hAlign' => 'center',
                             'value' => Html::a($model->instagram, $model->instagram, ['target' => 'blank'])
                         ],
                         [
-                            'attribute' => 'twitter',
-                            'format' => 'raw',
-                            'hAlign' => 'center',
-                            'value' => Html::a($model->twitter, $model->twitter, ['target' => 'blank'])
-                        ],[
                             'attribute' => 'youtube',
                             'format' => 'raw',
                             'hAlign' => 'center',

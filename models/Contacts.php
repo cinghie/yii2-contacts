@@ -13,13 +13,14 @@
 namespace cinghie\contacts\models;
 
 use Yii;
-use yii\db\ActiveRecord;
 use cinghie\traits\CreatedTrait;
 use cinghie\traits\ModifiedTrait;
 use cinghie\traits\StateTrait;
 use cinghie\traits\UserTrait;
 use cinghie\traits\UserHelpersTrait;
 use cinghie\traits\ViewsHelpersTrait;
+use kartik\detail\DetailView;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%contacts}}".
@@ -210,6 +211,61 @@ class Contacts extends ActiveRecord
     {
         return $this->lastname . ' ' . $this->firstname;
     }
+
+	/**
+	 * Generate DetailView for State
+	 *
+	 * @return array
+	 */
+	public function getAcceptDetailView()
+	{
+		return [
+			'attribute'       => 'accept',
+			'format'          => 'html',
+			'type'            => DetailView::INPUT_SWITCH,
+			'value'           => $this->accept ? '<span class="label label-success">' . \Yii::t('traits', 'Yes') . '</span>' : '<span class="label label-danger">' . \Yii::t('traits', 'No') . '</span>',
+			'valueColOptions' => [
+				'style' => 'width:30%'
+			],
+			'widgetOptions'   => [
+				'pluginOptions' => [
+					'onText'  => 'Yes',
+					'offText' => 'No',
+				]
+			]
+		];
+	}
+
+	/**
+	 * Generate DetailView for Entry Informations
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
+	public function getEntryInformationsDetailView()
+	{
+		return DetailView::widget([
+			'model' => $this,
+			'enableEditMode' => false,
+			'deleteOptions' => false,
+			'condensed' => true,
+			'hover' => true,
+			'mode' => DetailView::MODE_VIEW,
+			'panel' => [
+				'heading' => \Yii::t('traits', 'Entry Informations'),
+				'type' => DetailView::TYPE_INFO,
+			],
+			'attributes' => [
+				$this->getAcceptDetailView(),
+				$this->getStateDetailView(),
+				$this->getUserDetailView(),
+				$this->getCreatedByDetailView(),
+				$this->getCreatedDetailView(),
+				$this->getModifiedByDetailView(),
+				$this->getModifiedDetailView(),
+			]
+		]);
+	}
 
     /**
      * @inheritdoc
