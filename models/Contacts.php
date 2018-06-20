@@ -154,7 +154,7 @@ class Contacts extends ActiveRecord
             'instagram' => Yii::t('traits', 'Instagram'),
             'linkedin' => Yii::t('traits', 'Linkedin'),
             'twitter' => Yii::t('traits', 'Twitter'),
-            'youtube' => Yii::t('traits', 'Youtube'),
+            'youtube' => Yii::t('traits', 'YouTube'),
         ]);
     }
 
