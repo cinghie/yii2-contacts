@@ -6,7 +6,6 @@
 
 use kartik\detail\DetailView;
 use kartik\helpers\Html;
-use yii\helpers\HtmlPurifier;
 
 $this->title = $model->getFullname();
 $this->params['breadcrumbs'][] = ['label' => Yii::t('contacts', 'Contacts'), 'url' => ['index']];
@@ -170,7 +169,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		                            'attribute' => 'note',
 		                            'format' => 'raw',
 		                            'hAlign' => 'center',
-		                            'value' => HtmlPurifier::process($model->note)
+		                            'value' => Html::encode($model->note)
 	                            ]
                             ]
                         ]
