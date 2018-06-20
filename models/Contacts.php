@@ -21,6 +21,7 @@ use cinghie\traits\UserTrait;
 use cinghie\traits\UserHelpersTrait;
 use cinghie\traits\ViewsHelpersTrait;
 use kartik\detail\DetailView;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -29,9 +30,6 @@ use yii\db\ActiveRecord;
  * @property int $id
  * @property string $firstname
  * @property string $lastname
- * @property string $rule
- * @property string $rule_type
- * @property string $note
  * @property string $email
  * @property string $email_secondary
  * @property string $phone
@@ -46,6 +44,10 @@ use yii\db\ActiveRecord;
  * @property int $fax_code
  * @property string $fax_secondary
  * @property int $fax_secondary_code
+ * @property string $rule
+ * @property string $rule_type
+ * @property string $note
+ * @property int accept
  * @property string $website
  * @property string $skype
  * @property string $facebook
@@ -55,6 +57,7 @@ use yii\db\ActiveRecord;
  * @property string $twitter
  * @property string $youtube
  *
+ * @property ActiveQuery $vatCodePrefix
  * @property Countriescodes $faxCode
  * @property Countriescodes $faxSecondaryCode
  * @property Countriescodes $mobileCode
@@ -64,7 +67,8 @@ use yii\db\ActiveRecord;
  *
  * @property string $fullName
  * @property array $publishSelect2
- * @property \yii\db\ActiveQuery $vatCodePrefix
+ * @property array $acceptDetailView
+ * @property string $entryInformationsDetailView
  */
 class Contacts extends ActiveRecord
 {
@@ -102,17 +106,17 @@ class Contacts extends ActiveRecord
             [['note'], 'string'],
             [['accept','phone_code', 'phone_secondary_code', 'mobile_code', 'mobile_secondary_code', 'fax_code', 'fax_secondary_code'], 'integer'],
             [['fax_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['fax_code' => 'id']],
-            [['fax_code'], 'required', 'when' => function ($model) { return $model->fax != ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() != ''; }"],
+            [['fax_code'], 'required', 'when' => function ($model) { return $model->fax !== ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() !== ''; }"],
             [['fax_secondary_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['fax_secondary_code' => 'id']],
-            [['fax_secondary_code'], 'required', 'when' => function ($model) { return $model->fax_secondary != ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() != ''; }"],
+            [['fax_secondary_code'], 'required', 'when' => function ($model) { return $model->fax_secondary !== ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() !== ''; }"],
             [['mobile_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['mobile_code' => 'id']],
-            [['mobile_code'], 'required', 'when' => function ($model) { return $model->mobile != ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() != ''; }"],
+            [['mobile_code'], 'required', 'when' => function ($model) { return $model->mobile !== ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() !== ''; }"],
             [['mobile_secondary_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['mobile_secondary_code' => 'id']],
-            [['mobile_secondary_code'], 'required', 'when' => function ($model) { return $model->mobile_secondary != ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() != ''; }"],
+            [['mobile_secondary_code'], 'required', 'when' => function ($model) { return $model->mobile_secondary !== ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() !== ''; }"],
             [['phone_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['phone_code' => 'id']],
-            [['phone_code'], 'required', 'when' => function ($model) { return $model->phone != ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() != ''; }"],
+            [['phone_code'], 'required', 'when' => function ($model) { return $model->phone !== ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() !== ''; }"],
             [['phone_secondary_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['phone_secondary_code' => 'id']],
-            [['phone_secondary_code'], 'required', 'when' => function ($model) { return $model->phone_secondary != ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() != ''; }"],
+            [['phone_secondary_code'], 'required', 'when' => function ($model) { return $model->phone_secondary !== ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() !== ''; }"],
         ]);
     }
 
@@ -155,7 +159,7 @@ class Contacts extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getVatCodePrefix()
     {
@@ -163,7 +167,7 @@ class Contacts extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getPhoneCode()
     {
@@ -171,7 +175,7 @@ class Contacts extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getPhoneSecondaryCode()
     {
@@ -179,7 +183,7 @@ class Contacts extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getMobileCode()
     {
@@ -187,7 +191,7 @@ class Contacts extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getMobileSecondaryCode()
     {
@@ -195,7 +199,7 @@ class Contacts extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getFaxCode()
     {
@@ -203,7 +207,7 @@ class Contacts extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getFaxSecondaryCode()
     {
@@ -282,7 +286,7 @@ class Contacts extends ActiveRecord
      */
     public static function find()
     {
-        return new ContactsQuery(get_called_class());
+        return new ContactsQuery( static::class );
     }
 
 }

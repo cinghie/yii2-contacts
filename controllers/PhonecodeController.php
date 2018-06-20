@@ -13,8 +13,9 @@
 namespace cinghie\contacts\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
+use yii\db\Exception;
 use yii\db\Query;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -47,7 +48,7 @@ class PhonecodeController extends Controller
 	 * @param null $id
 	 *
 	 * @return array
-	 * @throws \yii\db\Exception
+	 * @throws Exception
 	 */
     public function actionPrefix($q = null, $id = null)
     {
@@ -89,7 +90,7 @@ class PhonecodeController extends Controller
 	 * @param int $id
 	 *
 	 * @return array
-	 * @throws \yii\db\Exception
+	 * @throws Exception
 	 */
     public function actionCountries($q = null, $id = null)
     {

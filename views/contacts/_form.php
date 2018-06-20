@@ -108,7 +108,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
                                 <div class="col-md-6">
 
                                     <?= $form->field($model, 'phone_code')->widget(Select2::class, [
-                                        'initValueText' => $model->phoneCode ? $model->phoneCode->nicename : "",
+                                        'initValueText' => $model->phoneCode ? $model->phoneCode->nicename : '',
                                         'addon' => [
                                             'prepend' => [
                                                 'content'=>'<i class="glyphicon glyphicon-flag"></i>'
@@ -147,7 +147,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
                                 <div class="col-md-6">
 
                                     <?= $form->field($model, 'mobile_code')->widget(Select2::class, [
-                                        'initValueText' => $model->mobileCode ? $model->mobileCode->nicename : "",
+                                        'initValueText' => $model->mobileCode ? $model->mobileCode->nicename : '',
                                         'addon' => [
                                             'prepend' => [
                                                 'content'=>'<i class="glyphicon glyphicon-flag"></i>'
@@ -186,7 +186,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
                                 <div class="col-md-6">
 
                                     <?= $form->field($model, 'fax_code')->widget(Select2::class, [
-                                        'initValueText' => $model->faxCode ? $model->faxCode->nicename : "",
+                                        'initValueText' => $model->faxCode ? $model->faxCode->nicename : '',
                                         'addon' => [
                                             'prepend' => [
                                                 'content'=>'<i class="glyphicon glyphicon-flag"></i>'
@@ -312,7 +312,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
                                 <div class="col-md-6">
 
                                     <?= $form->field($model, 'phone_secondary_code')->widget(Select2::class, [
-                                        'initValueText' => $model->phoneSecondaryCode ? $model->phoneSecondaryCode->nicename : "",
+                                        'initValueText' => $model->phoneSecondaryCode ? $model->phoneSecondaryCode->nicename : '',
                                         'addon' => [
                                             'prepend' => [
                                                 'content'=>'<i class="glyphicon glyphicon-flag"></i>'
@@ -351,7 +351,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
                                 <div class="col-md-6">
 
                                     <?= $form->field($model, 'mobile_secondary_code')->widget(Select2::class, [
-                                        'initValueText' => $model->mobileSecondaryCode ? $model->mobileSecondaryCode->nicename : "",
+                                        'initValueText' => $model->mobileSecondaryCode ? $model->mobileSecondaryCode->nicename : '',
                                         'addon' => [
                                             'prepend' => [
                                                 'content'=>'<i class="glyphicon glyphicon-flag"></i>'
@@ -390,7 +390,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
                                 <div class="col-md-6">
 
                                     <?= $form->field($model, 'fax_secondary_code')->widget(Select2::class, [
-                                        'initValueText' => $model->faxSecondaryCode ? $model->faxSecondaryCode->nicename : "",
+                                        'initValueText' => $model->faxSecondaryCode ? $model->faxSecondaryCode->nicename : '',
                                         'addon' => [
                                             'prepend' => [
                                                 'content'=>'<i class="glyphicon glyphicon-flag"></i>'
@@ -467,21 +467,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 		                ],
 	                ]) ?>
 
-	                <?php if($model->isNewRecord && !$model->user_id || $model->user_id == 0): ?>
-
-		                <?= $form->field($model, 'user_id')->textInput([
-			                'disabled' => true,
-			                'value' => \Yii::t('crm', 'Nobody')
-		                ]) ?>
-
-	                <?php else: ?>
-
-		                <?= $form->field($model, 'user_id')->textInput([
-			                'disabled' => true,
-			                'value' => $model->user->username
-		                ]) ?>
-
-	                <?php endif ?>
+	                <?= $model->getUserWidget($form, true) ?>
 
                     <?= $model->getCreatedByWidget($form) ?>
 

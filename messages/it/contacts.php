@@ -26,8 +26,12 @@ return [
     'Contacts Informations' => 'Informazioni Contatto',
     'Create Contacts' => 'Crea Contatto',
 	'Error deleting Contact!' => 'Errore nella cancellazione del Contatto!',
+	'Iso' => 'Iso',
+	'Iso3' => 'Iso3',
     'Last Contacts' => 'Ultimi Contatti',
     'New Contact' => 'Nuovo Contatto',
+	'Numcode' => 'Numcode',
+	'Phonecode' => 'Phonecode',
     'Social Informations' => 'Informazioni Social',
     'Update Contacts' => 'Modifica Contatto',
 ];

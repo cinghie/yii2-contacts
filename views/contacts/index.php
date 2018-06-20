@@ -1,4 +1,4 @@
-<?php
+<?php use kartik\grid\CheckboxColumn;
 
 /**
  * @var $dataProvider yii\data\ActiveDataProvider
@@ -79,7 +79,7 @@ $this->registerJs('$(document).ready(function()
             'responsive' => true,
             'columns' => [
                 [
-                    'class' => '\kartik\grid\CheckboxColumn'
+                    'class' => CheckboxColumn::class
                 ],
                 [
                     'attribute' => 'name',
@@ -88,7 +88,7 @@ $this->registerJs('$(document).ready(function()
                     'label' => Yii::t('contacts', 'Contact'),
                     'value' => function ($model) {
                         $url = urldecode(Url::toRoute(['/contacts/contacts/view', 'id' => $model->id]));
-                        return Html::a($model->lastname." ".$model->firstname,$url);
+                        return Html::a($model->lastname.' '.$model->firstname,$url);
                     }
                 ],
                 [
@@ -107,12 +107,12 @@ $this->registerJs('$(document).ready(function()
                     'hAlign' => 'center',
                     'value' => function ($model) {
                         if($model->mobile && $model->mobileCode) {
-                            return "+".$model->mobileCode->phonecode." ".$model->mobile;
+                            return '+'.$model->mobileCode->phonecode.' '.$model->mobile;
                         }
                         else if($model->mobile && !$model->mobileCode) {
                             return $model->mobile;
                         } else {
-                            return "";
+                            return '';
                         }
                     },
                     'width' => '10%'
@@ -123,11 +123,11 @@ $this->registerJs('$(document).ready(function()
                     'hAlign' => 'center',
                     'value' => function ($model) {
                         if($model->mobile_secondary && $model->mobileSecondaryCode) {
-                            return "+".$model->mobileSecondaryCode->phonecode." ".$model->mobile_secondary;
+                            return '+'.$model->mobileSecondaryCode->phonecode.' '.$model->mobile_secondary;
                         } else if($model->mobile_secondary && !$model->mobileSecondaryCode) {
                             return $model->mobile_secondary;
                         } else {
-                            return "";
+                            return '';
                         }
                     },
                     'width' => '10%'
@@ -138,11 +138,11 @@ $this->registerJs('$(document).ready(function()
                     'hAlign' => 'center',
                     'value' => function ($model) {
                         if($model->phone && $model->phoneCode) {
-                            return "+".$model->phoneCode->phonecode." ".$model->phone;
+                            return '+'.$model->phoneCode->phonecode.' '.$model->phone;
                         } else if($model->phone && !$model->phoneCode) {
                             return $model->phone;
                         } else {
-                            return "";
+                            return '';
                         }
                     },
                     'width' => '10%'
@@ -153,11 +153,11 @@ $this->registerJs('$(document).ready(function()
                     'hAlign' => 'center',
                     'value' => function ($model) {
                         if($model->phone_secondary && $model->phoneSecondaryCode) {
-                            return "+".$model->phoneSecondaryCode->phonecode." ".$model->phone_secondary;
+                            return '+'.$model->phoneSecondaryCode->phonecode.' '.$model->phone_secondary;
                         } else if($model->phone_secondary && !$model->phoneSecondaryCode) {
                             return $model->phone_secondary;
                         } else {
-                            return "";
+                            return '';
                         }
                     },
                     'width' => '10%'

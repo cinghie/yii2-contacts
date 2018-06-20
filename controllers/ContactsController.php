@@ -12,9 +12,11 @@
 
 namespace cinghie\contacts\controllers;
 
+use Throwable;
 use Yii;
 use cinghie\contacts\models\Contacts;
 use cinghie\contacts\models\ContactsSearch;
+use yii\db\StaleObjectException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -193,7 +195,7 @@ class ContactsController extends Controller
             $model->modified_by = Yii::$app->user->identity->id;
 
             // Set Modified as actual date
-            $model->modified = date("Y-m-d H:i:s");
+            $model->modified = date( 'Y-m-d H:i:s' );
 
 	        // If exist an user with the email, adding user_id
 	        if($model->getUserByEmail()) {
@@ -219,10 +221,9 @@ class ContactsController extends Controller
 
 	        return $this->render('update', [ 'model' => $model, ]);
 
-        } else {
-
-            return $this->render('update', [ 'model' => $model, ]);
         }
+
+	    return $this->render('update', [ 'model' => $model, ]);
     }
 
 	/**
@@ -233,8 +234,8 @@ class ContactsController extends Controller
 	 *
 	 * @return mixed
 	 * @throws NotFoundHttpException
-	 * @throws \Throwable
-	 * @throws \yii\db\StaleObjectException
+	 * @throws StaleObjectException
+	 * @throws Throwable
 	 */
     public function actionDelete($id)
     {
@@ -253,8 +254,8 @@ class ContactsController extends Controller
 	 *
 	 * @return mixed
 	 * @throws NotFoundHttpException
-	 * @throws \Throwable
-	 * @throws \yii\db\StaleObjectException
+	 * @throws StaleObjectException
+	 * @throws Throwable
 	 */
     public function actionDeletemultiple()
     {

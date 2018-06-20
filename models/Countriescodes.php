@@ -57,10 +57,10 @@ class Countriescodes extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('contacts', 'ID'),
+            'id' => Yii::t('traits', 'ID'),
             'iso' => Yii::t('contacts', 'Iso'),
-            'name' => Yii::t('contacts', 'Name'),
-            'nicename' => Yii::t('contacts', 'Nicename'),
+            'name' => Yii::t('traits', 'Name'),
+            'nicename' => Yii::t('traits', 'Nicename'),
             'iso3' => Yii::t('contacts', 'Iso3'),
             'numcode' => Yii::t('contacts', 'Numcode'),
             'phonecode' => Yii::t('contacts', 'Phonecode'),
