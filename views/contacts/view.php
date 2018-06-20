@@ -166,6 +166,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'value' => Html::a($model->website, $model->website, ['target' => 'blank'])
                                 ]
                             ],
+                        ],
+                        [
                             'columns' => [
 	                            [
 		                            'attribute' => 'note',
@@ -176,7 +178,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]
                         ]
                     ]
-                ]); ?>
+                ]) ?>
 
                 <?= DetailView::widget([
                     'model' => $model,
@@ -233,7 +235,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		                    'value' => Html::a($model->linkedin, $model->linkedin, ['target' => 'blank'])
 	                    ]
                     ]
-                ]); ?>
+                ]) ?>
 
             </div>
 
