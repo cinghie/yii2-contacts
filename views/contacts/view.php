@@ -6,6 +6,7 @@
 
 use kartik\detail\DetailView;
 use kartik\helpers\Html;
+use yii\helpers\HtmlPurifier;
 
 $this->title = $model->getFullname();
 $this->params['breadcrumbs'][] = ['label' => Yii::t('contacts', 'Contacts'), 'url' => ['index']];
@@ -73,6 +74,18 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ]
                             ]
                         ],
+	                    [
+		                    'columns' => [
+			                    [
+				                    'attribute' => 'rule',
+				                    'valueColOptions' => ['style'=>'width:30%']
+			                    ],
+			                    [
+				                    'attribute' => 'rule_type',
+				                    'valueColOptions' => ['style'=>'width:30%']
+			                    ]
+		                    ]
+	                    ],
                         [
                             'columns' => [
                                 [
@@ -151,6 +164,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'hAlign' => 'center',
                                     'value' => Html::a($model->website, $model->website, ['target' => 'blank'])
                                 ]
+                            ],
+                            'columns' => [
+	                            [
+		                            'attribute' => 'note',
+		                            'format' => 'raw',
+		                            'hAlign' => 'center',
+		                            'value' => HtmlPurifier::process($model->note)
+	                            ]
                             ]
                         ]
                     ]
