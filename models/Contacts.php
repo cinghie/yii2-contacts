@@ -14,6 +14,7 @@ namespace cinghie\contacts\models;
 
 use Yii;
 use cinghie\traits\CreatedTrait;
+use cinghie\traits\EditorTrait;
 use cinghie\traits\ModifiedTrait;
 use cinghie\traits\StateTrait;
 use cinghie\traits\UserTrait;
@@ -28,6 +29,9 @@ use yii\db\ActiveRecord;
  * @property int $id
  * @property string $firstname
  * @property string $lastname
+ * @property string $rule
+ * @property string $rule_type
+ * @property string $note
  * @property string $email
  * @property string $email_secondary
  * @property string $phone
@@ -65,7 +69,7 @@ use yii\db\ActiveRecord;
 class Contacts extends ActiveRecord
 {
     
-    use CreatedTrait, ModifiedTrait, StateTrait, UserHelpersTrait, UserTrait, ViewsHelpersTrait;
+    use CreatedTrait, EditorTrait, ModifiedTrait, StateTrait, UserHelpersTrait, UserTrait, ViewsHelpersTrait;
 
     const EVENT_AFTER_VIEW   = 'afterView';
     const EVENT_AFTER_CREATE = 'afterCreate';
@@ -94,7 +98,8 @@ class Contacts extends ActiveRecord
             [['website'], 'url', 'defaultScheme' => 'http'],
             [['phone', 'phone_secondary', 'mobile', 'mobile_secondary', 'fax', 'fax_secondary'], 'string', 'max' => 50],
             [['firstname', 'lastname', 'email', 'email_secondary'], 'string', 'max' => 100],
-            [['website', 'skype', 'facebook', 'gplus', 'instagram', 'linkedin', 'twitter', 'youtube'], 'string', 'max' => 255],
+            [['rule', 'rule_type', 'website', 'skype', 'facebook', 'gplus', 'instagram', 'linkedin', 'twitter', 'youtube'], 'string', 'max' => 255],
+            [['note'], 'string'],
             [['accept','phone_code', 'phone_secondary_code', 'mobile_code', 'mobile_secondary_code', 'fax_code', 'fax_secondary_code'], 'integer'],
             [['fax_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['fax_code' => 'id']],
             [['fax_code'], 'required', 'when' => function ($model) { return $model->fax != ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() != ''; }"],
@@ -117,32 +122,35 @@ class Contacts extends ActiveRecord
     public function attributeLabels()
     {
         return array_merge(CreatedTrait::attributeLabels(), ModifiedTrait::attributeLabels(), StateTrait::attributeLabels(), UserTrait::attributeLabels(), [
-            'id' => Yii::t('contacts', 'ID'),
-            'firstname' => Yii::t('contacts', 'Firstname'),
-            'lastname' => Yii::t('contacts', 'Lastname'),
-            'email' => Yii::t('contacts', 'Email'),
-            'email_secondary' => Yii::t('contacts', 'Email Secondary'),
-            'phone' => Yii::t('contacts', 'Phone'),
-            'phone_code' => Yii::t('contacts', 'Phone Code'),
-            'phone_secondary' => Yii::t('contacts', 'Phone Secondary'),
-            'phone_secondary_code' => Yii::t('contacts', 'Phone Secondary Code'),
-            'mobile' => Yii::t('contacts', 'Mobile'),
-            'mobile_code' => Yii::t('contacts', 'Mobile Code'),
-            'mobile_secondary' => Yii::t('contacts', 'Mobile Secondary'),
-            'mobile_secondary_code' => Yii::t('contacts', 'Mobile Secondary Code'),
-            'fax' => Yii::t('contacts', 'Fax'),
-            'fax_code' => Yii::t('contacts', 'Fax Code'),
-            'fax_secondary' => Yii::t('contacts', 'Fax Secondary'),
-            'fax_secondary_code' => Yii::t('contacts', 'Fax Secondary Code'),
-            'accept' => Yii::t('contacts', 'Accept'),
-            'website' => Yii::t('contacts', 'Website'),
-            'skype' => Yii::t('contacts', 'Skype'),
-            'facebook' => Yii::t('contacts', 'Facebook'),
-            'gplus' => Yii::t('contacts', 'Gplus'),
-            'instagram' => Yii::t('contacts', 'Instagram'),
-            'linkedin' => Yii::t('contacts', 'Linkedin'),
-            'twitter' => Yii::t('contacts', 'Twitter'),
-            'youtube' => Yii::t('contacts', 'Youtube'),
+            'id' => Yii::t('traits', 'ID'),
+            'firstname' => Yii::t('traits', 'Firstname'),
+            'lastname' => Yii::t('traits', 'Lastname'),
+            'email' => Yii::t('traits', 'Email'),
+            'email_secondary' => Yii::t('traits', 'Email Secondary'),
+            'phone' => Yii::t('traits', 'Phone'),
+            'phone_code' => Yii::t('traits', 'Phone Code'),
+            'phone_secondary' => Yii::t('traits', 'Phone Secondary'),
+            'phone_secondary_code' => Yii::t('traits', 'Phone Secondary Code'),
+            'mobile' => Yii::t('traits', 'Mobile'),
+            'mobile_code' => Yii::t('traits', 'Mobile Code'),
+            'mobile_secondary' => Yii::t('traits', 'Mobile Secondary'),
+            'mobile_secondary_code' => Yii::t('traits', 'Mobile Secondary Code'),
+            'fax' => Yii::t('traits', 'Fax'),
+            'fax_code' => Yii::t('traits', 'Fax Code'),
+            'fax_secondary' => Yii::t('traits', 'Fax Secondary'),
+            'fax_secondary_code' => Yii::t('traits', 'Fax Secondary Code'),
+            'accept' => Yii::t('traits', 'Accept'),
+            'rule' => Yii::t('traits', 'Rule'),
+            'rule_type' => Yii::t('traits', 'Rule Type'),
+            'note' => Yii::t('traits', 'Note'),
+            'website' => Yii::t('traits', 'Website'),
+            'skype' => Yii::t('traits', 'Skype'),
+            'facebook' => Yii::t('traits', 'Facebook'),
+            'gplus' => Yii::t('traits', 'Google Plus'),
+            'instagram' => Yii::t('traits', 'Instagram'),
+            'linkedin' => Yii::t('traits', 'Linkedin'),
+            'twitter' => Yii::t('traits', 'Twitter'),
+            'youtube' => Yii::t('traits', 'Youtube'),
         ]);
     }
 

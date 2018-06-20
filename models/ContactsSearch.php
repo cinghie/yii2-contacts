@@ -33,7 +33,7 @@ class ContactsSearch extends Contacts
     {
         return [
             [['id', 'state', 'accept'], 'integer'],
-            [['name','firstname', 'lastname', 'email', 'email_secondary', 'phone', 'phone_code', 'phone_secondary', 'phone_secondary_code', 'mobile', 'mobile_code', 'mobile_secondary', 'mobile_secondary_code', 'skype', 'created', 'modified', 'user_id',  'created_by', 'modified_by'], 'safe'],
+            [['name','firstname', 'lastname', 'email', 'email_secondary', 'phone', 'phone_code', 'phone_secondary', 'phone_secondary_code', 'mobile', 'mobile_code', 'mobile_secondary', 'mobile_secondary_code', 'fax', 'fax_code', 'fax_secondary', 'fax_secondary_code', 'rule', 'rule_type', 'skype', 'created', 'modified', 'user_id',  'created_by', 'modified_by'], 'safe'],
         ];
     }
 
@@ -74,7 +74,11 @@ class ContactsSearch extends Contacts
                 'phone',
                 'phone_secondary',
                 'mobile',
-                'mobile_secondary',
+	            'mobile_secondary',
+	            'fax',
+	            'fax_secondary',
+	            'rule',
+	            'rule_type',
                 'state',
 	            'accept',
                 'user_id',
@@ -126,6 +130,8 @@ class ContactsSearch extends Contacts
             ->andFilterWhere(['like', 'fax_code', $this->fax_code])
             ->andFilterWhere(['like', 'fax_secondary', $this->fax_secondary])
             ->andFilterWhere(['like', 'fax_secondary_code', $this->fax_secondary_code])
+            ->andFilterWhere(['like', 'rule', $this->rule])
+            ->andFilterWhere(['like', 'rule_type', $this->rule_type])
 	        ->andFilterWhere(['like', 'website', $this->website])
 	        ->andFilterWhere(['like', 'skype', $this->skype])
 	        ->andFilterWhere(['like', 'facebook', $this->facebook])

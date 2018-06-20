@@ -19,13 +19,13 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 
 <div class="contacts-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin() ?>
 
     <div class="row">
 
         <div class="col-lg-6">
 
-			<?= \Yii::$app->view->renderFile(\Yii::$app->controller->module->tabMenu) ?>
+
 
         </div>
 
@@ -128,7 +128,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
                                             'templateResult' => new JsExpression('function (country) { return country.text; }'),
                                             'templateSelection' => new JsExpression('function (country) { return country.text; }'),
                                         ],
-                                    ]); ?>
+                                    ]) ?>
 
                                 </div>
 
@@ -167,7 +167,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
                                             'templateResult' => new JsExpression('function (country) { return country.text; }'),
                                             'templateSelection' => new JsExpression('function (country) { return country.text; }'),
                                         ],
-                                    ]); ?>
+                                    ]) ?>
 
                                 </div>
 
@@ -206,7 +206,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
                                             'templateResult' => new JsExpression('function (country) { return country.text; }'),
                                             'templateSelection' => new JsExpression('function (country) { return country.text; }'),
                                         ]
-                                    ]); ?>
+                                    ]) ?>
 
                                     <?= $form->field($model, 'facebook', [
                                         'addon' => [
@@ -262,23 +262,27 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 
                             <div class="row">
 
-                                <div class="col-lg-12">
+                                <div class="col-lg-6">
 
-	                                <?php if($model->isNewRecord && !$model->user_id || $model->user_id == 0): ?>
+                                    <?= $form->field($model, 'rule', [
+                                        'addon' => [
+                                            'prepend' => [
+                                                'content'=>'<i class="fa fa-user-o"></i>'
+                                            ]
+                                        ],
+                                    ])->textInput(['maxlength' => true]) ?>
 
-		                                <?= $form->field($model, 'user_id')->textInput([
-			                                'disabled' => true,
-			                                'value' => \Yii::t('crm', 'Nobody')
-		                                ]) ?>
+                                </div>
 
-	                                <?php else: ?>
+                                <div class="col-lg-6">
 
-		                                <?= $form->field($model, 'user_id')->textInput([
-			                                'disabled' => true,
-			                                'value' => $model->user->username
-		                                ]) ?>
-
-	                                <?php endif ?>
+		                            <?= $form->field($model, 'rule_type', [
+			                            'addon' => [
+				                            'prepend' => [
+					                            'content'=>'<i class="fa fa-user-circle-o"></i>'
+				                            ]
+			                            ],
+		                            ])->textInput(['maxlength' => true]) ?>
 
                                 </div>
 
@@ -328,7 +332,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
                                             'templateResult' => new JsExpression('function (country) { return country.text; }'),
                                             'templateSelection' => new JsExpression('function (country) { return country.text; }'),
                                         ],
-                                    ]); ?>
+                                    ]) ?>
 
                                 </div>
 
@@ -367,7 +371,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
                                             'templateResult' => new JsExpression('function (country) { return country.text; }'),
                                             'templateSelection' => new JsExpression('function (country) { return country.text; }'),
                                         ],
-                                    ]); ?>
+                                    ]) ?>
 
                                 </div>
 
@@ -406,7 +410,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
                                             'templateResult' => new JsExpression('function (country) { return country.text; }'),
                                             'templateSelection' => new JsExpression('function (country) { return country.text; }'),
                                         ]
-                                    ]); ?>
+                                    ]) ?>
 
                                     <?= $form->field($model, 'instagram', [
                                         'addon' => [
@@ -448,10 +452,12 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 
                 <div class="col-lg-3 col-md-12">
 
+	                <?= $model->getStateWidget($form) ?>
+
 	                <?= $form->field($model, 'accept')->widget(Select2::class, [
 		                'data' => [
-			                '1' => Yii::t('contacts', 'Accepted'),
-			                '0' => Yii::t('contacts', 'Not Accepted')
+			                '1' => Yii::t('traits', 'Accepted'),
+			                '0' => Yii::t('traits', 'Not Accepted')
                         ],
 		                'disabled' => true,
 		                'addon' => [
@@ -459,9 +465,23 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 				                'content'=>'<i class="glyphicon glyphicon-minus-sign"></i>'
 			                ]
 		                ],
-	                ]); ?>
+	                ]) ?>
 
-                    <?= $model->getStateWidget($form) ?>
+	                <?php if($model->isNewRecord && !$model->user_id || $model->user_id == 0): ?>
+
+		                <?= $form->field($model, 'user_id')->textInput([
+			                'disabled' => true,
+			                'value' => \Yii::t('crm', 'Nobody')
+		                ]) ?>
+
+	                <?php else: ?>
+
+		                <?= $form->field($model, 'user_id')->textInput([
+			                'disabled' => true,
+			                'value' => $model->user->username
+		                ]) ?>
+
+	                <?php endif ?>
 
                     <?= $model->getCreatedByWidget($form) ?>
 
@@ -477,8 +497,14 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 
         </div>
 
+        <div class="col-lg-4">
+
+		    <?= $model->getEditorWidget($form, 'note', 'no-editor') ?>
+
+        </div>
+
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <?php ActiveForm::end() ?>
 
 </div>
