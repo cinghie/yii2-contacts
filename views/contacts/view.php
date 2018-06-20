@@ -30,6 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 		<?= $model->getCreateButton() ?>
 
+		<?= $model->getExitButton() ?>
+
     </div>
 
 </div>
