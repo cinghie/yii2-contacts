@@ -12,6 +12,7 @@
 
 namespace cinghie\contacts\models;
 
+use Exception;
 use Yii;
 use cinghie\traits\CreatedTrait;
 use cinghie\traits\EditorTrait;
@@ -23,6 +24,7 @@ use cinghie\traits\ViewsHelpersTrait;
 use kartik\detail\DetailView;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "{{%contacts}}".
@@ -58,15 +60,16 @@ use yii\db\ActiveRecord;
  * @property string $youtube
  *
  * @property ActiveQuery $vatCodePrefix
- * @property Countriescodes $faxCode
- * @property Countriescodes $faxSecondaryCode
- * @property Countriescodes $mobileCode
- * @property Countriescodes $mobileSecondaryCode
- * @property Countriescodes $phoneCode
- * @property Countriescodes $phoneSecondaryCode
+ * @property ActiveQuery $faxCode
+ * @property ActiveQuery $faxSecondaryCode
+ * @property ActiveQuery $mobileCode
+ * @property ActiveQuery $mobileSecondaryCode
+ * @property ActiveQuery $phoneCode
+ * @property ActiveQuery $phoneSecondaryCode
  *
  * @property string $fullName
- * @property array $publishSelect2
+ * @property string $fullPhone
+ * @property string $acceptIcon
  * @property array $acceptDetailView
  * @property string $entryInformationsDetailView
  */
@@ -253,39 +256,215 @@ class Contacts extends ActiveRecord
 	 */
     public function getAcceptIcon()
     {
-    	return $this->accept ? '<span class="label label-success">' . \Yii::t('traits', 'Yes') . '</span>' : '<span class="label label-danger">' . \Yii::t('traits', 'No') . '</span>'
-		    ;
+    	return $this->accept ? '<span class="label label-success">' . \Yii::t('traits', 'Yes') . '</span>' : '<span class="label label-danger">' . \Yii::t('traits', 'No') . '</span>';
     }
 
 	/**
-	 * Generate DetailView for State
+	 * Generate DetailView for Contacts Informations
 	 *
-	 * @return array
+	 * @return string
+	 * @throws Exception
 	 */
-	public function getAcceptDetailView()
+	public function getContactsInformationsDetailView()
 	{
-		return [
-			'attribute'       => 'accept',
-			'format'          => 'html',
-			'type'            => DetailView::INPUT_SWITCH,
-			'value'           => $this->getAcceptIcon(),
-			'valueColOptions' => [
-				'style' => 'width:30%'
+		return DetailView::widget([
+			'model' => $this,
+			'condensed' => true,
+			'enableEditMode' => false,
+			'hover' => true,
+			'mode' => DetailView::MODE_VIEW,
+			'panel' => [
+				'heading' => Yii::t('contacts', 'Contacts Informations'),
+				'type' => DetailView::TYPE_INFO,
 			],
-			'widgetOptions'   => [
-				'pluginOptions' => [
-					'onText'  => 'Yes',
-					'offText' => 'No',
+			'attributes'=> [
+				[
+					'columns' => [
+						[
+							'attribute' => 'firstname',
+							'valueColOptions' => ['style'=>'width:30%']
+						],
+						[
+							'attribute' => 'lastname',
+							'valueColOptions' => ['style'=>'width:30%']
+						]
+					]
+				],
+				[
+					'columns' => [
+						[
+							'attribute' => 'rule',
+							'valueColOptions' => ['style'=>'width:30%']
+						],
+						[
+							'attribute' => 'rule_type',
+							'valueColOptions' => ['style'=>'width:30%']
+						]
+					]
+				],
+				[
+					'columns' => [
+						[
+							'attribute' => 'email',
+							'format' => 'email',
+							'valueColOptions' => ['style'=>'width:30%']
+						],
+						[
+							'attribute' => 'email_secondary',
+							'format' => 'email',
+							'valueColOptions' => ['style'=>'width:30%']
+						]
+					]
+				],
+				[
+					'columns' => [
+						[
+							'attribute' => 'phone',
+							'format' => 'raw',
+							'hAlign' => 'center',
+							'value' => $this->getFullPhone('phone'),
+							'valueColOptions' => ['style'=>'width:30%']
+						],
+						[
+							'attribute' => 'phone_secondary',
+							'format' => 'raw',
+							'hAlign' => 'center',
+							'value' => $this->getFullPhone('phone_secondary'),
+							'valueColOptions' => ['style'=>'width:30%']
+						]
+					]
+				],
+				[
+					'columns' => [
+						[
+							'attribute' => 'mobile',
+							'format' => 'raw',
+							'hAlign' => 'center',
+							'value' => $this->getFullPhone('mobile'),
+							'valueColOptions' => ['style'=>'width:30%']
+						],
+						[
+							'attribute' => 'mobile_secondary',
+							'format' => 'raw',
+							'hAlign' => 'center',
+							'value' => $this->getFullPhone('mobile_secondary'),
+							'valueColOptions' => ['style'=>'width:30%']
+						]
+					],
+				],
+				[
+					'columns' => [
+						[
+							'attribute' => 'fax',
+							'format' => 'raw',
+							'hAlign' => 'center',
+							'value' => $this->getFullPhone('fax'),
+							'valueColOptions' => ['style'=>'width:30%']
+						],
+						[
+							'attribute' => 'fax_secondary',
+							'format' => 'raw',
+							'hAlign' => 'center',
+							'value' => $this->getFullPhone('fax_secondary'),
+							'valueColOptions' => ['style'=>'width:30%']
+						]
+					],
+				],
+				[
+					'columns' => [
+						[
+							'attribute' => 'website',
+							'format' => 'raw',
+							'hAlign' => 'center',
+							'value' => Html::a($this->website, $this->website, ['target' => 'blank'])
+						]
+					],
+				],
+				[
+					'columns' => [
+						[
+							'attribute' => 'note',
+							'format' => 'raw',
+							'hAlign' => 'center',
+							'value' => Html::encode($this->note)
+						]
+					]
 				]
 			]
-		];
+		]);
+	}
+
+	/**
+	 * Generate DetailView for Social Informations
+	 *
+	 * @return string
+	 * @throws Exception
+	 */
+	public function getSocialInformationsDetailView()
+	{
+		return DetailView::widget([
+			'model' => $this,
+			'condensed' => true,
+			'enableEditMode' => false,
+			'hover' => true,
+			'mode' => DetailView::MODE_VIEW,
+			'panel' => [
+				'heading' => Yii::t('contacts', 'Social Informations'),
+				'type' => DetailView::TYPE_INFO,
+			],
+			'deleteOptions' => false,
+			'attributes' => [
+				[
+					'attribute' => 'skype',
+					'format' => 'raw',
+					'hAlign' => 'center',
+					'value' => Html::a($this->skype, 'skype:cinghie?add')
+				],
+				[
+					'attribute' => 'facebook',
+					'format' => 'raw',
+					'hAlign' => 'center',
+					'value' => Html::a($this->facebook, $this->facebook, ['target' => 'blank'])
+				],
+				[
+					'attribute' => 'gplus',
+					'format' => 'raw',
+					'hAlign' => 'center',
+					'value' => Html::a($this->gplus, $this->gplus, ['target' => 'blank'])
+				],
+				[
+					'attribute' => 'twitter',
+					'format' => 'raw',
+					'hAlign' => 'center',
+					'value' => Html::a($this->twitter, $this->twitter, ['target' => 'blank'])
+				],
+				[
+					'attribute' => 'instagram',
+					'format' => 'raw',
+					'hAlign' => 'center',
+					'value' => Html::a($this->instagram, $this->instagram, ['target' => 'blank'])
+				],
+				[
+					'attribute' => 'youtube',
+					'format' => 'raw',
+					'hAlign' => 'center',
+					'value' => Html::a($this->youtube, $this->youtube, ['target' => 'blank'])
+				],
+				[
+					'attribute' => 'linkedin',
+					'format' => 'raw',
+					'hAlign' => 'center',
+					'value' => Html::a($this->linkedin, $this->linkedin, ['target' => 'blank'])
+				]
+			]
+		]);
 	}
 
 	/**
 	 * Generate DetailView for Entry Informations
 	 *
 	 * @return string
-	 * @throws \Exception
+	 * @throws Exception
 	 */
 	public function getEntryInformationsDetailView()
 	{
@@ -310,6 +489,30 @@ class Contacts extends ActiveRecord
 				$this->getModifiedDetailView(),
 			]
 		]);
+	}
+
+	/**
+	 * Generate DetailView for State
+	 *
+	 * @return array
+	 */
+	public function getAcceptDetailView()
+	{
+		return [
+			'attribute'       => 'accept',
+			'format'          => 'html',
+			'type'            => DetailView::INPUT_SWITCH,
+			'value'           => $this->getAcceptIcon(),
+			'valueColOptions' => [
+				'style' => 'width:30%'
+			],
+			'widgetOptions'   => [
+				'pluginOptions' => [
+					'onText'  => 'Yes',
+					'offText' => 'No',
+				]
+			]
+		];
 	}
 
     /**

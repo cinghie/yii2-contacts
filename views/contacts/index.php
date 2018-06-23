@@ -137,15 +137,16 @@ $this->registerJs('$(document).ready(function()
 					return $model->getFullPhone('mobile_secondary');
 				}
 			],
-			/**  [
+			[
 				'attribute' => 'user_id',
 				'format' => 'raw',
 				'hAlign' => 'center',
 				'width' => '10%',
 				'value' => function ($model) {
+					/** @var $model cinghie\contacts\models\Contacts */
 					return $model->getUserGridView();
 				}
-			], */
+			],
 			[
 				'attribute' => 'state',
 				'format' => 'raw',
@@ -176,7 +177,7 @@ $this->registerJs('$(document).ready(function()
 			'heading'    => '<h3 class="panel-title"><i class="fa fa-user"></i></h3>',
 			'type'       => 'success',
 			'showFooter' => false
-		],
+		]
 	]) ?>
 
 </div>
