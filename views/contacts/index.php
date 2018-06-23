@@ -137,6 +137,15 @@ $this->registerJs('$(document).ready(function()
 					return $model->getFullPhone('mobile_secondary');
 				}
 			],
+			/**  [
+				'attribute' => 'user_id',
+				'format' => 'raw',
+				'hAlign' => 'center',
+				'width' => '10%',
+				'value' => function ($model) {
+					return $model->getUserGridView();
+				}
+			], */
 			[
 				'attribute' => 'state',
 				'format' => 'raw',
