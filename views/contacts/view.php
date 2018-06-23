@@ -7,7 +7,7 @@
 use kartik\detail\DetailView;
 use kartik\helpers\Html;
 
-$this->title = $model->getFullname();
+$this->title = $model->getFullName();
 $this->params['breadcrumbs'][] = ['label' => Yii::t('contacts', 'Contacts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -92,15 +92,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                 [
                                     'attribute' => 'email',
                                     'format' => 'email',
-                                ]
-                            ]
-                        ],
-                        [
-                            'columns' => [
-                                [
-                                    'attribute' => 'email_secondary',
-                                    'format' => 'email',
-                                ]
+                                    'valueColOptions' => ['style'=>'width:30%']
+                                ],
+	                            [
+		                            'attribute' => 'email_secondary',
+		                            'format' => 'email',
+		                            'valueColOptions' => ['style'=>'width:30%']
+	                            ]
                             ]
                         ],
                         [
@@ -109,14 +107,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'attribute' => 'phone',
                                     'format' => 'raw',
                                     'hAlign' => 'center',
-                                    'value' => $model->phone ? "+".$model->phoneCode->phonecode." ".$model->phone : '',
+                                    'value' => $model->phone ? '+'.$model->phoneCode->phonecode.' '.$model->phone : '',
                                     'valueColOptions' => ['style'=>'width:30%']
                                 ],
                                 [
                                     'attribute' => 'phone_secondary',
                                     'format' => 'raw',
                                     'hAlign' => 'center',
-                                    'value' => $model->phone_secondary ? "+".$model->phoneSecondaryCode->phonecode." ".$model->phone_secondary : '',
+                                    'value' => $model->phone_secondary ? '+'.$model->phoneSecondaryCode->phonecode.' '.$model->phone_secondary : '',
                                     'valueColOptions' => ['style'=>'width:30%']
                                 ]
                             ]
@@ -127,14 +125,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'attribute' => 'mobile',
                                     'format' => 'raw',
                                     'hAlign' => 'center',
-                                    'value' => $model->mobile ? "+".$model->mobileCode->phonecode." ".$model->mobile : '',
+                                    'value' => $model->mobile ? '+'.$model->mobileCode->phonecode.' '.$model->mobile : '',
                                     'valueColOptions' => ['style'=>'width:30%']
                                 ],
                                 [
                                     'attribute' => 'mobile_secondary',
                                     'format' => 'raw',
                                     'hAlign' => 'center',
-                                    'value' => $model->mobile_secondary ? "+".$model->mobileSecondaryCode->phonecode." ".$model->mobile_secondary : '',
+                                    'value' => $model->mobile_secondary ? '+'.$model->mobileSecondaryCode->phonecode.' '.$model->mobile_secondary : '',
                                     'valueColOptions' => ['style'=>'width:30%']
                                 ]
                             ],
@@ -145,14 +143,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'attribute' => 'fax',
                                     'format' => 'raw',
                                     'hAlign' => 'center',
-                                    'value' => $model->fax ? "+".$model->faxcode->phonecode." ".$model->fax : '',
+                                    'value' => $model->fax ? '+'.$model->faxcode->phonecode.' '.$model->fax : '',
                                     'valueColOptions' => ['style'=>'width:30%']
                                 ],
                                 [
                                     'attribute' => 'fax_secondary',
                                     'format' => 'raw',
                                     'hAlign' => 'center',
-                                    'value' => $model->fax_secondary ? "+".$model->faxSecondaryCode->phonecode." ".$model->fax_secondary : '',
+                                    'value' => $model->fax_secondary ? '+'.$model->faxSecondaryCode->phonecode.' '.$model->fax_secondary : '',
                                     'valueColOptions' => ['style'=>'width:30%']
                                 ]
                             ],

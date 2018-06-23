@@ -225,6 +225,28 @@ class Contacts extends ActiveRecord
     }
 
 	/**
+	 * Get Phone field with code
+	 *
+	 * @param string $field
+	 *
+	 * @return string
+	 */
+    public function getFullPhone($field = 'phone')
+    {
+    	$fieldcode = $field.'Code';
+
+	    if($this->$field && $this->$fieldcode) {
+		    return '+' .$this->$fieldcode->phonecode. ' ' .$this->$field;
+	    }
+
+	    if($this->$field && !$this->$fieldcode) {
+		    return $this->$field;
+	    }
+
+	    return '';
+    }
+
+	/**
 	 * Generate DetailView for State
 	 *
 	 * @return array
