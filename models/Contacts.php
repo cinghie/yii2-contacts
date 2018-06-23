@@ -247,6 +247,17 @@ class Contacts extends ActiveRecord
     }
 
 	/**
+	 * Get Icon for Accept field
+	 *
+	 * @return string
+	 */
+    public function getAcceptIcon()
+    {
+    	return $this->accept ? '<span class="label label-success">' . \Yii::t('traits', 'Yes') . '</span>' : '<span class="label label-danger">' . \Yii::t('traits', 'No') . '</span>'
+		    ;
+    }
+
+	/**
 	 * Generate DetailView for State
 	 *
 	 * @return array
@@ -257,7 +268,7 @@ class Contacts extends ActiveRecord
 			'attribute'       => 'accept',
 			'format'          => 'html',
 			'type'            => DetailView::INPUT_SWITCH,
-			'value'           => $this->accept ? '<span class="label label-success">' . \Yii::t('traits', 'Yes') . '</span>' : '<span class="label label-danger">' . \Yii::t('traits', 'No') . '</span>',
+			'value'           => $this->getAcceptIcon(),
 			'valueColOptions' => [
 				'style' => 'width:30%'
 			],
@@ -290,8 +301,8 @@ class Contacts extends ActiveRecord
 				'type' => DetailView::TYPE_INFO,
 			],
 			'attributes' => [
-				$this->getAcceptDetailView(),
 				$this->getStateDetailView(),
+				$this->getAcceptDetailView(),
 				$this->getUserDetailView(),
 				$this->getCreatedByDetailView(),
 				$this->getCreatedDetailView(),
