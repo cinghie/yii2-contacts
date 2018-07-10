@@ -101,7 +101,7 @@ class Contacts extends ActiveRecord
         return array_merge(CreatedTrait::rules(), ModifiedTrait::rules(), StateTrait::rules(), UserTrait::rules(), [
             [['firstname', 'lastname'], 'required'],
             [['email', 'email_secondary'], 'email'],
-            [['email'], 'unique', 'targetAttribute' => ['email']],
+            //[['email'], 'unique', 'targetAttribute' => ['email']],
             [['website'], 'url', 'defaultScheme' => 'http'],
             [['phone', 'phone_secondary', 'mobile', 'mobile_secondary', 'fax', 'fax_secondary'], 'string', 'max' => 50],
             [['firstname', 'lastname', 'email', 'email_secondary'], 'string', 'max' => 100],
