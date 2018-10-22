@@ -1,4 +1,4 @@
-<?php use kartik\grid\CheckboxColumn;
+<?php
 
 /**
  * @var $dataProvider yii\data\ActiveDataProvider
@@ -7,10 +7,10 @@
  * @var $this yii\web\View
  */
 
+use kartik\grid\CheckboxColumn;
 use kartik\grid\GridView;
 use kartik\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\Pjax;
 
 $this->title = Yii::t('contacts', 'Contacts');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('contacts', 'Contacts'), 'url' => ['/contacts/default/index']];
