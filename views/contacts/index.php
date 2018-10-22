@@ -76,6 +76,7 @@ $this->registerJs('$(document).ready(function()
 		],
 		'hover' => true,
 		'responsive' => true,
+		'responsiveWrap' => true,
 		'columns' => [
 			[
 				'class' => CheckboxColumn::class
