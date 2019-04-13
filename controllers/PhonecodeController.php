@@ -12,6 +12,7 @@
 
 namespace cinghie\contacts\controllers;
 
+use RuntimeException;
 use Yii;
 use yii\db\Exception;
 use yii\db\Query;
@@ -34,8 +35,8 @@ class PhonecodeController extends Controller
                         'roles' => ['@']
                     ],
                 ],
-                'denyCallback' => function () {
-                    throw new \RuntimeException('traits','You are not allowed to access this page');
+                'denyCallback' => static function () {
+	                throw new RuntimeException(Yii::t('traits','You are not allowed to access this page'));
                 }
             ],
         ];

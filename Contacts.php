@@ -12,13 +12,14 @@
 
 namespace cinghie\contacts;
 
+use Yii;
+use yii\base\Module;
 use yii\i18n\PhpMessageSource;
 
-class Contacts extends \yii\base\Module
+class Contacts extends Module
 {
-
     /**
-     * @var boolean showTitles in views
+     * @var boolean
      */
     public $showTitles = true;
 
@@ -27,10 +28,9 @@ class Contacts extends \yii\base\Module
      */
     public function init()
     {
-        parent::init();
+	    $this->registerTranslations();
 
-        // Translate
-        $this->registerTranslations();
+        parent::init();
     }
 
     /**
@@ -38,13 +38,12 @@ class Contacts extends \yii\base\Module
      */
     public function registerTranslations()
     {
-        if (empty(\Yii::$app->i18n->translations['contacts']))
+        if (empty(Yii::$app->i18n->translations['contacts']))
         {
-            \Yii::$app->i18n->translations['contacts'] = [
+            Yii::$app->i18n->translations['contacts'] = [
                 'class' => PhpMessageSource::class,
                 'basePath' => __DIR__ . '/messages',
             ];
         }
     }
-
 }

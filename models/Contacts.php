@@ -71,6 +71,8 @@ use yii\helpers\Html;
  * @property string $fullPhone
  * @property string $acceptIcon
  * @property array $acceptDetailView
+ * @property string $contactsInformationsDetailView
+ * @property string $socialInformationsDetailView
  * @property string $entryInformationsDetailView
  */
 class Contacts extends ActiveRecord
@@ -257,7 +259,7 @@ class Contacts extends ActiveRecord
 	 */
     public function getAcceptIcon()
     {
-    	return $this->accept ? '<span class="label label-success">' . \Yii::t('traits', 'Yes') . '</span>' : '<span class="label label-danger">' . \Yii::t('traits', 'No') . '</span>';
+    	return $this->accept ? '<span class="label label-success">' . Yii::t('traits', 'Yes') . '</span>' : '<span class="label label-danger">' . Yii::t('traits', 'No') . '</span>';
     }
 
 	/**
@@ -275,6 +277,8 @@ class Contacts extends ActiveRecord
 			'hover' => true,
 			'mode' => DetailView::MODE_VIEW,
 			'panel' => [
+				'after' => false,
+				'before' => false,
 				'heading' => Yii::t('contacts', 'Contacts Informations'),
 				'type' => DetailView::TYPE_INFO,
 			],
@@ -323,7 +327,7 @@ class Contacts extends ActiveRecord
 							'attribute' => 'phone',
 							'format' => 'raw',
 							'hAlign' => 'center',
-							'value' => $this->getFullPhone('phone'),
+							'value' => $this->getFullPhone(),
 							'valueColOptions' => ['style'=>'width:30%']
 						],
 						[
@@ -410,6 +414,8 @@ class Contacts extends ActiveRecord
 			'hover' => true,
 			'mode' => DetailView::MODE_VIEW,
 			'panel' => [
+				'after' => false,
+				'before' => false,
 				'heading' => Yii::t('contacts', 'Social Informations'),
 				'type' => DetailView::TYPE_INFO,
 			],
@@ -477,7 +483,9 @@ class Contacts extends ActiveRecord
 			'hover' => true,
 			'mode' => DetailView::MODE_VIEW,
 			'panel' => [
-				'heading' => \Yii::t('traits', 'Entry Informations'),
+				'after' => false,
+				'before' => false,
+				'heading' => Yii::t('traits', 'Entry Informations'),
 				'type' => DetailView::TYPE_INFO,
 			],
 			'attributes' => [

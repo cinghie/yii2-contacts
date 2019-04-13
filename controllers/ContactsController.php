@@ -12,6 +12,7 @@
 
 namespace cinghie\contacts\controllers;
 
+use RuntimeException;
 use Throwable;
 use Yii;
 use cinghie\contacts\models\Contacts;
@@ -20,7 +21,6 @@ use yii\db\StaleObjectException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
-use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
 class ContactsController extends Controller
@@ -77,8 +77,8 @@ class ContactsController extends Controller
                         }
                     ]
                 ],
-                'denyCallback' => function () {
-                    throw new ForbiddenHttpException;
+                'denyCallback' => static function () {
+	                throw new RuntimeException(Yii::t('traits','You are not allowed to access this page'));
                 }
             ],
             'verbs' => [
@@ -141,8 +141,8 @@ class ContactsController extends Controller
         $post  = Yii::$app->request->post();
         $model = new Contacts();
 
-        if ( $model->load($post) ) {
-
+        if ( $model->load($post) )
+        {
             // Set Modified as actual date
             $model->modified = '0000-00-00 00:00:00';
 
@@ -153,8 +153,8 @@ class ContactsController extends Controller
 		        $model->user_id = NULL;
 	        }
 
-            if ( $model->save() ) {
-
+            if ( $model->save() )
+            {
                 // Set EVENT_AFTER_CREATE
                 $model->trigger(Contacts::EVENT_AFTER_CREATE);
 
@@ -162,14 +162,12 @@ class ContactsController extends Controller
                 Yii::$app->session->setFlash('success', Yii::t('contacts', 'Contact has been created!'));
 
                 return $this->redirect(['index']);
-
             }
 
 	        // Set Error Message
 	        Yii::$app->session->setFlash('error', Yii::t('contacts', 'Contact could not be saved!'));
 
 	        return $this->render('create', [ 'model' => $model, ]);
-
         }
 
 	    return $this->render('create', [ 'model' => $model, ]);
@@ -189,8 +187,8 @@ class ContactsController extends Controller
         $post  = Yii::$app->request->post();
         $model = $this->findModel($id);
 
-        if ( $model->load($post) ) {
-
+        if ( $model->load($post) )
+        {
             // Set Modified by User
             $model->modified_by = Yii::$app->user->identity->id;
 
@@ -204,8 +202,8 @@ class ContactsController extends Controller
 		        $model->user_id = NULL;
 	        }
 
-            if( $model->save() ) {
-
+            if( $model->save() )
+            {
                 // Set EVENT_AFTER_UPDATE
                 $model->trigger(Contacts::EVENT_AFTER_UPDATE);
 
@@ -213,14 +211,12 @@ class ContactsController extends Controller
                 Yii::$app->session->setFlash('success', Yii::t('contacts', 'Contact has been updated!'));
 
                 return $this->redirect(['index']);
-
             }
 
 	        // Set Error Message
 	        Yii::$app->session->setFlash('error', Yii::t('contacts', 'Contact could not be saved!'));
 
 	        return $this->render('update', [ 'model' => $model, ]);
-
         }
 
 	    return $this->render('update', [ 'model' => $model, ]);
@@ -252,7 +248,6 @@ class ContactsController extends Controller
 	 * Deletes selected Contacts models.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 *
-	 * @return mixed
 	 * @throws NotFoundHttpException
 	 * @throws StaleObjectException
 	 * @throws Throwable
@@ -270,18 +265,13 @@ class ContactsController extends Controller
             $model = $this->findModel($id);
 
             if ($model->delete()) {
-
                 // Set Success Message
                 Yii::$app->session->setFlash('success', Yii::t('contacts', 'Contact has been deleted!'));
-
             } else {
-
                 // Set Error Message
                 Yii::$app->session->setFlash('error', Yii::t('contacts', 'Error deleting Contact!'));
             }
         }
-
-	    return $this->redirect(['index']);
     }
 
 	/**
@@ -296,8 +286,8 @@ class ContactsController extends Controller
     {
         $model = $this->findModel($id);
 
-        if($model->state) {
-
+        if($model->state)
+        {
             $model->deactive();
 
             // Set EVENT_AFTER_DEACTIVE
@@ -324,7 +314,6 @@ class ContactsController extends Controller
 	 * Active selected Contacts models.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 *
-	 * @return mixed
 	 * @throws NotFoundHttpException
 	 */
     public function actionActivemultiple()
@@ -339,8 +328,8 @@ class ContactsController extends Controller
         {
             $model = $this->findModel($id);
 
-            if(!$model->state) {
-
+            if(!$model->state)
+            {
                 $model->active();
 
                 // Set EVENT_AFTER_ACTIVE
@@ -350,15 +339,12 @@ class ContactsController extends Controller
                 Yii::$app->getSession()->setFlash('success', Yii::t('contacts', 'Contacts actived'));
             }
         }
-
-	    return $this->redirect(['index']);
     }
 
 	/**
 	 * Active selected Contacts models.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 *
-	 * @return mixed
 	 * @throws NotFoundHttpException
 	 */
     public function actionDeactivemultiple()
@@ -373,8 +359,8 @@ class ContactsController extends Controller
         {
             $model = $this->findModel($id);
 
-            if($model->state) {
-
+            if($model->state)
+            {
                 $model->deactive();
 
                 // Set EVENT_AFTER_DEACTIVE
@@ -384,8 +370,6 @@ class ContactsController extends Controller
                 Yii::$app->getSession()->setFlash('warning', Yii::t('contacts', 'Contacts deactived'));
             }
         }
-
-	    return $this->redirect(['index']);
     }
 
     /**
