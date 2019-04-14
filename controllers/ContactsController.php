@@ -161,7 +161,7 @@ class ContactsController extends Controller
                 // Set Success Message
                 Yii::$app->session->setFlash('success', Yii::t('contacts', 'Contact has been created!'));
 
-                return $this->redirect(['index']);
+	            return $this->redirect(['update', 'id' => $model->id]);
             }
 
 	        // Set Error Message
@@ -210,7 +210,7 @@ class ContactsController extends Controller
                 // Set Success Message
                 Yii::$app->session->setFlash('success', Yii::t('contacts', 'Contact has been updated!'));
 
-                return $this->redirect(['index']);
+	            return $this->render('update', [ 'model' => $model, ]);
             }
 
 	        // Set Error Message
@@ -440,5 +440,4 @@ class ContactsController extends Controller
 
         return ( Yii::$app->user->can('contacts-view-all-contacts') || ( Yii::$app->user->can('contacts-view-his-contacts') && $model->isCurrentUserCreator() ) );
     }
-
 }
