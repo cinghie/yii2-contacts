@@ -28,7 +28,7 @@ class Contacts extends Module
      */
     public function init()
     {
-	    $this->registerTranslations();
+    	$this->registerTranslations();
 
         parent::init();
     }
