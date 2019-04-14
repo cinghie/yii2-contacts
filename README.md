@@ -1,8 +1,8 @@
 Yii2 Contacts
 ===============
 
-![Latest Stable Version](https://img.shields.io/github/release/cinghie/yii2-contacts.svg)
 ![License](https://img.shields.io/packagist/l/cinghie/yii2-contacts.svg)
+![Latest Stable Version](https://img.shields.io/github/release/cinghie/yii2-contacts.svg)
 ![Latest Release Date](https://img.shields.io/github/release-date/cinghie/yii2-contacts.svg)
 ![Latest Commit](https://img.shields.io/github/last-commit/cinghie/yii2-contacts.svg)
 [![Total Downloads](https://img.shields.io/packagist/dt/cinghie/yii2-contacts.svg)](https://packagist.org/packages/cinghie/yii2-contacts)
