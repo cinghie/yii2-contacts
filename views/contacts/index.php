@@ -86,7 +86,7 @@ $this->registerJs('$(document).ready(function()
 				'format' => 'raw',
 				'hAlign' => 'center',
 				'label' => Yii::t('contacts', 'Contact'),
-				'value' => function ($model) {
+				'value' => static function ($model) {
 					/** @var $model cinghie\contacts\models\Contacts */
 					$url = urldecode(Url::toRoute(['/contacts/contacts/view', 'id' => $model->id]));
 					return Html::a($model->lastname.' '.$model->firstname,$url);
@@ -106,16 +106,16 @@ $this->registerJs('$(document).ready(function()
 				'attribute' => 'phone',
 				'format' => 'raw',
 				'hAlign' => 'center',
-				'value' => function ($model) {
+				'value' => static function ($model) {
 					/** @var $model cinghie\contacts\models\Contacts */
-					return $model->getFullPhone('phone');
+					return $model->getFullPhone();
 				}
 			],
 			[
 				'attribute' => 'phone_secondary',
 				'format' => 'raw',
 				'hAlign' => 'center',
-				'value' => function ($model) {
+				'value' => static function ($model) {
 					/** @var $model cinghie\contacts\models\Contacts */
 					return $model->getFullPhone('phone_secondary');
 				}
@@ -124,7 +124,7 @@ $this->registerJs('$(document).ready(function()
 				'attribute' => 'mobile',
 				'format' => 'raw',
 				'hAlign' => 'center',
-				'value' => function ($model) {
+				'value' => static function ($model) {
 					/** @var $model cinghie\contacts\models\Contacts */
 					return $model->getFullPhone('mobile');
 				}
@@ -133,37 +133,42 @@ $this->registerJs('$(document).ready(function()
 				'attribute' => 'mobile_secondary',
 				'format' => 'raw',
 				'hAlign' => 'center',
-				'value' => function ($model) {
+				'value' => static function ($model) {
 					/** @var $model cinghie\contacts\models\Contacts */
 					return $model->getFullPhone('mobile_secondary');
 				}
 			],
 			[
-				'attribute' => 'user_id',
-				'format' => 'raw',
-				'hAlign' => 'center',
-				'width' => '10%',
-				'value' => function ($model) {
-					/** @var $model cinghie\contacts\models\Contacts */
-					return $model->getUserGridView();
-				}
-			],
-			[
 				'attribute' => 'state',
+				'filterType' => GridView::FILTER_SELECT2,
+				'filter' => $searchModel::getStateSelect2(),
+				'filterWidgetOptions' => [
+					'pluginOptions' => ['allowClear' => true],
+				],
+				'filterInputOptions' => ['placeholder' => ''],
 				'format' => 'raw',
 				'hAlign' => 'center',
-				'width' => '5%',
-				'value' => function ($model) {
+				'width' => '7%',
+				'value' => static function ($model) {
 					/** @var $model cinghie\contacts\models\Contacts */
 					return $model->getStateGridView();
 				}
 			],
 			[
 				'attribute' => 'accept',
+				'filterType' => GridView::FILTER_SELECT2,
+				'filter' => [
+					'1' => Yii::t('traits','Yes'),
+					'0' => Yii::t('traits','No')
+				],
+				'filterWidgetOptions' => [
+					'pluginOptions' => ['allowClear' => true],
+				],
+				'filterInputOptions' => ['placeholder' => ''],
 				'format' => 'raw',
 				'hAlign' => 'center',
-				'width' => '5%',
-				'value' => function ($model) {
+				'width' => '6%',
+				'value' => static function ($model) {
 					/** @var $model cinghie\contacts\models\Contacts */
 					return $model->getAcceptIcon();
 				}

@@ -11,6 +11,7 @@ $this->title = Yii::t('contacts', 'Create Contacts');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('contacts', 'Contacts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="contacts-create">
 
     <?php if(Yii::$app->getModule('contacts')->showTitles): ?>

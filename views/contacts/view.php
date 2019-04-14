@@ -1,10 +1,9 @@
 <?php
 
 /**
- * @var \cinghie\contacts\models\Contacts $model
+ * @var cinghie\contacts\models\Contacts $model
  */
 
-use kartik\detail\DetailView;
 use kartik\helpers\Html;
 
 $this->title = $model->getFullName();
