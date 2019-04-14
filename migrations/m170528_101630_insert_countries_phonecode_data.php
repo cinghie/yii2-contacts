@@ -1,22 +1,36 @@
 <?php
 
-use yii\db\Schema;
+/**
+ * @copyright Copyright &copy; Gogodigital Srls
+ * @company Gogodigital Srls - Wide ICT Solutions
+ * @website http://www.gogodigital.it
+ * @github https://github.com/cinghie/yii2-contacts
+ * @license GNU GENERAL PUBLIC LICENSE VERSION 3
+ * @package yii2-contacts
+ * @version 0.9.4
+ */
+
 use yii\db\Migration;
 
 class m170528_101630_insert_countries_phonecode_data extends Migration
 {
-
-    public function init()
+	/**
+	 * @inheritDoc
+	 */
+	public function init()
     {
         $this->db = 'db';
         parent::init();
     }
 
-    public function safeUp()
+	/**
+	 * @return bool|void
+	 */
+	public function safeUp()
     {
         $this->batchInsert(
             '{{%countries_phonecode}}',
-            ["id", "iso", "name", "nicename", "iso3", "numcode", "phonecode"],
+            ['id', 'iso', 'name', 'nicename', 'iso3', 'numcode', 'phonecode'],
             [
                 [
                     'id' => '1',
@@ -2173,9 +2187,11 @@ class m170528_101630_insert_countries_phonecode_data extends Migration
         );
     }
 
-    public function safeDown()
+	/**
+	 * @return bool|void
+	 */
+	public function safeDown()
     {
         $this->truncateTable('{{%countries_phonecode}}');
     }
-
 }

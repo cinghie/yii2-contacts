@@ -15,7 +15,6 @@ use cinghie\traits\migrations\Migration;
  */
 class m180620_100437_add_contacts_fields extends Migration
 {
-
     /**
      * {@inheritdoc}
      */
@@ -35,5 +34,4 @@ class m180620_100437_add_contacts_fields extends Migration
 	    $this->dropColumn('{{%contacts}}','rule_type');
 	    $this->dropColumn('{{%contacts}}','note');
     }
-
 }

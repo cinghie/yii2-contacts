@@ -20,7 +20,6 @@ use yii\data\ActiveDataProvider;
  */
 class ContactsSearch extends Contacts
 {
-
     /**
      * @var string
      */
@@ -182,5 +181,4 @@ class ContactsSearch extends Contacts
 
         return $dataProvider;
     }
-
 }

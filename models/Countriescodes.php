@@ -28,7 +28,6 @@ use yii\db\ActiveRecord;
  */
 class Countriescodes extends ActiveRecord
 {
-
     /**
      * @inheritdoc
      */
@@ -76,5 +75,4 @@ class Countriescodes extends ActiveRecord
     {
         return new CountriescodesQuery( static::class );
     }
-
 }

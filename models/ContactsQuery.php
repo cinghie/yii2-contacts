@@ -21,7 +21,6 @@ use yii\db\ActiveQuery;
  */
 class ContactsQuery extends ActiveQuery
 {
-
     /**
      * @inheritdoc
      *
@@ -55,5 +54,4 @@ class ContactsQuery extends ActiveQuery
     {
         return parent::one($db);
     }
-
 }

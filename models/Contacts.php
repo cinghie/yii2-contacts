@@ -77,7 +77,6 @@ use yii\helpers\Html;
  */
 class Contacts extends ActiveRecord
 {
-    
     use CreatedTrait, EditorTrait, ModifiedTrait, StateTrait, UserHelpersTrait, UserTrait, ViewsHelpersTrait;
 
     const EVENT_AFTER_VIEW   = 'afterView';
@@ -533,5 +532,4 @@ class Contacts extends ActiveRecord
     {
         return new ContactsQuery( static::class );
     }
-
 }

@@ -14,7 +14,6 @@ use cinghie\traits\migrations\Migration;
 
 class m170528_101639_create_contacts_table extends Migration
 {
-
     /**
      * @inheritdoc
      */
@@ -206,5 +205,4 @@ class m170528_101639_create_contacts_table extends Migration
         $this->dropIndex('index_contacts_modified_by', '{{%contacts}}');
         $this->dropTable('{{%contacts}}');
     }
-
 }

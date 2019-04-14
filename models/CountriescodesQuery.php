@@ -21,7 +21,6 @@ use yii\db\ActiveQuery;
  */
 class CountriescodesQuery extends ActiveQuery
 {
-
     /**
      * @inheritdoc
      *
@@ -41,5 +40,4 @@ class CountriescodesQuery extends ActiveQuery
     {
         return parent::one($db);
     }
-
 }

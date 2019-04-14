@@ -22,8 +22,10 @@ use yii\web\Response;
 
 class PhonecodeController extends Controller
 {
-
-    public function behaviors()
+	/**
+	 * @inheritDoc
+	 */
+	public function behaviors()
     {
         return [
             'access' => [
@@ -125,5 +127,4 @@ class PhonecodeController extends Controller
 
         return $out;
     }
-
 }
