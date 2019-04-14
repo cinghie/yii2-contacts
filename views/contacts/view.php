@@ -19,6 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- action buttons -->
     <div class="col-md-6">
 
+	    <?= $model->getExitButton() ?>
+
 		<?= $model->getDeactiveButton($model->id) ?>
 
 		<?= $model->getActiveButton($model->id) ?>
@@ -28,8 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		<?= $model->getUpdateButton($model->id) ?>
 
 		<?= $model->getCreateButton() ?>
-
-		<?= $model->getExitButton() ?>
 
     </div>
 

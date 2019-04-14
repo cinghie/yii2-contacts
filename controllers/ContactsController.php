@@ -307,7 +307,7 @@ class ContactsController extends Controller
             Yii::$app->getSession()->setFlash('success', Yii::t('contacts', 'Contact actived'));
         }
 
-        return $this->redirect(['index']);
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
 	/**
