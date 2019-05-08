@@ -54,6 +54,56 @@ Set on your configuration file
 ]	
 ```
 
+## Overrides
+
+Override controller example, on modules config
+
+```
+'modules' => [ 
+	
+	'contacts' => [ 
+		'class' => 'cinghie\contacts\Contacts',
+		'controllerMap' => [
+			'contacts' => 'app\controllers\ContactsController',
+			'phonecode' => 'app\controllers\PhonecodeController',
+		]
+	]
+	
+],
+```
+
+Override models example, on modules config
+
+```
+'modules' => [ 
+	
+	'contacts' => [ 
+		'class' => 'cinghie\contacts\Contacts',
+		'modelMap' => [
+			'Contacts' => 'app\models\Contacts',
+			'Countriescodes' => 'app\models\Countriescodes',
+		]
+	]
+	
+],
+```
+
+Override view example, on components config
+
+```
+'components' => [ 
+
+	'view' => [
+		'theme' => [
+			'pathMap' => [
+				'@cinghie/contacts/views/contacts' => '@app/views/contacts/contacts',
+			],
+		],
+	],
+	
+],
+```
+
 ### Permissions
 
 To access the module actions the user must have this permissions:

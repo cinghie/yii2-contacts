@@ -27,5 +27,8 @@
         "psr-4": {
             "cinghie\\contacts\\": ""
         }
+    },
+    "extra": {
+        "bootstrap": "cinghie\\contacts\\Bootstrap"
     }
 }

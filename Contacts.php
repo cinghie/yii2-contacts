@@ -16,8 +16,14 @@ use Yii;
 use yii\base\Module;
 use yii\i18n\PhpMessageSource;
 
+/**
+ * Class Contacts
+ */
 class Contacts extends Module
 {
+	// Model map
+	public $modelMap = [];
+
     /**
      * @var boolean
      */
