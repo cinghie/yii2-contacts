@@ -78,7 +78,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 	                <?= $form->field($model, 'rule', [
 		                'addon' => [
 			                'prepend' => [
-				                'content'=>'<i class="fa fa-user-o"></i>'
+				                'content'=>'<i class="fa fa-user"></i>'
 			                ]
 		                ],
 	                ])->textInput(['maxlength' => true]) ?>
@@ -90,7 +90,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 	                <?= $form->field($model, 'rule_type', [
 		                'addon' => [
 			                'prepend' => [
-				                'content'=>'<i class="fa fa-user-circle-o"></i>'
+				                'content'=>'<i class="fa fa-user-circle"></i>'
 			                ]
 		                ],
 	                ])->textInput(['maxlength' => true]) ?>
@@ -130,7 +130,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 	                <?= $form->field($model, 'skype', [
 		                'addon' => [
 			                'prepend' => [
-				                'content'=>'<i class="fa fa-skype"></i>'
+				                'content'=>'<i class="fab fa-skype"></i>'
 			                ]
 		                ]
 	                ])->textInput(['maxlength' => true]) ?>
@@ -404,7 +404,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 	                <?= $form->field($model, 'facebook', [
 		                'addon' => [
 			                'prepend' => [
-				                'content'=>'<i class="fa fa-facebook"></i>'
+				                'content'=>'<i class="fab fa-facebook"></i>'
 			                ]
 		                ]
 	                ])->textInput(['maxlength' => true]) ?>
@@ -416,7 +416,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 	                <?= $form->field($model, 'gplus', [
 		                'addon' => [
 			                'prepend' => [
-				                'content'=>'<i class="fa fa-google-plus"></i>'
+				                'content'=>'<i class="fab fa-google-plus"></i>'
 			                ]
 		                ]
 	                ])->textInput(['maxlength' => true]) ?>
@@ -428,7 +428,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 	                <?= $form->field($model, 'instagram', [
 		                'addon' => [
 			                'prepend' => [
-				                'content'=>'<i class="fa fa-instagram"></i>'
+				                'content'=>'<i class="fab fa-instagram"></i>'
 			                ]
 		                ]
 	                ])->textInput(['maxlength' => true]) ?>
@@ -440,7 +440,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 	                <?= $form->field($model, 'twitter', [
 		                'addon' => [
 			                'prepend' => [
-				                'content'=>'<i class="fa fa-twitter"></i>'
+				                'content'=>'<i class="fab fa-twitter"></i>'
 			                ]
 		                ]
 	                ])->textInput(['maxlength' => true]) ?>
@@ -456,7 +456,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 	                <?= $form->field($model, 'youtube', [
 		                'addon' => [
 			                'prepend' => [
-				                'content'=>'<i class="fa fa-youtube"></i>'
+				                'content'=>'<i class="fab fa-youtube"></i>'
 			                ]
 		                ]
 	                ])->textInput(['maxlength' => true]) ?>
@@ -468,7 +468,7 @@ $prefix = Url::to(['/contacts/phonecode/prefix']);
 	                <?= $form->field($model, 'linkedin', [
 		                'addon' => [
 			                'prepend' => [
-				                'content'=>'<i class="fa fa-linkedin"></i>'
+				                'content'=>'<i class="fab fa-linkedin"></i>'
 			                ]
 		                ]
 	                ])->textInput(['maxlength' => true]) ?>
