@@ -112,30 +112,12 @@ $this->registerJs('$(document).ready(function()
 				}
 			],
 			[
-				'attribute' => 'phone_secondary',
-				'format' => 'raw',
-				'hAlign' => 'center',
-				'value' => static function ($model) {
-					/** @var $model cinghie\contacts\models\Contacts */
-					return $model->getFullPhone('phone_secondary');
-				}
-			],
-			[
 				'attribute' => 'mobile',
 				'format' => 'raw',
 				'hAlign' => 'center',
 				'value' => static function ($model) {
 					/** @var $model cinghie\contacts\models\Contacts */
 					return $model->getFullPhone('mobile');
-				}
-			],
-			[
-				'attribute' => 'mobile_secondary',
-				'format' => 'raw',
-				'hAlign' => 'center',
-				'value' => static function ($model) {
-					/** @var $model cinghie\contacts\models\Contacts */
-					return $model->getFullPhone('mobile_secondary');
 				}
 			],
 			[
