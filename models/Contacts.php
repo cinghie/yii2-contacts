@@ -50,6 +50,7 @@ use yii\helpers\Html;
  * @property string $rule_type
  * @property string $note
  * @property int accept
+ * @property int accept_secondary
  * @property string $website
  * @property string $skype
  * @property string $facebook
@@ -108,7 +109,7 @@ class Contacts extends ActiveRecord
             [['firstname', 'lastname', 'email', 'email_secondary'], 'string', 'max' => 100],
             [['rule', 'rule_type', 'website', 'skype', 'facebook', 'gplus', 'instagram', 'linkedin', 'twitter', 'youtube'], 'string', 'max' => 255],
             [['note'], 'string'],
-            [['accept','phone_code', 'phone_secondary_code', 'mobile_code', 'mobile_secondary_code', 'fax_code', 'fax_secondary_code'], 'integer'],
+            [['accept','accept_secondary','phone_code', 'phone_secondary_code', 'mobile_code', 'mobile_secondary_code', 'fax_code', 'fax_secondary_code'], 'integer'],
             //[['fax_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['fax_code' => 'id']],
             //[['fax_code'], 'required', 'when' => function ($model) { return $model->fax !== ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() !== ''; }"],
             //[['fax_secondary_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['fax_secondary_code' => 'id']],
@@ -148,6 +149,7 @@ class Contacts extends ActiveRecord
             'fax_secondary' => Yii::t('traits', 'Fax Secondary'),
             'fax_secondary_code' => Yii::t('traits', 'Fax Secondary Code'),
             'accept' => Yii::t('traits', 'Accept'),
+            'accept_secondary' => Yii::t('contacts', 'Accept Secondary'),
             'rule' => Yii::t('traits', 'Rule'),
             'rule_type' => Yii::t('traits', 'Rule Type'),
             'note' => Yii::t('traits', 'Note'),
@@ -260,6 +262,16 @@ class Contacts extends ActiveRecord
     {
     	return $this->accept ? '<span class="label label-success">' . Yii::t('traits', 'Yes') . '</span>' : '<span class="label label-danger">' . Yii::t('traits', 'No') . '</span>';
     }
+
+	/**
+	 * Get Icon for Accept field
+	 *
+	 * @return string
+	 */
+	public function getAccept2Icon()
+	{
+		return $this->accept_secondary ? '<span class="label label-success">' . Yii::t('traits', 'Yes') . '</span>' : '<span class="label label-danger">' . Yii::t('traits', 'No') . '</span>';
+	}
 
 	/**
 	 * Generate DetailView for Contacts Informations

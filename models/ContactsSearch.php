@@ -31,7 +31,7 @@ class ContactsSearch extends Contacts
     public function rules()
     {
         return [
-            [['id', 'state', 'accept'], 'integer'],
+            [['id', 'state', 'accept', 'accept_secondary'], 'integer'],
             [['name','firstname', 'lastname', 'email', 'email_secondary', 'phone', 'phone_code', 'phone_secondary', 'phone_secondary_code', 'mobile', 'mobile_code', 'mobile_secondary', 'mobile_secondary_code', 'fax', 'fax_code', 'fax_secondary', 'fax_secondary_code', 'rule', 'rule_type', 'skype', 'created', 'modified', 'user_id',  'created_by', 'modified_by'], 'safe'],
         ];
     }
@@ -69,7 +69,9 @@ class ContactsSearch extends Contacts
                     'default' => SORT_ASC
                 ],
                 'email',
+	            'accept',
                 'email_secondary',
+	            'accept_secondary',
                 'phone',
                 'phone_secondary',
                 'mobile',
@@ -79,7 +81,6 @@ class ContactsSearch extends Contacts
 	            'rule',
 	            'rule_type',
                 'state',
-	            'accept',
                 'user_id',
                 'created',
                 'created_by',
@@ -104,6 +105,7 @@ class ContactsSearch extends Contacts
             'id' => $this->id,
             'state' => $this->state,
             'accept' => $this->accept,
+            'accept_secondary' => $this->accept_secondary,
         ]);
 
         $query->andFilterWhere(['OR',['like', 'firstname', $this->name],['like', 'lastname', $this->name]])

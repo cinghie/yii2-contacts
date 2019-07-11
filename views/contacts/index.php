@@ -98,9 +98,47 @@ $this->registerJs('$(document).ready(function()
 				'hAlign' => 'center',
 			],
 			[
+				'attribute' => 'accept',
+				'filterType' => GridView::FILTER_SELECT2,
+				'filter' => [
+					'1' => Yii::t('traits','Yes'),
+					'0' => Yii::t('traits','No')
+				],
+				'filterWidgetOptions' => [
+					'pluginOptions' => ['allowClear' => true],
+				],
+				'filterInputOptions' => ['placeholder' => ''],
+				'format' => 'raw',
+				'hAlign' => 'center',
+				'width' => '5%',
+				'value' => static function ($model) {
+					/** @var $model cinghie\contacts\models\Contacts */
+					return $model->getAcceptIcon();
+				}
+			],
+			[
 				'attribute' => 'email_secondary',
 				'format' => 'email',
 				'hAlign' => 'center',
+			],
+			[
+				'attribute' => 'accept_secondary',
+				'filterType' => GridView::FILTER_SELECT2,
+				'filter' => [
+					'1' => Yii::t('traits','Yes'),
+					'0' => Yii::t('traits','No')
+				],
+				'filterWidgetOptions' => [
+					'pluginOptions' => ['allowClear' => true],
+				],
+				'filterInputOptions' => ['placeholder' => ''],
+				'format' => 'raw',
+				'hAlign' => 'center',
+				'width' => '5%',
+				'value' => static function ($model) {
+					/** @var $model cinghie\contacts\models\Contacts */
+					return $model->getAccept2Icon();
+				}
 			],
 			[
 				'attribute' => 'phone',
@@ -134,25 +172,6 @@ $this->registerJs('$(document).ready(function()
 				'value' => static function ($model) {
 					/** @var $model cinghie\contacts\models\Contacts */
 					return $model->getStateGridView();
-				}
-			],
-			[
-				'attribute' => 'accept',
-				'filterType' => GridView::FILTER_SELECT2,
-				'filter' => [
-					'1' => Yii::t('traits','Yes'),
-					'0' => Yii::t('traits','No')
-				],
-				'filterWidgetOptions' => [
-					'pluginOptions' => ['allowClear' => true],
-				],
-				'filterInputOptions' => ['placeholder' => ''],
-				'format' => 'raw',
-				'hAlign' => 'center',
-				'width' => '6%',
-				'value' => static function ($model) {
-					/** @var $model cinghie\contacts\models\Contacts */
-					return $model->getAcceptIcon();
 				}
 			],
 			[

@@ -111,37 +111,47 @@ use yii\web\JsExpression;
 
                     <div class="col-md-3 col-sm-6">
 
-                        <?= $form->field($model, 'email_secondary', [
-                            'addon' => [
-                                'prepend' => [
-                                    'content'=>'<i class="fa fa-envelope"></i>'
-                                ]
-                            ]
-                        ])->textInput(['maxlength' => true]) ?>
+	                    <?= $form->field($model, 'accept')->widget(Select2::class, [
+		                    'data' => [
+			                    '1' => Yii::t('traits', 'Accepted'),
+			                    '0' => Yii::t('traits', 'Not Accepted')
+		                    ],
+		                    'disabled' => true,
+		                    'addon' => [
+			                    'prepend' => [
+				                    'content'=>'<i class="glyphicon glyphicon-minus-sign"></i>'
+			                    ]
+		                    ],
+	                    ]) ?>
 
                     </div>
 
                     <div class="col-md-3 col-sm-6">
 
-                        <?= $form->field($model, 'skype', [
-                            'addon' => [
-                                'prepend' => [
-                                    'content'=>'<i class="fab fa-skype"></i>'
-                                ]
-                            ]
-                        ])->textInput(['maxlength' => true]) ?>
+	                    <?= $form->field($model, 'email_secondary', [
+		                    'addon' => [
+			                    'prepend' => [
+				                    'content'=>'<i class="fa fa-envelope"></i>'
+			                    ]
+		                    ]
+	                    ])->textInput(['maxlength' => true]) ?>
 
                     </div>
 
                     <div class="col-md-3 col-sm-6">
 
-                        <?= $form->field($model, 'website', [
-                            'addon' => [
-                                'prepend' => [
-                                    'content'=>'<i class="fa fa-globe"></i>'
-                                ]
-                            ]
-                        ])->textInput(['maxlength' => true]) ?>
+	                    <?= $form->field($model, 'accept_secondary')->widget(Select2::class, [
+		                    'data' => [
+			                    '1' => Yii::t('traits', 'Accepted'),
+			                    '0' => Yii::t('traits', 'Not Accepted')
+		                    ],
+		                    'disabled' => true,
+		                    'addon' => [
+			                    'prepend' => [
+				                    'content'=>'<i class="glyphicon glyphicon-minus-sign"></i>'
+			                    ]
+		                    ],
+	                    ]) ?>
 
                     </div>
 
@@ -397,37 +407,37 @@ use yii\web\JsExpression;
 
                     <div class="col-md-3 col-sm-6">
 
-                        <?= $form->field($model, 'facebook', [
-                            'addon' => [
-                                'prepend' => [
-                                    'content'=>'<i class="fab fa-facebook"></i>'
-                                ]
-                            ]
-                        ])->textInput(['maxlength' => true]) ?>
+	                    <?= $form->field($model, 'skype', [
+		                    'addon' => [
+			                    'prepend' => [
+				                    'content'=>'<i class="fab fa-skype"></i>'
+			                    ]
+		                    ]
+	                    ])->textInput(['maxlength' => true]) ?>
 
                     </div>
 
                     <div class="col-md-3 col-sm-6">
 
-                        <?= $form->field($model, 'gplus', [
-                            'addon' => [
-                                'prepend' => [
-                                    'content'=>'<i class="fab fa-google-plus"></i>'
-                                ]
-                            ]
-                        ])->textInput(['maxlength' => true]) ?>
+	                    <?= $form->field($model, 'website', [
+		                    'addon' => [
+			                    'prepend' => [
+				                    'content'=>'<i class="fa fa-globe"></i>'
+			                    ]
+		                    ]
+	                    ])->textInput(['maxlength' => true]) ?>
 
                     </div>
 
                     <div class="col-md-3 col-sm-6">
 
-                        <?= $form->field($model, 'instagram', [
-                            'addon' => [
-                                'prepend' => [
-                                    'content'=>'<i class="fab fa-instagram"></i>'
-                                ]
-                            ]
-                        ])->textInput(['maxlength' => true]) ?>
+	                    <?= $form->field($model, 'facebook', [
+		                    'addon' => [
+			                    'prepend' => [
+				                    'content'=>'<i class="fab fa-facebook"></i>'
+			                    ]
+		                    ]
+	                    ])->textInput(['maxlength' => true]) ?>
 
                     </div>
 
@@ -449,13 +459,13 @@ use yii\web\JsExpression;
 
                     <div class="col-md-3 col-sm-6">
 
-                        <?= $form->field($model, 'youtube', [
-                            'addon' => [
-                                'prepend' => [
-                                    'content'=>'<i class="fab fa-youtube"></i>'
-                                ]
-                            ]
-                        ])->textInput(['maxlength' => true]) ?>
+	                    <?= $form->field($model, 'instagram', [
+		                    'addon' => [
+			                    'prepend' => [
+				                    'content'=>'<i class="fab fa-instagram"></i>'
+			                    ]
+		                    ]
+	                    ])->textInput(['maxlength' => true]) ?>
 
                     </div>
 
@@ -473,13 +483,25 @@ use yii\web\JsExpression;
 
                     <div class="col-md-3 col-sm-6">
 
-
+	                    <?= $form->field($model, 'gplus', [
+		                    'addon' => [
+			                    'prepend' => [
+				                    'content'=>'<i class="fab fa-google-plus"></i>'
+			                    ]
+		                    ]
+	                    ])->textInput(['maxlength' => true]) ?>
 
                     </div>
 
                     <div class="col-md-3 col-sm-6">
 
-
+	                    <?= $form->field($model, 'youtube', [
+		                    'addon' => [
+			                    'prepend' => [
+				                    'content'=>'<i class="fab fa-youtube"></i>'
+			                    ]
+		                    ]
+	                    ])->textInput(['maxlength' => true]) ?>
 
                     </div>
 
@@ -506,19 +528,6 @@ use yii\web\JsExpression;
             <div class="col-md-3">
 
                 <?= $model->getStateWidget($form) ?>
-
-                <?= $form->field($model, 'accept')->widget(Select2::class, [
-                    'data' => [
-                        '1' => Yii::t('traits', 'Accepted'),
-                        '0' => Yii::t('traits', 'Not Accepted')
-                    ],
-                    'disabled' => true,
-                    'addon' => [
-                        'prepend' => [
-                            'content'=>'<i class="glyphicon glyphicon-minus-sign"></i>'
-                        ]
-                    ],
-                ]) ?>
 
                 <?= $model->getUserWidget($form, true) ?>
 

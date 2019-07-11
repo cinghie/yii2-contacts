@@ -11,6 +11,7 @@
  */
 
 return [
+	'Accept Secondary' => 'Accetta 2',
     'Contact' => 'Contatto',
     'Contact actived' => 'Contatto attivato',
     'Contact deactived' => 'Contatto disattivato',
