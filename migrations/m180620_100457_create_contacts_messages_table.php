@@ -19,11 +19,12 @@ class m180620_100457_create_contacts_messages_table extends Migration
      */
     public function up()
     {
-        $this->createTable('{{%contacts}}', [
+        $this->createTable('{{%contacts_messages}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string(100)->notNull(),
             'email' => $this->string(100)->notNull(),
             'message' => $this->text()->notNull(),
+            'ip' => $this->bigInteger()->notNull(),
         ], $this->tableOptions);
     }
 
