@@ -21,6 +21,8 @@ use yii\db\ActiveRecord;
  * @property int $id
  * @property string $name
  * @property string $email
+ * @property string $phone
+ * @property string $mobile
  * @property string $message
  * @property int $ip
  */
@@ -41,9 +43,10 @@ class ContactForm extends ActiveRecord
     {
         return [
             [['name', 'email', 'message', 'ip'], 'required'],
+	        [['name', 'email'], 'string', 'max' => 100],
+	        [['phone', 'mobile'], 'string', 'max' => 26],
             [['message'], 'string'],
             [['ip'], 'integer'],
-            [['name', 'email'], 'string', 'max' => 100],
         ];
     }
 
@@ -56,8 +59,10 @@ class ContactForm extends ActiveRecord
             'id' => Yii::t('traits', 'ID'),
             'name' => Yii::t('traits', 'Name'),
             'email' => Yii::t('traits', 'Email'),
+            'phone' => Yii::t('traits', 'Phone'),
+            'mobile' => Yii::t('traits', 'Mobile'),
             'message' => Yii::t('traits', 'Message'),
-            'ip' => Yii::t('traits', 'Ip'),
+            'ip' => Yii::t('traits', 'IP'),
         ];
     }
 
