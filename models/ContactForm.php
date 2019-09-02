@@ -42,8 +42,8 @@ class ContactForm extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'email', 'message', 'ip'], 'required'],
-	        [['name', 'email'], 'string', 'max' => 100],
+            [['name', 'email', 'message'], 'required'],
+	        [['name', 'firstname', 'lastname', 'email'], 'string', 'max' => 100],
 	        [['phone', 'mobile'], 'string', 'max' => 26],
             [['message'], 'string'],
             [['ip'], 'integer'],
@@ -58,6 +58,8 @@ class ContactForm extends ActiveRecord
         return [
             'id' => Yii::t('traits', 'ID'),
             'name' => Yii::t('traits', 'Name'),
+            'firstname' => Yii::t('traits', 'Firstname'),
+            'lastname' => Yii::t('traits', 'Lastname'),
             'email' => Yii::t('traits', 'Email'),
             'phone' => Yii::t('traits', 'Phone'),
             'mobile' => Yii::t('traits', 'Mobile'),

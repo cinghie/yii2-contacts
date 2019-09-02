@@ -22,6 +22,8 @@ class m180620_100457_create_contacts_messages_table extends Migration
         $this->createTable('{{%contacts_messages}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string(100)->notNull(),
+            'firstname' => $this->string(100)->notNull(),
+            'lastname' => $this->string(100)->notNull(),
             'email' => $this->string(100)->notNull(),
             'phone' => $this->string(26)->notNull(),
             'mobile' => $this->string(26)->notNull(),
