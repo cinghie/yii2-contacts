@@ -47,8 +47,7 @@ Set on your configuration file
 
     // Yii2 Contacts
     'contacts' => [
-        'class' => 'cinghie\contacts\Contacts',
-        'roles' => ['admin']
+        'class' => 'cinghie\contacts\Contacts'
      ],
 	
 ]	
