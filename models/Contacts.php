@@ -71,6 +71,7 @@ use yii\helpers\Html;
  * @property string $fullName
  * @property string $fullPhone
  * @property string $acceptIcon
+ * @property string $accept2Icon
  * @property array $acceptDetailView
  * @property string $contactsInformationsDetailView
  * @property string $socialInformationsDetailView

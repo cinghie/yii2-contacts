@@ -1,17 +1,14 @@
 <?php
 
-use yii\helpers\Html;
-
 /* @var $this yii\web\View */
 /* @var $model cinghie\contacts\models\Messages */
 
-$this->title = Yii::t('contacts', 'Create Contact Form');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('contacts', 'Contact Forms'), 'url' => ['index']];
+$this->title = Yii::t('contacts', 'Create Message');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('traits', 'Messages'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="contact-form-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="contact-form-create">
 
     <?= $this->render('_form', [
         'model' => $model,

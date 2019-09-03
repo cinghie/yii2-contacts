@@ -6,10 +6,8 @@
 
 use kartik\grid\CheckboxColumn;
 use kartik\grid\GridView;
-use kartik\helpers\Html;
-use yii\helpers\Url;
 
-$this->title = Yii::t('contacts', 'Contact Forms');
+$this->title = Yii::t('traits', 'Messages');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -49,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	<?php if(Yii::$app->getModule('contacts')->showTitles): ?>
         <div class="page-header">
-            <h1><?= \kartik\helpers\Html::encode($this->title) ?></h1>
+            <h1><?= Html::encode($this->title) ?></h1>
         </div>
 	<?php endif ?>
 
@@ -72,6 +70,14 @@ $this->params['breadcrumbs'][] = $this->title;
 		        'hAlign' => 'center',
 	        ],
 	        [
+		        'attribute' => 'firstname',
+		        'hAlign' => 'center',
+	        ],
+	        [
+		        'attribute' => 'lastname',
+		        'hAlign' => 'center',
+	        ],
+	        [
 		        'attribute' => 'email',
 		        'format' => 'email',
 		        'hAlign' => 'center',
@@ -79,15 +85,17 @@ $this->params['breadcrumbs'][] = $this->title;
 	        [
 		        'attribute' => 'phone',
 		        'hAlign' => 'center',
+		        'width' => '8%',
 	        ],
 	        [
 		        'attribute' => 'mobile',
 		        'hAlign' => 'center',
+		        'width' => '8%',
 	        ],
             [
 		        'attribute' => 'ip',
 		        'hAlign' => 'center',
-		        'width' => '14%',
+		        'width' => '10%',
 	        ],
 	        [
 		        'attribute' => 'id',

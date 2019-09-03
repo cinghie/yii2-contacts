@@ -26,6 +26,7 @@ return [
     'Contacts deactived' => 'Contatti disattivati',
     'Contacts Informations' => 'Informazioni Contatto',
     'Create Contacts' => 'Crea Contatto',
+	'Create Message' => 'Crea Messaggio',
 	'Error deleting Contact!' => 'Errore nella cancellazione del Contatto!',
 	'Iso' => 'Iso',
 	'Iso3' => 'Iso3',
@@ -35,4 +36,5 @@ return [
 	'Phonecode' => 'Phonecode',
     'Social Informations' => 'Informazioni Social',
     'Update Contacts' => 'Modifica Contatto',
+	'Update Messages' => 'Modifica Messaggio',
 ];

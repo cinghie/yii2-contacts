@@ -7,20 +7,21 @@ use yii\widgets\DetailView;
 /* @var $model cinghie\contacts\models\Messages */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('contacts', 'Contact Forms'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('traits', 'Messages'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 Yii\webYiiAsset::register($this);
 ?>
+
 <div class="contact-form-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('contacts', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('contacts', 'Delete'), ['delete', 'id' => $model->id], [
+        <?= Html::a(Yii::t('traits', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('traits', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('contacts', 'Are you sure you want to delete this item?'),
+                'confirm' => Yii::t('traits', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
         ]) ?>

@@ -4,7 +4,6 @@ namespace cinghie\contacts\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use cinghie\contacts\models\Messages;
 
 /**
  * MessagesSearch represents the model behind the search form of `cinghie\contacts\models\Messages`.
@@ -18,7 +17,7 @@ class MessagesSearch extends Messages
     {
         return [
             [['id', 'ip'], 'integer'],
-            [['name', 'email', 'phone', 'mobile', 'message'], 'safe'],
+            [['name', 'firstname', 'lastname', 'email', 'phone', 'mobile', 'message', 'created_by', 'created'], 'safe'],
         ];
     }
 
@@ -41,8 +40,7 @@ class MessagesSearch extends Messages
     public function search($params)
     {
         $query = Messages::find();
-
-        // add conditions that should always apply here
+	    $query->joinWith(['createdBy']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -63,10 +61,14 @@ class MessagesSearch extends Messages
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'firstname', $this->firstname])
+            ->andFilterWhere(['like', 'lastname', $this->lastname])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', 'mobile', $this->mobile])
-            ->andFilterWhere(['like', 'message', $this->message]);
+            ->andFilterWhere(['like', 'message', $this->message])
+	        ->andFilterWhere(['like', 'created', $this->created])
+	        ->andFilterWhere(['like', 'createdby.username', $this->created_by]);
 
         return $dataProvider;
     }

@@ -26,6 +26,8 @@ use yii\db\ActiveRecord;
  * @property string $phone
  * @property string $mobile
  * @property string $message
+ * @property string $created
+ * @property string $created_by
  * @property int $ip
  */
 class Messages extends ActiveRecord
@@ -61,7 +63,7 @@ class Messages extends ActiveRecord
     {
 	    return array_merge(CreatedTrait::attributeLabels(), [
             'id' => Yii::t('traits', 'ID'),
-            'name' => Yii::t('traits', 'Name'),
+            'name' => Yii::t('traits', 'Fullname'),
             'firstname' => Yii::t('traits', 'Firstname'),
             'lastname' => Yii::t('traits', 'Lastname'),
             'email' => Yii::t('traits', 'Email'),
