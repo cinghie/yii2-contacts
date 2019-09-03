@@ -46,6 +46,12 @@ class MessagesSearch extends Messages
             'query' => $query,
         ]);
 
+	    $dataProvider->setSort([
+		    'defaultOrder' => [
+			    'created' => SORT_DESC
+		    ]
+	    ]);
+
         $this->load($params);
 
         if (!$this->validate()) {

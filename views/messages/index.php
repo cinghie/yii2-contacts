@@ -99,6 +99,11 @@ $this->registerJs('$(document).ready(function()
             [
 		        'attribute' => 'ip',
 		        'hAlign' => 'center',
+		        'width' => '8%',
+	        ],
+	        [
+		        'attribute' => 'created',
+		        'hAlign' => 'center',
 		        'width' => '10%',
 	        ],
 	        [
