@@ -1,43 +1,43 @@
 <?php
 
-use yii\helpers\Html;
-use yii\widgets\DetailView;
-
 /* @var $this yii\web\View */
 /* @var $model cinghie\contacts\models\Messages */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('traits', 'Messages'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-Yii\webYiiAsset::register($this);
 ?>
 
-<div class="contact-form-view">
+<div class="row">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <!-- action menu -->
+    <div class="col-md-6"></div>
 
-    <p>
-        <?= Html::a(Yii::t('traits', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('traits', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('traits', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+    <!-- action buttons -->
+    <div class="col-md-6">
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'name',
-            'email:email',
-            'phone',
-            'mobile',
-            'message:ntext',
-            'ip',
-        ],
-    ]) ?>
+		<?= $model->getExitButton() ?>
+
+		<?= $model->getDeleteButton($model->id) ?>
+
+    </div>
+
+</div>
+
+<div class="separator"></div>
+
+<div class="row contact-message-view">
+
+    <div class="col-lg-6 col-md-12">
+
+        <?= $model->getMessageInformationDetailView() ?>
+
+    </div>
+
+    <div class="col-lg-6 col-md-12">
+
+		<?= $model->getMessageDetailView() ?>
+
+    </div>
 
 </div>

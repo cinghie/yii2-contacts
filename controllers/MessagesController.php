@@ -2,9 +2,11 @@
 
 namespace cinghie\contacts\controllers;
 
+use Throwable;
 use Yii;
 use cinghie\contacts\models\Messages;
 use cinghie\contacts\models\MessagesSearch;
+use yii\db\StaleObjectException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -21,7 +23,7 @@ class MessagesController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -57,51 +59,17 @@ class MessagesController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Messages model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Messages();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Updates an existing Messages model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing Messages model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+	/**
+	 * Deletes an existing Messages model.
+	 * If deletion is successful, the browser will be redirected to the 'index' page.
+	 *
+	 * @param integer $id
+	 *
+	 * @return mixed
+	 * @throws NotFoundHttpException if the model cannot be found
+	 * @throws StaleObjectException
+	 * @throws Throwable
+	 */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
@@ -109,10 +77,42 @@ class MessagesController extends Controller
         return $this->redirect(['index']);
     }
 
+	/**
+	 * Deletes selected Contacts models.
+	 * If deletion is successful, the browser will be redirected to the 'index' page.
+	 *
+	 * @throws NotFoundHttpException
+	 * @throws StaleObjectException
+	 * @throws Throwable
+	 */
+	public function actionDeletemultiple()
+	{
+		$ids = Yii::$app->request->post('ids');
+
+		if (!$ids) {
+			return;
+		}
+
+		foreach ($ids as $id)
+		{
+			$model = $this->findModel($id);
+
+			if ($model->delete()) {
+				// Set Success Message
+				Yii::$app->session->setFlash('success', Yii::t('contacts', 'Messages has been deleted!'));
+			} else {
+				// Set Error Message
+				Yii::$app->session->setFlash('error', Yii::t('contacts', 'Error deleting Message!'));
+			}
+		}
+	}
+
     /**
      * Finds the Messages model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
+     *
      * @return Messages the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -122,6 +122,6 @@ class MessagesController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException(Yii::t('contacts', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(Yii::t('traits', 'The requested page does not exist.'));
     }
 }

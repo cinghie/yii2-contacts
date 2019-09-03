@@ -12,10 +12,15 @@
 
 namespace cinghie\contacts\models;
 
+use Exception;
 use Yii;
 use cinghie\traits\CreatedTrait;
 use cinghie\traits\ViewsHelpersTrait;
+use kartik\detail\DetailView;
+use yii\base\InvalidParamException;
 use yii\db\ActiveRecord;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "{{%contacts_messages}}".
@@ -82,6 +87,135 @@ class Messages extends ActiveRecord
 	public function getFullName()
 	{
 		return $this->lastname . ' ' . $this->firstname;
+	}
+
+	/**
+	 * Generate DetailView for Messages Informations
+	 *
+	 * @return string
+	 * @throws Exception
+	 */
+	public function getMessageInformationDetailView()
+	{
+		return DetailView::widget([
+			'model' => $this,
+			'condensed' => true,
+			'enableEditMode' => false,
+			'hover' => true,
+			'mode' => DetailView::MODE_VIEW,
+			'panel' => [
+				'after' => false,
+				'before' => false,
+				'heading' => Yii::t('contacts', 'Contacts Informations'),
+				'type' => DetailView::TYPE_INFO,
+			],
+			'attributes'=> [
+				[
+					'columns' => [
+						[
+							'attribute' => 'name',
+							'format' => 'email',
+							'valueColOptions' => ['style'=>'width:30%']
+						],
+						[
+							'attribute' => 'email',
+							'format' => 'email',
+							'valueColOptions' => ['style'=>'width:30%']
+						],
+					]
+				],
+				[
+					'columns' => [
+						[
+							'attribute' => 'firstname',
+							'valueColOptions' => ['style'=>'width:30%']
+						],
+						[
+							'attribute' => 'lastname',
+							'valueColOptions' => ['style'=>'width:30%']
+						],
+					]
+				],
+				[
+					'columns' => [
+						[
+							'attribute' => 'phone',
+							'format' => 'raw',
+							'hAlign' => 'center',
+							'valueColOptions' => ['style'=>'width:30%']
+						],
+						[
+							'attribute' => 'mobile',
+							'format' => 'raw',
+							'hAlign' => 'center',
+							'valueColOptions' => ['style'=>'width:30%']
+						],
+					]
+				],
+				[
+					'columns' => [
+						[
+							'attribute' => 'created',
+							'hAlign' => 'center',
+							'valueColOptions' => ['style'=>'width:30%']
+						],
+						[
+							'attribute' => 'created_by',
+							'hAlign' => 'center',
+							'valueColOptions' => ['style'=>'width:30%']
+						],
+					]
+				]
+			]
+		]);
+	}
+
+	/**
+	 * Generate DetailView for Messages
+	 *
+	 * @return string
+	 * @throws Exception
+	 */
+	public function getMessageDetailView()
+	{
+		return DetailView::widget([
+			'model' => $this,
+			'condensed' => true,
+			'enableEditMode' => false,
+			'hover' => true,
+			'mode' => DetailView::MODE_VIEW,
+			'panel' => [
+				'after' => false,
+				'before' => false,
+				'heading' => Yii::t('contacts', 'Message Text'),
+				'type' => DetailView::TYPE_INFO,
+			],
+			'attributes'=> [
+				[
+					'attribute' => 'message',
+					'label' => false
+				],
+			]
+		]);
+	}
+
+	/**
+	 * Generate DetailView for CreatedBy
+	 *
+	 * @return array
+	 * @throws InvalidParamException
+	 */
+	public function getCreatedByDetailView()
+	{
+		return [
+			'attribute' => 'created_by',
+			'format' => 'html',
+			'type' => DetailView::INPUT_SWITCH,
+			'value' => $this->created_by ? \kartik\helpers\Html::a($this->createdBy->username,urldecode(Url::toRoute(['/user/admin/update', 'id' => $this->createdBy]))) : Yii::t('traits', 'Nobody'),
+			'valueColOptions'=> [
+				'style'=>'width:30%'
+			]
+		];
 	}
 
     /**

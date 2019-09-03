@@ -19,11 +19,11 @@ $this->params['breadcrumbs'][] = $this->title;
 // Register action buttons js
 $this->registerJs('$(document).ready(function() 
     {'
-	.$searchModel->getUpdateButtonJavascript('#w0')
-	.$searchModel->getDeleteButtonJavascript('#w0')
-	.$searchModel->getActiveButtonJavascript('#w0')
-	.$searchModel->getDeactiveButtonJavascript('#w0')
-	.$searchModel->getPreviewButtonJavascript('#w0').
+	.$searchModel->getUpdateButtonJavascript('#w1')
+	.$searchModel->getDeleteButtonJavascript('#w1')
+	.$searchModel->getActiveButtonJavascript('#w1')
+	.$searchModel->getDeactiveButtonJavascript('#w1')
+	.$searchModel->getPreviewButtonJavascript('#w1').
 	'});
 ');
 

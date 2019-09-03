@@ -53,6 +53,7 @@ class m180620_100457_create_contacts_messages_table extends Migration
      */
     public function down()
     {
+	    $this->dropForeignKey('fk_contacts_messages_created_by', '{{%contacts_messages}}');
 	    $this->dropIndex('index_contacts_messages_created_by', '{{%contacts_messages}}');
         $this->dropTable('{{%contacts_messages}}');
     }

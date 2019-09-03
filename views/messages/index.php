@@ -6,9 +6,17 @@
 
 use kartik\grid\CheckboxColumn;
 use kartik\grid\GridView;
+use kartik\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = Yii::t('traits', 'Messages');
 $this->params['breadcrumbs'][] = $this->title;
+
+// Register action buttons js
+$this->registerJs('$(document).ready(function() 
+    {'.$searchModel->getDeleteButtonJavascript('#w1').'});
+');
+
 ?>
 
 <div class="row">
@@ -23,19 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- action buttons -->
     <div class="col-md-6">
 
-		<?= $searchModel->getDeactiveButton() ?>
-
-		<?= $searchModel->getActiveButton() ?>
-
 		<?= $searchModel->getResetButton() ?>
 
-		<?= $searchModel->getPreviewButton() ?>
-
 		<?= $searchModel->getDeleteButton() ?>
-
-		<?= $searchModel->getUpdateButton() ?>
-
-		<?= $searchModel->getCreateButton() ?>
 
     </div>
 
@@ -67,7 +65,13 @@ $this->params['breadcrumbs'][] = $this->title;
 	        ],
 	        [
 		        'attribute' => 'name',
+		        'format' => 'raw',
 		        'hAlign' => 'center',
+		        'value' => static function ($model) {
+			        /** @var $model cinghie\contacts\models\Messages */
+			        $url = urldecode(Url::toRoute(['/contacts/messages/view', 'id' => $model->id]));
+			        return Html::a($model->lastname.' '.$model->firstname,$url);
+		        }
 	        ],
 	        [
 		        'attribute' => 'firstname',
