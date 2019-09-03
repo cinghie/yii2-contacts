@@ -14,17 +14,17 @@ namespace cinghie\contacts\controllers;
 
 use Throwable;
 use Yii;
-use cinghie\contacts\models\Messages;
-use cinghie\contacts\models\MessagesSearch;
+use cinghie\contacts\models\Forms;
+use cinghie\contacts\models\FormsSearch;
 use yii\db\StaleObjectException;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
- * MessagesController implements the CRUD actions for Messages model.
+ * FormsController implements the CRUD actions for Forms model.
  */
-class MessagesController extends Controller
+class FormsController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -42,12 +42,12 @@ class MessagesController extends Controller
     }
 
     /**
-     * Lists all Messages models.
+     * Lists all Forms models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new MessagesSearch();
+        $searchModel = new FormsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -57,7 +57,7 @@ class MessagesController extends Controller
     }
 
     /**
-     * Displays a single Messages model.
+     * Displays a single Forms model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -69,8 +69,76 @@ class MessagesController extends Controller
         ]);
     }
 
+    /**
+     * Creates a new Forms model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        $model = new Forms();
+	    $post  = Yii::$app->request->post();
+
+	    if ( $model->load($post) )
+	    {
+		    if ( $model->save() )
+		    {
+			    // Set Success Message
+			    Yii::$app->session->setFlash('success', Yii::t('contacts', 'Form has been created!'));
+
+			    return $this->redirect(['update', 'id' => $model->id]);
+		    }
+
+	    } else {
+
+		    // Set Error Message
+		    Yii::$app->session->setFlash('error', Yii::t('contacts', 'Form could not be saved!'));
+
+		    return $this->render('create', [
+			    'model' => $model,
+		    ]);
+	    }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing Forms model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     *
+     * @param integer $id
+     *
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+	    $post  = Yii::$app->request->post();
+
+	    if ( $model->load($post) )
+	    {
+		    if( $model->save() )
+		    {
+			    // Set Success Message
+			    Yii::$app->session->setFlash('success', Yii::t('contacts', 'Form has been updated!'));
+
+			    return $this->render('update', [ 'model' => $model, ]);
+		    }
+
+		    // Set Error Message
+		    Yii::$app->session->setFlash('error', Yii::t('contacts', 'Form could not be saved!'));
+
+		    return $this->render('update', [ 'model' => $model, ]);
+	    }
+
+	    return $this->render('update', [ 'model' => $model, ]);
+    }
+
 	/**
-	 * Deletes an existing Messages model.
+	 * Deletes an existing Forms model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 *
 	 * @param integer $id
@@ -109,26 +177,26 @@ class MessagesController extends Controller
 
 			if ($model->delete()) {
 				// Set Success Message
-				Yii::$app->session->setFlash('success', Yii::t('contacts', 'Messages has been deleted!'));
+				Yii::$app->session->setFlash('success', Yii::t('contacts', 'Form has been deleted!'));
 			} else {
 				// Set Error Message
-				Yii::$app->session->setFlash('error', Yii::t('contacts', 'Error deleting Message!'));
+				Yii::$app->session->setFlash('error', Yii::t('contacts', 'Error deleting Form!'));
 			}
 		}
 	}
 
     /**
-     * Finds the Messages model based on its primary key value.
+     * Finds the Forms model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      *
      * @param integer $id
      *
-     * @return Messages the loaded model
+     * @return Forms the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Messages::findOne($id)) !== null) {
+        if (($model = Forms::findOne($id)) !== null) {
             return $model;
         }
 

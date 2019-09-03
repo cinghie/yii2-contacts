@@ -1,0 +1,45 @@
+<?php
+
+namespace cinghie\contacts\models;
+
+use yii\db\ActiveQuery;
+
+/**
+ * This is the ActiveQuery class for [[Forms]].
+ *
+ * @see Forms
+ */
+class FormsQuery extends ActiveQuery
+{
+	/**
+	 * @inheritdoc
+	 *
+	 * @param int $limit
+	 * @param string $order
+	 * @param string $orderby
+	 *
+	 * @return FormsQuery
+	 */
+	public function last($limit, $orderby = 'id', $order = 'DESC' )
+	{
+		return $this->orderBy([$orderby => $order])->limit($limit);
+	}
+
+    /**
+     * {@inheritdoc}
+     * @return Forms[]|array
+     */
+    public function all($db = null)
+    {
+        return parent::all($db);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return Forms|array|null
+     */
+    public function one($db = null)
+    {
+        return parent::one($db);
+    }
+}
