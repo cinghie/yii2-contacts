@@ -30,7 +30,7 @@ class m180620_100457_create_contacts_messages_table extends Migration
             'message' => $this->text()->notNull(),
             'created_by' => $this->integer(11)->defaultValue(null),
             'created' => $this->dateTime()->notNull()->defaultValue('0000-00-00 00:00:00'),
-            'ip' => $this->bigInteger()->notNull(),
+            'ip' => $this->string(16)->notNull(),
         ], $this->tableOptions);
 
 	    // Add Index and Foreign Key

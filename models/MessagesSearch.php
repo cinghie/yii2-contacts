@@ -57,7 +57,6 @@ class MessagesSearch extends Messages
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'ip' => $this->ip,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
@@ -68,7 +67,8 @@ class MessagesSearch extends Messages
             ->andFilterWhere(['like', 'mobile', $this->mobile])
             ->andFilterWhere(['like', 'message', $this->message])
 	        ->andFilterWhere(['like', 'created', $this->created])
-	        ->andFilterWhere(['like', 'createdby.username', $this->created_by]);
+	        ->andFilterWhere(['like', 'createdby.username', $this->created_by])
+	        ->andFilterWhere(['like', 'ip', $this->ip]);
 
         return $dataProvider;
     }

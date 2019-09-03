@@ -28,7 +28,7 @@ use yii\db\ActiveRecord;
  * @property string $message
  * @property string $created
  * @property string $created_by
- * @property int $ip
+ * @property string $ip
  */
 class Messages extends ActiveRecord
 {
@@ -51,8 +51,8 @@ class Messages extends ActiveRecord
             [['name', 'email', 'message'], 'required'],
 	        [['name', 'firstname', 'lastname', 'email'], 'string', 'max' => 100],
 	        [['phone', 'mobile'], 'string', 'max' => 26],
+		    [['ip'], 'string', 'max' => 16],
             [['message'], 'string'],
-            [['ip'], 'integer'],
         ]);
     }
 
@@ -73,6 +73,16 @@ class Messages extends ActiveRecord
             'ip' => Yii::t('traits', 'IP'),
         ]);
     }
+
+	/**
+	 * Return Contact Full Name
+	 *
+	 * @return string
+	 */
+	public function getFullName()
+	{
+		return $this->lastname . ' ' . $this->firstname;
+	}
 
     /**
      * @inheritdoc
