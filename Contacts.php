@@ -21,8 +21,15 @@ use yii\i18n\PhpMessageSource;
  */
 class Contacts extends Module
 {
-	// Model map
+	/**
+	 * @var array
+	 */
 	public $modelMap = [];
+
+	/**
+	 * @var string
+	 */
+	public $tabMenu = '@vendor/cinghie/yii2-contacts/views/default/_menu.php';
 
     /**
      * @var boolean

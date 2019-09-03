@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model cinghie\contacts\models\ContactFormSearch */
+/* @var $model cinghie\contacts\models\MessagesSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
         'options' => [
             'data-pjax' => 1
         ],
-    ]); ?>
+    ]) ?>
 
     <?= $form->field($model, 'id') ?>
 
@@ -37,6 +37,6 @@ use yii\widgets\ActiveForm;
         <?= Html::resetButton(Yii::t('contacts', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <?php ActiveForm::end() ?>
 
 </div>

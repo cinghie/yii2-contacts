@@ -28,8 +28,24 @@ class m180620_100457_create_contacts_messages_table extends Migration
             'phone' => $this->string(26)->notNull(),
             'mobile' => $this->string(26)->notNull(),
             'message' => $this->text()->notNull(),
+            'created_by' => $this->integer(11)->defaultValue(null),
+            'created' => $this->dateTime()->notNull()->defaultValue('0000-00-00 00:00:00'),
             'ip' => $this->bigInteger()->notNull(),
         ], $this->tableOptions);
+
+	    // Add Index and Foreign Key
+	    $this->createIndex(
+		    'index_contacts_messages_created_by',
+		    '{{%contacts_messages}}',
+		    'created_by'
+	    );
+
+	    $this->addForeignKey(
+		    'fk_contacts_messages_created_by',
+		    '{{%contacts_messages}}', 'created_by',
+		    '{{%user}}', 'id',
+		    'SET NULL', 'CASCADE'
+	    );
     }
 
     /**
@@ -37,6 +53,7 @@ class m180620_100457_create_contacts_messages_table extends Migration
      */
     public function down()
     {
+	    $this->dropIndex('index_contacts_messages_created_by', '{{%contacts_messages}}');
         $this->dropTable('{{%contacts_messages}}');
     }
 }

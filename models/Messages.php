@@ -13,6 +13,8 @@
 namespace cinghie\contacts\models;
 
 use Yii;
+use cinghie\traits\CreatedTrait;
+use cinghie\traits\ViewsHelpersTrait;
 use yii\db\ActiveRecord;
 
 /**
@@ -26,8 +28,10 @@ use yii\db\ActiveRecord;
  * @property string $message
  * @property int $ip
  */
-class ContactForm extends ActiveRecord
+class Messages extends ActiveRecord
 {
+	use CreatedTrait, ViewsHelpersTrait;
+
     /**
      * @inheritdoc
      */
@@ -41,13 +45,13 @@ class ContactForm extends ActiveRecord
      */
     public function rules()
     {
-        return [
+	    return array_merge(CreatedTrait::rules(), [
             [['name', 'email', 'message'], 'required'],
 	        [['name', 'firstname', 'lastname', 'email'], 'string', 'max' => 100],
 	        [['phone', 'mobile'], 'string', 'max' => 26],
             [['message'], 'string'],
             [['ip'], 'integer'],
-        ];
+        ]);
     }
 
     /**
@@ -55,7 +59,7 @@ class ContactForm extends ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
+	    return array_merge(CreatedTrait::attributeLabels(), [
             'id' => Yii::t('traits', 'ID'),
             'name' => Yii::t('traits', 'Name'),
             'firstname' => Yii::t('traits', 'Firstname'),
@@ -65,16 +69,16 @@ class ContactForm extends ActiveRecord
             'mobile' => Yii::t('traits', 'Mobile'),
             'message' => Yii::t('traits', 'Message'),
             'ip' => Yii::t('traits', 'IP'),
-        ];
+        ]);
     }
 
     /**
      * @inheritdoc
      *
-     * @return ContactFormQuery the active query used by this AR class.
+     * @return MessagesQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new ContactFormQuery( static::class );
+        return new MessagesQuery( static::class );
     }
 }

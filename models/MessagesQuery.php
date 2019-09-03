@@ -15,11 +15,11 @@ namespace cinghie\contacts\models;
 use yii\db\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[ContactForm]].
+ * This is the ActiveQuery class for [[Messages]].
  *
- * @see ContactForm
+ * @see Messages
  */
-class ContactFormQuery extends ActiveQuery
+class MessagesQuery extends ActiveQuery
 {
     /**
      * @inheritdoc
@@ -28,7 +28,7 @@ class ContactFormQuery extends ActiveQuery
      * @param string $order
      * @param string $orderby
      *
-     * @return ContactFormQuery
+     * @return MessagesQuery
      */
     public function last($limit, $orderby = 'id', $order = 'DESC' )
     {
@@ -38,7 +38,7 @@ class ContactFormQuery extends ActiveQuery
     /**
      * @inheritdoc
      *
-     * @return ContactForm[]|array
+     * @return Messages[]|array
      */
     public function all($db = null)
     {
@@ -48,7 +48,7 @@ class ContactFormQuery extends ActiveQuery
     /**
      * @inheritdoc
      *
-     * @return ContactForm|array|null
+     * @return Messages|array|null
      */
     public function one($db = null)
     {

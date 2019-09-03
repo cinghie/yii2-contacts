@@ -16,7 +16,7 @@ use kartik\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
-    ]); ?>
+    ]) ?>
 
         <?= $form->field($model, 'id') ?>
 
@@ -53,10 +53,10 @@ use kartik\widgets\ActiveForm;
         <?php // echo $form->field($model, 'modified') ?>
 
         <div class="form-group">
-            <?= Html::submitButton(\Yii::t('traits', 'Search'), ['class' => 'btn btn-primary']) ?>
-            <?= Html::resetButton(\Yii::t('traits', 'Reset'), ['class' => 'btn btn-default']) ?>
+            <?= Html::submitButton(Yii::t('traits', 'Search'), ['class' => 'btn btn-primary']) ?>
+            <?= Html::resetButton(Yii::t('traits', 'Reset'), ['class' => 'btn btn-default']) ?>
         </div>
 
-    <?php ActiveForm::end(); ?>
+    <?php ActiveForm::end() ?>
 
 </div>

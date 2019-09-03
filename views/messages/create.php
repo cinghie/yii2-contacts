@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model cinghie\contacts\models\ContactForm */
+/* @var $model cinghie\contacts\models\Messages */
 
 $this->title = Yii::t('contacts', 'Create Contact Form');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('contacts', 'Contact Forms'), 'url' => ['index']];

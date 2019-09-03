@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model cinghie\contacts\models\ContactForm */
+/* @var $model cinghie\contacts\models\Messages */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="contact-form-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin() ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -28,6 +28,6 @@ use yii\widgets\ActiveForm;
         <?= Html::submitButton(Yii::t('contacts', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <?php ActiveForm::end() ?>
 
 </div>

@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model cinghie\contacts\models\ContactForm */
+/* @var $model cinghie\contacts\models\Messages */
 
 $this->title = Yii::t('contacts', 'Update Contact Form: {name}', [
     'name' => $model->name,

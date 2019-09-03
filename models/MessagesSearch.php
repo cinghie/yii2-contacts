@@ -4,12 +4,12 @@ namespace cinghie\contacts\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use cinghie\contacts\models\ContactForm;
+use cinghie\contacts\models\Messages;
 
 /**
- * ContactFormSearch represents the model behind the search form of `cinghie\contacts\models\ContactForm`.
+ * MessagesSearch represents the model behind the search form of `cinghie\contacts\models\Messages`.
  */
-class ContactFormSearch extends ContactForm
+class MessagesSearch extends Messages
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class ContactFormSearch extends ContactForm
      */
     public function search($params)
     {
-        $query = ContactForm::find();
+        $query = Messages::find();
 
         // add conditions that should always apply here
 

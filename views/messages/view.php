@@ -4,12 +4,12 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model cinghie\contacts\models\ContactForm */
+/* @var $model cinghie\contacts\models\Messages */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('contacts', 'Contact Forms'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
+Yii\webYiiAsset::register($this);
 ?>
 <div class="contact-form-view">
 

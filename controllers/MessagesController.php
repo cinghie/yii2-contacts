@@ -3,16 +3,16 @@
 namespace cinghie\contacts\controllers;
 
 use Yii;
-use cinghie\contacts\models\ContactForm;
-use cinghie\contacts\models\ContactFormSearch;
+use cinghie\contacts\models\Messages;
+use cinghie\contacts\models\MessagesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ContactFormController implements the CRUD actions for ContactForm model.
+ * MessagesController implements the CRUD actions for Messages model.
  */
-class ContactFormController extends Controller
+class MessagesController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class ContactFormController extends Controller
     }
 
     /**
-     * Lists all ContactForm models.
+     * Lists all Messages models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ContactFormSearch();
+        $searchModel = new MessagesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class ContactFormController extends Controller
     }
 
     /**
-     * Displays a single ContactForm model.
+     * Displays a single Messages model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class ContactFormController extends Controller
     }
 
     /**
-     * Creates a new ContactForm model.
+     * Creates a new Messages model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new ContactForm();
+        $model = new Messages();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class ContactFormController extends Controller
     }
 
     /**
-     * Updates an existing ContactForm model.
+     * Updates an existing Messages model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class ContactFormController extends Controller
     }
 
     /**
-     * Deletes an existing ContactForm model.
+     * Deletes an existing Messages model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class ContactFormController extends Controller
     }
 
     /**
-     * Finds the ContactForm model based on its primary key value.
+     * Finds the Messages model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ContactForm the loaded model
+     * @return Messages the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ContactForm::findOne($id)) !== null) {
+        if (($model = Messages::findOne($id)) !== null) {
             return $model;
         }
 

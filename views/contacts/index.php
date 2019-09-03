@@ -32,24 +32,28 @@ $this->registerJs('$(document).ready(function()
 <div class="row">
 
     <!-- action menu -->
-    <div class="col-md-6"></div>
+    <div class="col-md-6">
+
+		<?= Yii::$app->view->renderFile(Yii::$app->controller->module->tabMenu) ?>
+
+    </div>
 
     <!-- action buttons -->
     <div class="col-md-6">
 
-		<?= $searchModel->getDeactiveButton() ?>
+	    <?= $searchModel->getDeactiveButton() ?>
 
-		<?= $searchModel->getActiveButton() ?>
+	    <?= $searchModel->getActiveButton() ?>
 
-		<?= $searchModel->getResetButton() ?>
+	    <?= $searchModel->getResetButton() ?>
 
-		<?= $searchModel->getPreviewButton() ?>
+	    <?= $searchModel->getPreviewButton() ?>
 
-		<?= $searchModel->getDeleteButton() ?>
+	    <?= $searchModel->getDeleteButton() ?>
 
-		<?= $searchModel->getUpdateButton() ?>
+	    <?= $searchModel->getUpdateButton() ?>
 
-		<?= $searchModel->getCreateButton() ?>
+	    <?= $searchModel->getCreateButton() ?>
 
     </div>
 
@@ -65,7 +69,7 @@ $this->registerJs('$(document).ready(function()
         </div>
     <?php endif ?>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]) ?>
 
 	<?= GridView::widget([
 		'dataProvider' => $dataProvider,
