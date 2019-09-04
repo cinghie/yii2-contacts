@@ -12,9 +12,12 @@
 
 namespace cinghie\contacts\models;
 
+use Exception;
 use Yii;
 use cinghie\traits\TitleAliasTrait;
 use cinghie\traits\ViewsHelpersTrait;
+use kartik\widgets\ActiveForm;
+use kartik\widgets\Select2;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
@@ -47,7 +50,7 @@ class Forms extends ActiveRecord
     public function rules()
     {
         return [
-	        [['title','alias'], 'string', 'max' => 64],
+	        [['title','alias','contact_id'], 'string', 'max' => 64],
 	        [['alias'], 'unique'],
 	        [['contact_id','captcha'], 'integer'],
             [['contact_id'], 'exist', 'skipOnError' => true, 'targetClass' => Contacts::class, 'targetAttribute' => ['contact_id' => 'id']],
@@ -75,18 +78,26 @@ class Forms extends ActiveRecord
     }
 
 	/**
-	 * Get Contacts Widget
+	 * Get Contacts Select2
 	 *
-	 * @param $form
+	 * @param ActiveForm $form
 	 *
-	 * @return mixed
+	 * @return string
+	 * @throws Exception
 	 */
 	public function getContactsWidget($form)
-    {
-    	$contact = new Contacts();
+	{
+		$contacts = new Contacts();
 
-    	return $contact->getContactsWidget($form);
-    }
+		return $form->field($this, 'contact_id')->widget(Select2::class, [
+			'data' => $contacts->getContactsSelect2(),
+			'addon' => [
+				'prepend' => [
+					'content'=>'<i class="fa fa-address-book"></i>'
+				]
+			],
+		]);
+	}
 
     /**
      * {@inheritdoc}

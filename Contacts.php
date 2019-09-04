@@ -31,6 +31,16 @@ class Contacts extends Module
 	 */
 	public $tabMenu = '@vendor/cinghie/yii2-contacts/views/default/_menu.php';
 
+	// Slugify Options
+	public $slugifyOptions = [
+		'separator' => '-',
+		'lowercase' => true,
+		'trim' => true,
+		'rulesets'  => [
+			'default'
+		]
+	];
+
     /**
      * @var boolean
      */

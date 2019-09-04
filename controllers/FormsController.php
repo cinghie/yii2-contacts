@@ -81,6 +81,9 @@ class FormsController extends Controller
 
 	    if ( $model->load($post) )
 	    {
+		    // If alias is not set, generate it
+		    $model->setAlias($post['Forms'],'title');
+
 		    if ( $model->save() )
 		    {
 			    // Set Success Message
@@ -114,6 +117,9 @@ class FormsController extends Controller
 
 	    if ( $model->load($post) )
 	    {
+		    // If alias is not set, generate it
+		    $model->setAlias($post['Forms'],'title');
+
 		    if( $model->save() )
 		    {
 			    // Set Success Message

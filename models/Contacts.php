@@ -281,13 +281,14 @@ class Contacts extends ActiveRecord
 	 * Get Contacts Select2
 	 *
 	 * @param ActiveForm $form
+	 * @param string $attribute
 	 *
 	 * @return string
 	 * @throws Exception
 	 */
-	public function getContactsWidget($form)
+	public function getContactsWidget($form, $attribute = 'contact_id')
 	{
-		return $form->field($this, 'user_id')->widget(Select2::class, [
+		return $form->field($this, $attribute)->widget(Select2::class, [
 			'data' => $this->getContactsSelect2(),
 			'addon' => [
 				'prepend' => [
