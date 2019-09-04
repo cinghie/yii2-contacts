@@ -84,24 +84,18 @@ class FormsController extends Controller
 		    if ( $model->save() )
 		    {
 			    // Set Success Message
-			    Yii::$app->session->setFlash('success', Yii::t('contacts', 'Form has been created!'));
+			    Yii::$app->session->setFlash('success', Yii::t('contacts', 'Contact has been created!'));
 
 			    return $this->redirect(['update', 'id' => $model->id]);
 		    }
 
-	    } else {
-
 		    // Set Error Message
-		    Yii::$app->session->setFlash('error', Yii::t('contacts', 'Form could not be saved!'));
+		    Yii::$app->session->setFlash('error', Yii::t('contacts', 'Contact could not be saved!'));
 
-		    return $this->render('create', [
-			    'model' => $model,
-		    ]);
+		    return $this->render('create', [ 'model' => $model, ]);
 	    }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+	    return $this->render('create', [ 'model' => $model, ]);
     }
 
     /**

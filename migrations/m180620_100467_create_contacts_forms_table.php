@@ -22,7 +22,9 @@ class m180620_100467_create_contacts_forms_table extends Migration
         $this->createTable('{{%contacts_forms}}', [
             'id' => $this->primaryKey(),
             'contact_id' => $this->integer(11)->defaultValue(null),
-            'name' => $this->string(32)->notNull()
+            'title' => $this->string(64)->notNull(),
+            'alias' => $this->string(64)->notNull(),
+            'captcha' => $this->boolean()->notNull()->defaultValue(1),
         ], $this->tableOptions);
 
 	    // Add Index and Foreign Key contact_id

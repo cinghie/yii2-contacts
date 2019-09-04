@@ -13,6 +13,7 @@
 namespace cinghie\contacts\models;
 
 use Yii;
+use cinghie\traits\TitleAliasTrait;
 use cinghie\traits\ViewsHelpersTrait;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -22,12 +23,15 @@ use yii\db\ActiveRecord;
  *
  * @property int $id
  * @property int $contact_id
+ * @property string $title
+ * @property string $alias
+ * @property int $captcha
  *
  * @property Contacts $contact
  */
 class Forms extends ActiveRecord
 {
-	use ViewsHelpersTrait;
+	use TitleAliasTrait, ViewsHelpersTrait;
 
     /**
      * {@inheritdoc}
@@ -43,7 +47,9 @@ class Forms extends ActiveRecord
     public function rules()
     {
         return [
-            [['contact_id'], 'integer'],
+	        [['title','alias'], 'string', 'max' => 64],
+	        [['alias'], 'unique'],
+	        [['contact_id','captcha'], 'integer'],
             [['contact_id'], 'exist', 'skipOnError' => true, 'targetClass' => Contacts::class, 'targetAttribute' => ['contact_id' => 'id']],
         ];
     }
@@ -53,10 +59,11 @@ class Forms extends ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
+	    return array_merge(TitleAliasTrait::attributeLabels(),[
             'id' => Yii::t('traits', 'ID'),
             'contact_id' => Yii::t('contacts', 'Contact'),
-        ];
+            'captcha' => Yii::t('traits', 'Captcha'),
+        ]);
     }
 
     /**
@@ -65,6 +72,20 @@ class Forms extends ActiveRecord
     public function getContact()
     {
         return $this->hasOne(Contacts::class, ['id' => 'contact_id']);
+    }
+
+	/**
+	 * Get Contacts Widget
+	 *
+	 * @param $form
+	 *
+	 * @return mixed
+	 */
+	public function getContactsWidget($form)
+    {
+    	$contact = new Contacts();
+
+    	return $contact->getContactsWidget($form);
     }
 
     /**

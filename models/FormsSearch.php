@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * @copyright Copyright &copy; Gogodigital Srls
+ * @company Gogodigital Srls - Wide ICT Solutions
+ * @website http://www.gogodigital.it
+ * @github https://github.com/cinghie/yii2-contacts
+ * @license GNU GENERAL PUBLIC LICENSE VERSION 3
+ * @package yii2-contacts
+ * @version 0.9.7
+ */
+
 namespace cinghie\contacts\models;
 
 use yii\base\Model;
@@ -17,7 +27,8 @@ class FormsSearch extends Forms
     public function rules()
     {
         return [
-            [['id', 'contact_id'], 'integer'],
+            [['id', 'contact_id','captcha'], 'integer'],
+	        [['title'], 'safe'],
         ];
     }
 
@@ -59,7 +70,10 @@ class FormsSearch extends Forms
         $query->andFilterWhere([
             'id' => $this->id,
             'contact_id' => $this->contact_id,
+            'captcha' => $this->captcha,
         ]);
+
+	    $query->andFilterWhere(['like', 'title', $this->title]);
 
         return $dataProvider;
     }

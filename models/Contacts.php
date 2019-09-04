@@ -22,6 +22,8 @@ use cinghie\traits\UserTrait;
 use cinghie\traits\UserHelpersTrait;
 use cinghie\traits\ViewsHelpersTrait;
 use kartik\detail\DetailView;
+use kartik\widgets\ActiveForm;
+use kartik\widgets\Select2;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\helpers\Html;
@@ -73,6 +75,7 @@ use yii\helpers\Html;
  * @property string $acceptIcon
  * @property string $accept2Icon
  * @property array $acceptDetailView
+ * @property string $contactsSelect2
  * @property string $contactsInformationsDetailView
  * @property string $socialInformationsDetailView
  * @property string $entryInformationsDetailView
@@ -272,6 +275,47 @@ class Contacts extends ActiveRecord
 	public function getAccept2Icon()
 	{
 		return $this->accept_secondary ? '<span class="label label-success">' . Yii::t('traits', 'Yes') . '</span>' : '<span class="label label-danger">' . Yii::t('traits', 'No') . '</span>';
+	}
+
+	/**
+	 * Get Contacts Select2
+	 *
+	 * @param ActiveForm $form
+	 *
+	 * @return string
+	 * @throws Exception
+	 */
+	public function getContactsWidget($form)
+	{
+		return $form->field($this, 'user_id')->widget(Select2::class, [
+			'data' => $this->getContactsSelect2(),
+			'addon' => [
+				'prepend' => [
+					'content'=>'<i class="fa fa-address-book"></i>'
+				]
+			],
+		]);
+	}
+
+	/**
+	 * Get Contacts Select2
+	 *
+	 * @return array
+	 */
+	public function getContactsSelect2()
+	{
+		$contacts = self::find()
+			->select(['id','firstname','lastname'])
+			->where(['state' => 1])
+		    ->all();
+
+		$array = [];
+
+		foreach($contacts as $contact) {
+			$array[$contact['id']] = ucwords($contact['lastname']).' '.ucwords($contact['firstname']);
+		}
+
+		return $array;
 	}
 
 	/**

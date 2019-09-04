@@ -27,7 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
 		<?= $searchModel->getResetButton() ?>
 
+		<?= $searchModel->getPreviewButton() ?>
+
 		<?= $searchModel->getDeleteButton() ?>
+
+		<?= $searchModel->getUpdateButton() ?>
+
+		<?= $searchModel->getCreateButton() ?>
 
     </div>
 
@@ -58,9 +64,14 @@ $this->params['breadcrumbs'][] = $this->title;
 		        'class' => CheckboxColumn::class
 	        ],
 	        [
+		        'attribute' => 'title',
+		        'hAlign' => 'center',
+	        ],
+	        [
 		        'attribute' => 'contact_id',
 		        'format' => 'raw',
 		        'hAlign' => 'center',
+		        'width' => '20%',
 		        'value' => function ($model) {
 			        $url = urldecode(Url::toRoute(['/contacts/contacts/view', 'id' => $model->id]));
 			        /** @var cinghie\contacts\models\Contacts $model */
@@ -68,9 +79,14 @@ $this->params['breadcrumbs'][] = $this->title;
 		        }
 	        ],
 	        [
+		        'attribute' => 'captcha',
+		        'hAlign' => 'center',
+		        'width' => '8%',
+	        ],
+	        [
 		        'attribute' => 'id',
 		        'hAlign' => 'center',
-		        'width' => '5%',
+		        'width' => '6%',
 	        ]
         ],
         'panel' => [
