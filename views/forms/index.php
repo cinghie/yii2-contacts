@@ -65,7 +65,13 @@ $this->params['breadcrumbs'][] = $this->title;
 	        ],
 	        [
 		        'attribute' => 'title',
+		        'format' => 'raw',
 		        'hAlign' => 'center',
+		        'value' => function ($model) {
+			        $url = urldecode(Url::toRoute(['/contacts/forms/update', 'id' => $model->id]));
+			        /** @var cinghie\contacts\models\Forms $model */
+			        return Html::a($model->title,$url);
+		        }
 	        ],
 	        [
 		        'attribute' => 'contact_id',
@@ -80,8 +86,22 @@ $this->params['breadcrumbs'][] = $this->title;
 	        ],
 	        [
 		        'attribute' => 'captcha',
+		        'filterType' => GridView::FILTER_SELECT2,
+		        'filter' => [
+			        '1' => Yii::t('traits','Yes'),
+			        '0' => Yii::t('traits','No')
+		        ],
+		        'filterWidgetOptions' => [
+			        'pluginOptions' => ['allowClear' => true],
+		        ],
+		        'filterInputOptions' => ['placeholder' => ''],
+		        'format' => 'raw',
 		        'hAlign' => 'center',
 		        'width' => '8%',
+                'value' => function ($model) {
+	                /** @var cinghie\contacts\models\Forms $model */
+                    return $model->getCaptchaIcon();
+                }
 	        ],
 	        [
 		        'attribute' => 'id',

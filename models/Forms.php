@@ -99,6 +99,16 @@ class Forms extends ActiveRecord
 		]);
 	}
 
+	/**
+	 * Get Icon for Accept field
+	 *
+	 * @return string
+	 */
+	public function getCaptchaIcon()
+	{
+		return $this->captcha ? '<span class="label label-success">' . Yii::t('traits', 'Yes') . '</span>' : '<span class="label label-danger">' . Yii::t('traits', 'No') . '</span>';
+	}
+
     /**
      * {@inheritdoc}
      *
