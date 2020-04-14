@@ -57,9 +57,9 @@ use yii\helpers\Html;
  * @property string $website
  * @property string $skype
  * @property string $facebook
- * @property string $gplus
  * @property string $instagram
  * @property string $linkedin
+ * @property string $pinterest
  * @property string $twitter
  * @property string $youtube
  *
