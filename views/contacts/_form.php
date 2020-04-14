@@ -21,7 +21,7 @@ use yii\web\JsExpression;
 
             <div class="col-lg-6">
 
-
+	            <?= Yii::$app->view->renderFile(Yii::$app->controller->module->tabMenu) ?>
 
             </div>
 
@@ -431,25 +431,13 @@ use yii\web\JsExpression;
 
                     <div class="col-md-3 col-sm-6">
 
-	                    <?= $form->field($model, 'facebook', [
-		                    'addon' => [
-			                    'prepend' => [
-				                    'content'=>'<i class="fab fa-facebook"></i>'
-			                    ]
-		                    ]
-	                    ])->textInput(['maxlength' => true]) ?>
+	                    <?= $model->getFacebookWidget($form) ?>
 
                     </div>
 
                     <div class="col-md-3 col-sm-6">
 
-                        <?= $form->field($model, 'twitter', [
-                            'addon' => [
-                                'prepend' => [
-                                    'content'=>'<i class="fab fa-twitter"></i>'
-                                ]
-                            ]
-                        ])->textInput(['maxlength' => true]) ?>
+	                    <?= $model->getInstagramWidget($form) ?>
 
                     </div>
 
@@ -459,49 +447,25 @@ use yii\web\JsExpression;
 
                     <div class="col-md-3 col-sm-6">
 
-	                    <?= $form->field($model, 'instagram', [
-		                    'addon' => [
-			                    'prepend' => [
-				                    'content'=>'<i class="fab fa-instagram"></i>'
-			                    ]
-		                    ]
-	                    ])->textInput(['maxlength' => true]) ?>
+	                    <?= $model->getTwitterWidget($form) ?>
 
                     </div>
 
                     <div class="col-md-3 col-sm-6">
 
-                        <?= $form->field($model, 'linkedin', [
-                            'addon' => [
-                                'prepend' => [
-                                    'content'=>'<i class="fab fa-linkedin"></i>'
-                                ]
-                            ]
-                        ])->textInput(['maxlength' => true]) ?>
+                        <?= $model->getLinkedinWidget($form) ?>
 
                     </div>
 
                     <div class="col-md-3 col-sm-6">
 
-	                    <?= $form->field($model, 'gplus', [
-		                    'addon' => [
-			                    'prepend' => [
-				                    'content'=>'<i class="fab fa-google-plus"></i>'
-			                    ]
-		                    ]
-	                    ])->textInput(['maxlength' => true]) ?>
+	                    <?= $model->getPinterestWidget($form) ?>
 
                     </div>
 
                     <div class="col-md-3 col-sm-6">
 
-	                    <?= $form->field($model, 'youtube', [
-		                    'addon' => [
-			                    'prepend' => [
-				                    'content'=>'<i class="fab fa-youtube"></i>'
-			                    ]
-		                    ]
-	                    ])->textInput(['maxlength' => true]) ?>
+	                    <?= $model->getYouTubeWidget($form) ?>
 
                     </div>
 

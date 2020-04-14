@@ -17,6 +17,7 @@ use Yii;
 use cinghie\traits\CreatedTrait;
 use cinghie\traits\EditorTrait;
 use cinghie\traits\ModifiedTrait;
+use cinghie\traits\SocialTrait;
 use cinghie\traits\StateTrait;
 use cinghie\traits\UserTrait;
 use cinghie\traits\UserHelpersTrait;
@@ -82,7 +83,7 @@ use yii\helpers\Html;
  */
 class Contacts extends ActiveRecord
 {
-    use CreatedTrait, EditorTrait, ModifiedTrait, StateTrait, UserHelpersTrait, UserTrait, ViewsHelpersTrait;
+    use CreatedTrait, EditorTrait, ModifiedTrait, SocialTrait, StateTrait, UserHelpersTrait, UserTrait, ViewsHelpersTrait;
 
     const EVENT_AFTER_VIEW   = 'afterView';
     const EVENT_AFTER_CREATE = 'afterCreate';
@@ -104,14 +105,14 @@ class Contacts extends ActiveRecord
      */
     public function rules()
     {
-        return array_merge(CreatedTrait::rules(), ModifiedTrait::rules(), StateTrait::rules(), UserTrait::rules(), [
+        return array_merge(CreatedTrait::rules(), ModifiedTrait::rules(), SocialTrait::rules(), StateTrait::rules(), UserTrait::rules(), [
             [['firstname', 'lastname'], 'required'],
             [['email', 'email_secondary'], 'email'],
             [['email'], 'unique', 'targetAttribute' => ['email']],
             [['website'], 'url', 'defaultScheme' => 'http'],
             [['phone', 'phone_secondary', 'mobile', 'mobile_secondary', 'fax', 'fax_secondary'], 'string', 'max' => 50],
             [['firstname', 'lastname', 'email', 'email_secondary'], 'string', 'max' => 100],
-            [['rule', 'rule_type', 'website', 'skype', 'facebook', 'gplus', 'instagram', 'linkedin', 'twitter', 'youtube'], 'string', 'max' => 255],
+            [['rule', 'rule_type', 'website', 'skype'], 'string', 'max' => 255],
             [['note'], 'string'],
             [['accept','accept_secondary','phone_code', 'phone_secondary_code', 'mobile_code', 'mobile_secondary_code', 'fax_code', 'fax_secondary_code'], 'integer'],
             //[['fax_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['fax_code' => 'id']],
@@ -134,7 +135,7 @@ class Contacts extends ActiveRecord
      */
     public function attributeLabels()
     {
-        return array_merge(CreatedTrait::attributeLabels(), ModifiedTrait::attributeLabels(), StateTrait::attributeLabels(), UserTrait::attributeLabels(), [
+        return array_merge(CreatedTrait::attributeLabels(), ModifiedTrait::attributeLabels(), SocialTrait::attributeLabels(), StateTrait::attributeLabels(), UserTrait::attributeLabels(), [
             'id' => Yii::t('traits', 'ID'),
             'firstname' => Yii::t('traits', 'Firstname'),
             'lastname' => Yii::t('traits', 'Lastname'),
@@ -159,12 +160,6 @@ class Contacts extends ActiveRecord
             'note' => Yii::t('traits', 'Note'),
             'website' => Yii::t('traits', 'Website'),
             'skype' => Yii::t('traits', 'Skype'),
-            'facebook' => Yii::t('traits', 'Facebook'),
-            'gplus' => Yii::t('traits', 'Google Plus'),
-            'instagram' => Yii::t('traits', 'Instagram'),
-            'linkedin' => Yii::t('traits', 'Linkedin'),
-            'twitter' => Yii::t('traits', 'Twitter'),
-            'youtube' => Yii::t('traits', 'YouTube'),
         ]);
     }
 
