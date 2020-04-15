@@ -486,10 +486,22 @@ class Contacts extends ActiveRecord
 					'value' => Html::a($this->facebook, $this->facebook, ['target' => 'blank'])
 				],
 				[
-					'attribute' => 'gplus',
+					'attribute' => 'instagram',
 					'format' => 'raw',
 					'hAlign' => 'center',
-					'value' => Html::a($this->gplus, $this->gplus, ['target' => 'blank'])
+					'value' => Html::a($this->instagram, $this->instagram, ['target' => 'blank'])
+				],
+				[
+					'attribute' => 'linkedin',
+					'format' => 'raw',
+					'hAlign' => 'center',
+					'value' => Html::a($this->linkedin, $this->linkedin, ['target' => 'blank'])
+				],
+				[
+					'attribute' => 'pinterest',
+					'format' => 'raw',
+					'hAlign' => 'center',
+					'value' => Html::a($this->pinterest, $this->pinterest, ['target' => 'blank'])
 				],
 				[
 					'attribute' => 'twitter',
@@ -498,22 +510,10 @@ class Contacts extends ActiveRecord
 					'value' => Html::a($this->twitter, $this->twitter, ['target' => 'blank'])
 				],
 				[
-					'attribute' => 'instagram',
-					'format' => 'raw',
-					'hAlign' => 'center',
-					'value' => Html::a($this->instagram, $this->instagram, ['target' => 'blank'])
-				],
-				[
 					'attribute' => 'youtube',
 					'format' => 'raw',
 					'hAlign' => 'center',
 					'value' => Html::a($this->youtube, $this->youtube, ['target' => 'blank'])
-				],
-				[
-					'attribute' => 'linkedin',
-					'format' => 'raw',
-					'hAlign' => 'center',
-					'value' => Html::a($this->linkedin, $this->linkedin, ['target' => 'blank'])
 				]
 			]
 		]);

@@ -135,10 +135,10 @@ class ContactsSearch extends Contacts
 	        ->andFilterWhere(['like', 'website', $this->website])
 	        ->andFilterWhere(['like', 'skype', $this->skype])
 	        ->andFilterWhere(['like', 'facebook', $this->facebook])
-	        ->andFilterWhere(['like', 'twitter', $this->twitter])
-	        ->andFilterWhere(['like', 'linkedin', $this->linkedin])
 	        ->andFilterWhere(['like', 'instagram', $this->instagram])
+	        ->andFilterWhere(['like', 'linkedin', $this->linkedin])
 	        ->andFilterWhere(['like', 'pinterest', $this->pinterest])
+	        ->andFilterWhere(['like', 'twitter', $this->twitter])
 	        ->andFilterWhere(['like', 'youtube', $this->youtube]);
 
         // Print SQL query
