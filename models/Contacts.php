@@ -376,6 +376,36 @@ class Contacts extends ActiveRecord
 				[
 					'columns' => [
 						[
+							'attribute' => 'accept',
+							'format' => 'raw',
+							'value' => $this->accept ? '<span class="label label-success">'. Yii::t('traits', 'Yes').'</span>' : '<span class="label label-danger">'. Yii::t('traits', 'No').'</span>',
+							'type' => DetailView::INPUT_SWITCH,
+							'widgetOptions' => [
+								'pluginOptions' => [
+									'onText' => 'Yes',
+									'offText' => 'No',
+								]
+							],
+							'valueColOptions' => ['style'=>'width:30%']
+						],
+						[
+							'attribute' => 'accept_secondary',
+							'format' => 'raw',
+							'value' => $this->accept_secondary ? '<span class="label label-success">'. Yii::t('traits', 'Yes').'</span>' : '<span class="label label-danger">'. Yii::t('traits', 'No').'</span>',
+							'type' => DetailView::INPUT_SWITCH,
+							'widgetOptions' => [
+								'pluginOptions' => [
+									'onText' => 'Yes',
+									'offText' => 'No',
+								]
+							],
+							'valueColOptions' => ['style'=>'width:30%']
+						]
+					]
+				],
+				[
+					'columns' => [
+						[
 							'attribute' => 'phone',
 							'format' => 'raw',
 							'hAlign' => 'center',
@@ -542,7 +572,6 @@ class Contacts extends ActiveRecord
 			],
 			'attributes' => [
 				$this->getStateDetailView(),
-				$this->getAcceptDetailView(),
 				$this->getUserDetailView(),
 				$this->getCreatedByDetailView(),
 				$this->getCreatedDetailView(),
