@@ -23,6 +23,9 @@
         "yiisoft/yii2": "^2.0.14",
         "cinghie/yii2-traits": "@dev"
     },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+    },
     "autoload": {
         "psr-4": {
             "cinghie\\contacts\\": ""
