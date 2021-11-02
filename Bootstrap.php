@@ -21,7 +21,7 @@ use yii\base\Module;
 use yii\db\ActiveRecord;
 
 /**
- * Bootstrap class
+ * Class Bootstrap
  */
 class Bootstrap implements BootstrapInterface
 {

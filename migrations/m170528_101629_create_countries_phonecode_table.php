@@ -12,6 +12,9 @@
 
 use cinghie\traits\migrations\Migration;
 
+/**
+ * Class m170528_101629_create_countries_phonecode_table
+ */
 class m170528_101629_create_countries_phonecode_table extends Migration
 {
     /**

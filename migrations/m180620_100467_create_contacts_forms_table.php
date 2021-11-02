@@ -12,6 +12,9 @@
 
 use cinghie\traits\migrations\Migration;
 
+/**
+ * Class m180620_100467_create_contacts_forms_table
+ */
 class m180620_100467_create_contacts_forms_table extends Migration
 {
     /**

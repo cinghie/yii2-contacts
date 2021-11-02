@@ -12,6 +12,9 @@
 
 use yii\db\Migration;
 
+/**
+ * Class m170528_101630_insert_countries_phonecode_data
+ */
 class m170528_101630_insert_countries_phonecode_data extends Migration
 {
 	/**
