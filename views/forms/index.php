@@ -110,7 +110,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	        ]
         ],
         'panel' => [
-	        'heading'    => '<h3 class="panel-title"><i class="fa fa-wpforms"></i></h3>',
+	        'heading'    => '<h3 class="panel-title"><i class="fab fa-wpforms"></i></h3>',
 	        'type'       => 'success',
 	        'showFooter' => false
         ]
