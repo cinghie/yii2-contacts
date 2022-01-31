@@ -7,7 +7,7 @@
  * @github https://github.com/cinghie/yii2-contacts
  * @license GNU GENERAL PUBLIC LICENSE VERSION 3
  * @package yii2-contacts
- * @version 0.9.7
+ * @version 0.9.8
  */
 
 namespace cinghie\contacts\controllers;
@@ -22,7 +22,11 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
+/**
+ * Class ContactsController
+ */
 class ContactsController extends Controller
 {
     /**
@@ -97,7 +101,7 @@ class ContactsController extends Controller
     /**
      * Lists all Contacts models.
      *
-     * @return mixed
+     * @return string
      */
     public function actionIndex()
     {
@@ -115,8 +119,8 @@ class ContactsController extends Controller
 	 *
 	 * @param integer $id
 	 *
-	 * @return mixed
-	 * @throws NotFoundHttpException
+	 * @return string
+     * @throws NotFoundHttpException
 	 */
     public function actionView($id)
     {
@@ -134,7 +138,7 @@ class ContactsController extends Controller
      * Creates a new Contacts model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * 
-     * @return mixed
+     * @return string|Response
      */
     public function actionCreate()
     {
@@ -179,8 +183,8 @@ class ContactsController extends Controller
 	 *
 	 * @param integer $id
 	 *
-	 * @return mixed
-	 * @throws NotFoundHttpException
+	 * @return string
+     * @throws NotFoundHttpException
 	 */
     public function actionUpdate($id)
     {
@@ -228,8 +232,8 @@ class ContactsController extends Controller
 	 *
 	 * @param integer $id
 	 *
-	 * @return mixed
-	 * @throws NotFoundHttpException
+	 * @return Response
+     * @throws NotFoundHttpException
 	 * @throws StaleObjectException
 	 * @throws Throwable
 	 */
@@ -279,8 +283,8 @@ class ContactsController extends Controller
 	 *
 	 * @param int $id
 	 *
-	 * @return mixed
-	 * @throws NotFoundHttpException
+	 * @return Response
+     * @throws NotFoundHttpException
 	 */
     public function actionChangestate($id)
     {

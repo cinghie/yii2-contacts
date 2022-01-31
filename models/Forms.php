@@ -7,7 +7,7 @@
  * @github https://github.com/cinghie/yii2-contacts
  * @license GNU GENERAL PUBLIC LICENSE VERSION 3
  * @package yii2-contacts
- * @version 0.9.7
+ * @version 0.9.8
  */
 
 namespace cinghie\contacts\models;
@@ -16,6 +16,7 @@ use Exception;
 use Yii;
 use cinghie\traits\TitleAliasTrait;
 use cinghie\traits\ViewsHelpersTrait;
+use kartik\form\ActiveField;
 use kartik\widgets\ActiveForm;
 use kartik\widgets\Select2;
 use yii\db\ActiveQuery;
@@ -31,6 +32,8 @@ use yii\db\ActiveRecord;
  * @property int $captcha
  *
  * @property Contacts $contact
+ *
+ * @property string $captchaIcon
  */
 class Forms extends ActiveRecord
 {
@@ -82,8 +85,8 @@ class Forms extends ActiveRecord
 	 *
 	 * @param ActiveForm $form
 	 *
-	 * @return string
-	 * @throws Exception
+	 * @return ActiveField
+     * @throws Exception
 	 */
 	public function getContactsWidget($form)
 	{

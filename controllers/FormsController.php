@@ -7,22 +7,25 @@
  * @github https://github.com/cinghie/yii2-contacts
  * @license GNU GENERAL PUBLIC LICENSE VERSION 3
  * @package yii2-contacts
- * @version 0.9.7
+ * @version 0.9.8
  */
 
 namespace cinghie\contacts\controllers;
 
+use RuntimeException;
 use Throwable;
 use Yii;
 use cinghie\contacts\models\Forms;
 use cinghie\contacts\models\FormsSearch;
 use yii\db\StaleObjectException;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 /**
- * FormsController implements the CRUD actions for Forms model.
+ * Class FormsController
  */
 class FormsController extends Controller
 {
@@ -32,6 +35,19 @@ class FormsController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index','create','update','delete','deletemultiple'],
+                        'roles' => ['admin']
+                    ],
+                ],
+                'denyCallback' => static function () {
+                    throw new RuntimeException(Yii::t('traits','You are not allowed to access this page'));
+                }
+            ],
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
@@ -43,7 +59,8 @@ class FormsController extends Controller
 
     /**
      * Lists all Forms models.
-     * @return mixed
+     *
+     * @return string
      */
     public function actionIndex()
     {
@@ -58,8 +75,10 @@ class FormsController extends Controller
 
     /**
      * Displays a single Forms model.
+     *
      * @param integer $id
-     * @return mixed
+     *
+     * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
@@ -72,7 +91,8 @@ class FormsController extends Controller
     /**
      * Creates a new Forms model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     *
+     * @return string|Response
      */
     public function actionCreate()
     {
@@ -107,7 +127,7 @@ class FormsController extends Controller
      *
      * @param integer $id
      *
-     * @return mixed
+     * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
@@ -143,8 +163,8 @@ class FormsController extends Controller
 	 *
 	 * @param integer $id
 	 *
-	 * @return mixed
-	 * @throws NotFoundHttpException if the model cannot be found
+	 * @return Response
+     * @throws NotFoundHttpException if the model cannot be found
 	 * @throws StaleObjectException
 	 * @throws Throwable
 	 */

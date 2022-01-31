@@ -7,7 +7,7 @@
  * @github https://github.com/cinghie/yii2-contacts
  * @license GNU GENERAL PUBLIC LICENSE VERSION 3
  * @package yii2-contacts
- * @version 0.9.7
+ * @version 0.9.8
  */
 
 namespace cinghie\contacts;
@@ -15,6 +15,8 @@ namespace cinghie\contacts;
 use Yii;
 use cinghie\contacts\models\Contacts;
 use cinghie\contacts\models\Countriescodes;
+use cinghie\contacts\models\Forms;
+use cinghie\contacts\models\Messages;
 use yii\base\Application;
 use yii\base\BootstrapInterface;
 use yii\base\Module;
@@ -30,7 +32,9 @@ class Bootstrap implements BootstrapInterface
      */
     private $_modelMap = [
         'Contacts' => Contacts::class,
-        'Countriescodes' => Countriescodes::class
+        'Countriescodes' => Countriescodes::class,
+        'Forms' => Forms::class,
+        'Messages' => Messages::class,
     ];
 
 	/**
@@ -54,7 +58,7 @@ class Bootstrap implements BootstrapInterface
                 $modelName = is_array($definition) ? $definition['class'] : $definition;
                 $module->modelMap[$name] = $modelName;
 
-                if (in_array($name,['Contacts','Countriescodes']))
+                if (in_array($name,['Contacts','Countriescodes','Forms','Messages']))
                 {
                     Yii::$container->set($name . 'Query', function () use ($modelName) {
                         return $modelName::find();

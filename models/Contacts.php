@@ -7,7 +7,7 @@
  * @github https://github.com/cinghie/yii2-contacts
  * @license GNU GENERAL PUBLIC LICENSE VERSION 3
  * @package yii2-contacts
- * @version 0.9.7
+ * @version 0.9.8
  */
 
 namespace cinghie\contacts\models;
@@ -23,6 +23,7 @@ use cinghie\traits\UserTrait;
 use cinghie\traits\UserHelpersTrait;
 use cinghie\traits\ViewsHelpersTrait;
 use kartik\detail\DetailView;
+use kartik\form\ActiveField;
 use kartik\widgets\ActiveForm;
 use kartik\widgets\Select2;
 use yii\db\ActiveQuery;
@@ -85,12 +86,12 @@ class Contacts extends ActiveRecord
 {
     use CreatedTrait, EditorTrait, ModifiedTrait, SocialTrait, StateTrait, UserHelpersTrait, UserTrait, ViewsHelpersTrait;
 
-    const EVENT_AFTER_VIEW   = 'afterView';
-    const EVENT_AFTER_CREATE = 'afterCreate';
-    const EVENT_AFTER_UPDATE = 'afterUpdate';
-    const EVENT_AFTER_DELETE = 'afterDelete';
-    const EVENT_AFTER_ACTIVE = 'afterActive';
-    const EVENT_AFTER_DEACTIVE = 'afterDeactive';
+    public const EVENT_AFTER_VIEW   = 'afterView';
+    public const EVENT_AFTER_CREATE = 'afterCreate';
+    public const EVENT_AFTER_UPDATE = 'afterUpdate';
+    public const EVENT_AFTER_DELETE = 'afterDelete';
+    public const EVENT_AFTER_ACTIVE = 'afterActive';
+    public const EVENT_AFTER_DEACTIVE = 'afterDeactive';
 
     /**
      * @inheritdoc
@@ -278,8 +279,8 @@ class Contacts extends ActiveRecord
 	 * @param ActiveForm $form
 	 * @param string $attribute
 	 *
-	 * @return string
-	 * @throws Exception
+	 * @return ActiveField
+     * @throws Exception
 	 */
 	public function getContactsWidget($form, $attribute = 'contact_id')
 	{

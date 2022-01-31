@@ -7,7 +7,7 @@
  * @github https://github.com/cinghie/yii2-contacts
  * @license GNU GENERAL PUBLIC LICENSE VERSION 3
  * @package yii2-contacts
- * @version 0.9.7
+ * @version 0.9.8
  */
 
 namespace cinghie\contacts\models;
@@ -19,7 +19,6 @@ use cinghie\traits\ViewsHelpersTrait;
 use kartik\detail\DetailView;
 use yii\base\InvalidParamException;
 use yii\db\ActiveRecord;
-use yii\helpers\Html;
 use yii\helpers\Url;
 
 /**
@@ -34,6 +33,11 @@ use yii\helpers\Url;
  * @property string $created
  * @property string $created_by
  * @property string $ip
+ *
+ * @property-read string $fullName
+ * @property-read string $messageInformationDetailView
+ * @property-read array $createdByDetailView
+ * @property-read string $messageDetailView
  */
 class Messages extends ActiveRecord
 {

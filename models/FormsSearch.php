@@ -7,14 +7,13 @@
  * @github https://github.com/cinghie/yii2-contacts
  * @license GNU GENERAL PUBLIC LICENSE VERSION 3
  * @package yii2-contacts
- * @version 0.9.7
+ * @version 0.9.8
  */
 
 namespace cinghie\contacts\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use cinghie\contacts\models\Forms;
 
 /**
  * FormsSearch represents the model behind the search form of `cinghie\contacts\models\Forms`.
