@@ -20,10 +20,10 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "^2.0.14",
-        "cinghie/yii2-traits": "@dev"
+        "yiisoft/yii2": "^2.0.14"
     },
     "require-dev": {
+        "cinghie/yii2-traits": "@dev",
         "roave/security-advisories": "dev-latest"
     },
     "autoload": {
