@@ -16,6 +16,7 @@ use Exception;
 use Yii;
 use cinghie\traits\CreatedTrait;
 use cinghie\traits\EditorTrait;
+use cinghie\traits\FatturazioneElettronicaTrait;
 use cinghie\traits\ModifiedTrait;
 use cinghie\traits\SocialTrait;
 use cinghie\traits\StateTrait;
@@ -36,8 +37,15 @@ use yii\helpers\Html;
  * @property int $id
  * @property string $firstname
  * @property string $lastname
+ * @property string $tax_code
+ * @property int $vat_code_prefix
+ * @property string $vat_code
+ * @property string $sdi
+ * @property string $pec
  * @property string $email
+ * @property bool accept
  * @property string $email_secondary
+ * @property bool accept_secondary
  * @property string $phone
  * @property int $phone_code
  * @property string $phone_secondary
@@ -52,9 +60,21 @@ use yii\helpers\Html;
  * @property int $fax_secondary_code
  * @property string $rule
  * @property string $rule_type
+ * @property string $billing_street
+ * @property string $billing_code
+ * @property string $billing_city
+ * @property string $billing_state
+ * @property string $billing_country
+ * @property float $billing_lat
+ * @property float $billing_lng
+ * @property string $shipping_street
+ * @property string $shipping_code
+ * @property string $shipping_city
+ * @property string $shipping_state
+ * @property string $shipping_country
+ * @property float $shipping_lat
+ * @property float $shipping_lng
  * @property string $note
- * @property int accept
- * @property int accept_secondary
  * @property string $website
  * @property string $skype
  * @property string $facebook
@@ -84,7 +104,7 @@ use yii\helpers\Html;
  */
 class Contacts extends ActiveRecord
 {
-    use CreatedTrait, EditorTrait, ModifiedTrait, SocialTrait, StateTrait, UserHelpersTrait, UserTrait, ViewsHelpersTrait;
+    use CreatedTrait, EditorTrait, FatturazioneElettronicaTrait, ModifiedTrait, SocialTrait, StateTrait, UserHelpersTrait, UserTrait, ViewsHelpersTrait;
 
     public const EVENT_AFTER_VIEW   = 'afterView';
     public const EVENT_AFTER_CREATE = 'afterCreate';
@@ -106,16 +126,19 @@ class Contacts extends ActiveRecord
      */
     public function rules()
     {
-        return array_merge(CreatedTrait::rules(), ModifiedTrait::rules(), SocialTrait::rules(), StateTrait::rules(), UserTrait::rules(), [
+        return array_merge(CreatedTrait::rules(), FatturazioneElettronicaTrait::rules(), ModifiedTrait::rules(), SocialTrait::rules(), StateTrait::rules(), UserTrait::rules(), [
             [['firstname', 'lastname'], 'required'],
+            [['billing_lat','billing_lng', 'shipping_lat', 'shipping_lng'], 'number'],
+            [['tax_code', 'vat_code', 'billing_code', 'shipping_code'], 'string', 'max' => 30],
             [['email', 'email_secondary'], 'email'],
             [['email'], 'unique', 'targetAttribute' => ['email']],
             [['website'], 'url', 'defaultScheme' => 'http'],
-            [['phone', 'phone_secondary', 'mobile', 'mobile_secondary', 'fax', 'fax_secondary'], 'string', 'max' => 50],
+            [['phone', 'phone_secondary', 'mobile', 'mobile_secondary', 'fax', 'fax_secondary', 'billing_city', 'billing_state', 'billing_country', 'shipping_city', 'shipping_state', 'shipping_country'], 'string', 'max' => 50],
             [['firstname', 'lastname', 'email', 'email_secondary'], 'string', 'max' => 100],
-            [['rule', 'rule_type', 'website', 'skype'], 'string', 'max' => 255],
+            [['rule', 'rule_type', 'billing_street', 'shipping_street', 'website', 'skype'], 'string', 'max' => 255],
             [['note'], 'string'],
             [['accept','accept_secondary','phone_code', 'phone_secondary_code', 'mobile_code', 'mobile_secondary_code', 'fax_code', 'fax_secondary_code'], 'integer'],
+            [['vat_code_prefix'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['vat_code_prefix' => 'id']],
             //[['fax_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['fax_code' => 'id']],
             //[['fax_code'], 'required', 'when' => function ($model) { return $model->fax !== ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() !== ''; }"],
             //[['fax_secondary_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['fax_secondary_code' => 'id']],
@@ -140,8 +163,15 @@ class Contacts extends ActiveRecord
             'id' => Yii::t('traits', 'ID'),
             'firstname' => Yii::t('traits', 'Firstname'),
             'lastname' => Yii::t('traits', 'Lastname'),
+            'tax_code' => Yii::t('traits', 'Tax Code'),
+            'vat_code_prefix' => Yii::t('traits', 'Vat Code Prefix'),
+            'vat_code' => Yii::t('traits', 'Vat Code'),
+            'pec' => Yii::t('traits', 'PEC'),
+            'sdi' => Yii::t('traits', 'SDI'),
             'email' => Yii::t('traits', 'Email'),
+            'accept' => Yii::t('traits', 'Accept'),
             'email_secondary' => Yii::t('traits', 'Email Secondary'),
+            'accept_secondary' => Yii::t('contacts', 'Accept Secondary'),
             'phone' => Yii::t('traits', 'Phone'),
             'phone_code' => Yii::t('traits', 'Phone Code'),
             'phone_secondary' => Yii::t('traits', 'Phone Secondary'),
@@ -154,10 +184,22 @@ class Contacts extends ActiveRecord
             'fax_code' => Yii::t('traits', 'Fax Code'),
             'fax_secondary' => Yii::t('traits', 'Fax Secondary'),
             'fax_secondary_code' => Yii::t('traits', 'Fax Secondary Code'),
-            'accept' => Yii::t('traits', 'Accept'),
-            'accept_secondary' => Yii::t('contacts', 'Accept Secondary'),
             'rule' => Yii::t('traits', 'Rule'),
             'rule_type' => Yii::t('traits', 'Rule Type'),
+            'billing_street' => Yii::t('traits', 'Billing Street'),
+            'billing_code' => Yii::t('traits', 'Billing Code'),
+            'billing_city' => Yii::t('traits', 'Billing City'),
+            'billing_state' => Yii::t('traits', 'Billing State'),
+            'billing_country' => Yii::t('traits', 'Billing Coutry'),
+            'billing_lat' => Yii::t('traits', 'Billing Latitude'),
+            'billing_lng' => Yii::t('traits', 'Billing Longitude'),
+            'shipping_street' => Yii::t('crm', 'Shipping Street'),
+            'shipping_code' => Yii::t('crm', 'Shipping Code'),
+            'shipping_city' => Yii::t('crm', 'Shipping City'),
+            'shipping_state' => Yii::t('crm', 'Shipping State'),
+            'shipping_country' => Yii::t('crm', 'Shipping Coutry'),
+            'shipping_lat' => Yii::t('crm', 'Shipping Latitude'),
+            'shipping_lng' => Yii::t('crm', 'Shipping Longitude'),
             'note' => Yii::t('traits', 'Note'),
             'website' => Yii::t('traits', 'Website'),
             'skype' => Yii::t('traits', 'Skype'),
