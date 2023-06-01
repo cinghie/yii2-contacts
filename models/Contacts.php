@@ -86,11 +86,11 @@ use yii\helpers\Html;
  *
  * @property ActiveQuery $vatCodePrefix
  * @property ActiveQuery $faxCode
- * @property ActiveQuery $faxSecondaryCode
+ * @property ActiveQuery $faxSecondarycode
  * @property ActiveQuery $mobileCode
- * @property ActiveQuery $mobileSecondaryCode
+ * @property ActiveQuery $mobileSecondarycode
  * @property ActiveQuery $phoneCode
- * @property ActiveQuery $phoneSecondaryCode
+ * @property ActiveQuery $phoneSecondarycode
  *
  * @property string $fullName
  * @property string $fullPhone
@@ -281,7 +281,7 @@ class Contacts extends ActiveRecord
 	 */
     public function getFullPhone($field = 'phone')
     {
-    	$fieldcode = $field.'Code';
+    	$fieldcode = $field.'code';
 	    $fieldcode = str_replace(['phone_secondary','mobile_secondary','fax_secondary'],['phoneSecondary','mobileSecondary','faxSecondary'],$fieldcode);
 
 	    if($this->$field && $this->$fieldcode) {
