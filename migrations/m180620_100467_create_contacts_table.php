@@ -11,9 +11,9 @@
 use cinghie\traits\migrations\Migration;
 
 /**
- * Class m180620_100477_create_contacts_table
+ * Class m180620_100467_create_contacts_table
  */
-class m180620_100477_create_contacts_table extends Migration
+class m180620_100467_create_contacts_table extends Migration
 {
     /**
      * @inheritdoc
