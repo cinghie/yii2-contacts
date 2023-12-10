@@ -974,8 +974,8 @@ class m170528_101630_insert_countries_phonecode_data extends Migration
                 [
                     'id' => '105',
                     'iso' => 'IT',
-                    'name' => 'ITALY',
-                    'nicename' => 'Italy',
+                    'name' => 'ITALIA',
+                    'nicename' => 'Italia',
                     'iso3' => 'ITA',
                     'numcode' => '380',
                     'phonecode' => '39',
