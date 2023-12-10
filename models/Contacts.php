@@ -281,7 +281,7 @@ class Contacts extends ActiveRecord
 	 */
     public function getFullPhone($field = 'phone')
     {
-    	$fieldcode = $field.'code';
+    	$fieldcode = $field.'Code';
 	    $fieldcode = str_replace(['phone_secondary','mobile_secondary','fax_secondary'],['phoneSecondary','mobileSecondary','faxSecondary'],$fieldcode);
 
 	    if($this->$field && $this->$fieldcode) {
