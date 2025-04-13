@@ -14,6 +14,9 @@ namespace cinghie\contacts\models;
 
 use Exception;
 use Yii;
+use cinghie\newsletters\models\Queue as NewslettersQueue;
+use cinghie\newsletters\models\Listsassign as NewslettersListsassign;
+use cinghie\newsletters\models\Statistics as NewslettersStatistics;
 use cinghie\traits\CreatedTrait;
 use cinghie\traits\EditorTrait;
 use cinghie\traits\FatturazioneElettronicaTrait;
@@ -37,60 +40,67 @@ use yii\helpers\Html;
  * @property int $id
  * @property string $firstname
  * @property string $lastname
- * @property string $tax_code
- * @property int $vat_code_prefix
- * @property string $vat_code
- * @property string $sdi
- * @property string $pec
- * @property string $email
- * @property bool accept
- * @property string $email_secondary
- * @property bool accept_secondary
- * @property string $phone
- * @property int $phone_code
- * @property string $phone_secondary
- * @property int $phone_secondary_code
- * @property string $mobile
- * @property int $mobile_code
- * @property string $mobile_secondary
- * @property int $mobile_secondary_code
- * @property string $fax
- * @property int $fax_code
- * @property string $fax_secondary
- * @property int $fax_secondary_code
- * @property string $rule
- * @property string $rule_type
- * @property string $billing_street
- * @property string $billing_code
- * @property string $billing_city
- * @property string $billing_state
- * @property string $billing_country
- * @property float $billing_lat
- * @property float $billing_lng
- * @property string $shipping_street
- * @property string $shipping_code
- * @property string $shipping_city
- * @property string $shipping_state
- * @property string $shipping_country
- * @property float $shipping_lat
- * @property float $shipping_lng
- * @property string $note
- * @property string $website
- * @property string $skype
- * @property string $facebook
- * @property string $instagram
- * @property string $linkedin
- * @property string $pinterest
- * @property string $twitter
- * @property string $youtube
+ * @property string|null $tax_code
+ * @property int|null $vat_code_prefix
+ * @property string|null $vat_code
+ * @property string|null $sdi
+ * @property string|null $pec
+ * @property string|null $email
+ * @property int $accept
+ * @property string|null $email_secondary
+ * @property int $accept_secondary
+ * @property string|null $phone
+ * @property int|null $phone_code
+ * @property string|null $phone_secondary
+ * @property int|null $phone_secondary_code
+ * @property string|null $mobile
+ * @property int|null $mobile_code
+ * @property string|null $mobile_secondary
+ * @property int|null $mobile_secondary_code
+ * @property string|null $fax
+ * @property int|null $fax_code
+ * @property string|null $fax_secondary
+ * @property int|null $fax_secondary_code
+ * @property string|null $rule
+ * @property string|null $rule_type
+ * @property string|null $billing_street
+ * @property string|null $billing_code
+ * @property string|null $billing_city
+ * @property string|null $billing_province
+ * @property string|null $billing_state
+ * @property string|null $billing_country
+ * @property float|null $billing_lat
+ * @property float|null $billing_lng
+ * @property string|null $shipping_street
+ * @property string|null $shipping_code
+ * @property string|null $shipping_city
+ * @property string|null $shipping_province
+ * @property string|null $shipping_state
+ * @property string|null $shipping_country
+ * @property float|null $shipping_lat
+ * @property float|null $shipping_lng
+ * @property string|null $note
+ * @property string|null $website
+ * @property string|null $skype
+ * @property string|null $facebook
+ * @property string|null $instagram
+ * @property string|null $linkedin
+ * @property string|null $twitter
+ * @property string|null $youtube
+ * @property string|null $pinterest
  *
- * @property ActiveQuery $vatCodePrefix
- * @property ActiveQuery $faxCode
- * @property ActiveQuery $faxSecondarycode
- * @property ActiveQuery $mobileCode
- * @property ActiveQuery $mobileSecondarycode
- * @property ActiveQuery $phoneCode
- * @property ActiveQuery $phoneSecondarycode
+ * @property Forms[] $contactsForms
+ * @property NewslettersQueue[] $newsletterItemsQueues
+ * @property NewslettersListsassign[] $newsletterListsAssignments
+ * @property NewslettersStatistics[] $newsletterStats
+ *
+ * @property Countriescodes $vatCodePrefix
+ * @property Countriescodes $faxCode
+ * @property Countriescodes $faxSecondarycode
+ * @property Countriescodes $mobileCode
+ * @property Countriescodes $mobileSecondarycode
+ * @property Countriescodes $phoneCode
+ * @property Countriescodes $phoneSecondarycode
  *
  * @property string $fullName
  * @property string $fullPhone
@@ -129,15 +139,20 @@ class Contacts extends ActiveRecord
         return array_merge(CreatedTrait::rules(), FatturazioneElettronicaTrait::rules(), ModifiedTrait::rules(), SocialTrait::rules(), StateTrait::rules(), UserTrait::rules(), [
             [['firstname', 'lastname'], 'required'],
             [['billing_lat','billing_lng', 'shipping_lat', 'shipping_lng'], 'number'],
-            [['tax_code', 'vat_code', 'billing_code', 'shipping_code'], 'string', 'max' => 30],
+            [['accept','accept_secondary','phone_code', 'phone_secondary_code', 'mobile_code', 'mobile_secondary_code', 'fax_code', 'fax_secondary_code'], 'integer'],
             [['email', 'email_secondary'], 'email'],
             [['email'], 'unique', 'targetAttribute' => ['email']],
             [['website'], 'url', 'defaultScheme' => 'http'],
-            [['phone', 'phone_secondary', 'mobile', 'mobile_secondary', 'fax', 'fax_secondary', 'billing_city', 'billing_state', 'billing_country', 'shipping_city', 'shipping_state', 'shipping_country'], 'string', 'max' => 50],
-            [['firstname', 'lastname', 'email', 'email_secondary'], 'string', 'max' => 100],
-            [['rule', 'rule_type', 'billing_street', 'shipping_street', 'website', 'skype'], 'string', 'max' => 255],
             [['note'], 'string'],
-            [['accept','accept_secondary','phone_code', 'phone_secondary_code', 'mobile_code', 'mobile_secondary_code', 'fax_code', 'fax_secondary_code'], 'integer'],
+            [['sdi'], 'string', 'max' => 7],
+            [['tax_code', 'vat_code', 'billing_code', 'shipping_code'], 'string', 'max' => 30],
+            [['phone', 'phone_secondary', 'mobile', 'mobile_secondary', 'fax', 'fax_secondary', 'billing_city', 'billing_province', 'billing_state', 'billing_country', 'shipping_city', 'shipping_province', 'shipping_state', 'shipping_country'], 'string', 'max' => 50],
+            [['firstname', 'lastname', 'pec', 'email', 'email_secondary'], 'string', 'max' => 100],
+            [['rule', 'rule_type', 'billing_street', 'shipping_street', 'website', 'skype'], 'string', 'max' => 255],
+            [['rule_type'], 'default', 'value' => ''],
+            [['state'], 'default', 'value' => 1],
+            [['modified'], 'default', 'value' => '0000-00-00 00:00:00'],
+            [['tax_code', 'vat_code_prefix', 'email', 'email_secondary', 'phone', 'phone_code', 'phone_secondary', 'phone_secondary_code', 'mobile', 'mobile_code', 'mobile_secondary', 'mobile_secondary_code', 'fax', 'fax_code', 'fax_secondary', 'fax_secondary_code', 'billing_street', 'billing_code', 'billing_city', 'billing_province', 'billing_state', 'billing_country', 'billing_lat', 'billing_lng', 'shipping_street', 'shipping_code', 'shipping_city', 'shipping_province', 'shipping_state', 'shipping_country', 'shipping_lat', 'shipping_lng', 'note', 'website', 'skype', 'facebook', 'instagram', 'linkedin', 'twitter', 'youtube', 'pinterest', 'user_id', 'created_by', 'modified_by'], 'default', 'value' => null],
             [['vat_code_prefix'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['vat_code_prefix' => 'id']],
             //[['fax_code'], 'exist', 'skipOnError' => true, 'targetClass' => Countriescodes::class, 'targetAttribute' => ['fax_code' => 'id']],
             //[['fax_code'], 'required', 'when' => function ($model) { return $model->fax !== ''; }, 'whenClient' => "function (attribute, value) { return $(attribute).val() !== ''; }"],
@@ -189,6 +204,7 @@ class Contacts extends ActiveRecord
             'billing_street' => Yii::t('traits', 'Billing Street'),
             'billing_code' => Yii::t('traits', 'Billing Code'),
             'billing_city' => Yii::t('traits', 'Billing City'),
+            'billing_province' => Yii::t('traits', 'Billing Province'),
             'billing_state' => Yii::t('traits', 'Billing State'),
             'billing_country' => Yii::t('traits', 'Billing Coutry'),
             'billing_lat' => Yii::t('traits', 'Billing Latitude'),
@@ -196,6 +212,7 @@ class Contacts extends ActiveRecord
             'shipping_street' => Yii::t('crm', 'Shipping Street'),
             'shipping_code' => Yii::t('crm', 'Shipping Code'),
             'shipping_city' => Yii::t('crm', 'Shipping City'),
+            'shipping_province' => Yii::t('traits', 'Shipping Province'),
             'shipping_state' => Yii::t('crm', 'Shipping State'),
             'shipping_country' => Yii::t('crm', 'Shipping Coutry'),
             'shipping_lat' => Yii::t('crm', 'Shipping Latitude'),

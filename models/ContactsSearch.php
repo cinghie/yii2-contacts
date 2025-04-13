@@ -23,7 +23,7 @@ class ContactsSearch extends Contacts
     /**
      * @var string
      */
-    public $name;
+    public string $name;
 
     /**
      * @inheritdoc
@@ -31,8 +31,9 @@ class ContactsSearch extends Contacts
     public function rules()
     {
         return [
-            [['id', 'state', 'accept', 'accept_secondary'], 'integer'],
-            [['name','firstname', 'lastname', 'email', 'email_secondary', 'phone', 'phone_code', 'phone_secondary', 'phone_secondary_code', 'mobile', 'mobile_code', 'mobile_secondary', 'mobile_secondary_code', 'fax', 'fax_code', 'fax_secondary', 'fax_secondary_code', 'rule', 'rule_type', 'skype', 'created', 'modified', 'user_id',  'created_by', 'modified_by'], 'safe'],
+            [['id', 'vat_code_prefix', 'accept', 'accept_secondary', 'phone_code', 'phone_secondary_code', 'mobile_code', 'mobile_secondary_code', 'fax_code', 'fax_secondary_code', 'state', 'user_id', 'created_by', 'modified_by'], 'integer'],
+            [['firstname', 'lastname', 'tax_code', 'vat_code', 'sdi', 'pec', 'email', 'email_secondary', 'phone', 'phone_secondary', 'mobile', 'mobile_secondary', 'fax', 'fax_secondary', 'rule', 'rule_type', 'billing_street', 'billing_code', 'billing_city', 'billing_province', 'billing_state', 'billing_country', 'shipping_street', 'shipping_code', 'shipping_city', 'shipping_province', 'shipping_state', 'shipping_country', 'note', 'website', 'skype', 'facebook', 'instagram', 'linkedin', 'twitter', 'youtube', 'pinterest', 'created', 'modified'], 'safe'],
+            [['billing_lat', 'billing_lng', 'shipping_lat', 'shipping_lng'], 'number'],
         ];
     }
 
@@ -49,6 +50,7 @@ class ContactsSearch extends Contacts
      * Creates data provider instance with search query applied
      *
      * @param array $params
+     *
      * @return ActiveDataProvider
      */
     public function search($params)
@@ -119,27 +121,36 @@ class ContactsSearch extends Contacts
             ->andFilterWhere(['like', '{{%contacts}}.email', $this->email])
             ->andFilterWhere(['like', 'email_secondary', $this->email_secondary])
             ->andFilterWhere(['like', 'phone', $this->phone])
-            ->andFilterWhere(['like', 'phone_code', $this->phone_code])
             ->andFilterWhere(['like', 'phone_secondary', $this->phone_secondary])
-            ->andFilterWhere(['like', 'phone_secondary_code', $this->phone_secondary_code])
             ->andFilterWhere(['like', 'mobile', $this->mobile])
-            ->andFilterWhere(['like', 'mobile_code', $this->mobile_code])
             ->andFilterWhere(['like', 'mobile_secondary', $this->mobile_secondary])
-            ->andFilterWhere(['like', 'mobile_secondary_code', $this->mobile_secondary_code])
             ->andFilterWhere(['like', 'fax', $this->fax])
-            ->andFilterWhere(['like', 'fax_code', $this->fax_code])
             ->andFilterWhere(['like', 'fax_secondary', $this->fax_secondary])
-            ->andFilterWhere(['like', 'fax_secondary_code', $this->fax_secondary_code])
             ->andFilterWhere(['like', 'rule', $this->rule])
             ->andFilterWhere(['like', 'rule_type', $this->rule_type])
-	        ->andFilterWhere(['like', 'website', $this->website])
-	        ->andFilterWhere(['like', 'skype', $this->skype])
-	        ->andFilterWhere(['like', 'facebook', $this->facebook])
-	        ->andFilterWhere(['like', 'instagram', $this->instagram])
-	        ->andFilterWhere(['like', 'linkedin', $this->linkedin])
-	        ->andFilterWhere(['like', 'pinterest', $this->pinterest])
-	        ->andFilterWhere(['like', 'twitter', $this->twitter])
-	        ->andFilterWhere(['like', 'youtube', $this->youtube]);
+            ->andFilterWhere(['like', 'sdi', $this->sdi])
+            ->andFilterWhere(['like', 'pec', $this->pec])
+            ->andFilterWhere(['like', 'billing_street', $this->billing_street])
+            ->andFilterWhere(['like', 'billing_code', $this->billing_code])
+            ->andFilterWhere(['like', 'billing_city', $this->billing_city])
+            ->andFilterWhere(['like', 'billing_province', $this->billing_province])
+            ->andFilterWhere(['like', 'billing_state', $this->billing_state])
+            ->andFilterWhere(['like', 'billing_country', $this->billing_country])
+            ->andFilterWhere(['like', 'shipping_street', $this->shipping_street])
+            ->andFilterWhere(['like', 'shipping_code', $this->shipping_code])
+            ->andFilterWhere(['like', 'shipping_city', $this->shipping_city])
+            ->andFilterWhere(['like', 'shipping_province', $this->shipping_province])
+            ->andFilterWhere(['like', 'shipping_state', $this->shipping_state])
+            ->andFilterWhere(['like', 'shipping_country', $this->shipping_country])
+            ->andFilterWhere(['like', 'note', $this->note])
+            ->andFilterWhere(['like', 'website', $this->website])
+            ->andFilterWhere(['like', 'skype', $this->skype])
+            ->andFilterWhere(['like', 'facebook', $this->facebook])
+            ->andFilterWhere(['like', 'instagram', $this->instagram])
+            ->andFilterWhere(['like', 'linkedin', $this->linkedin])
+            ->andFilterWhere(['like', 'twitter', $this->twitter])
+            ->andFilterWhere(['like', 'youtube', $this->youtube])
+            ->andFilterWhere(['like', 'pinterest', $this->pinterest]);;
 
         // Print SQL query
         //var_dump($query->createCommand()->sql); //exit();
