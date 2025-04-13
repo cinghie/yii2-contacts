@@ -144,7 +144,7 @@ class Contacts extends ActiveRecord
             [['email'], 'unique', 'targetAttribute' => ['email']],
             [['website'], 'url', 'defaultScheme' => 'http'],
             [['note'], 'string'],
-            [['sdi'], 'string', 'max' => 7],
+            [['sdi'], 'string', 'max' => 15],
             [['tax_code', 'vat_code', 'billing_code', 'shipping_code'], 'string', 'max' => 30],
             [['phone', 'phone_secondary', 'mobile', 'mobile_secondary', 'fax', 'fax_secondary', 'billing_city', 'billing_province', 'billing_state', 'billing_country', 'shipping_city', 'shipping_province', 'shipping_state', 'shipping_country'], 'string', 'max' => 50],
             [['firstname', 'lastname', 'pec', 'email', 'email_secondary'], 'string', 'max' => 100],
