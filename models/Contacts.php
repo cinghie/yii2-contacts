@@ -14,9 +14,6 @@ namespace cinghie\contacts\models;
 
 use Exception;
 use Yii;
-use cinghie\newsletters\models\Queue as NewslettersQueue;
-use cinghie\newsletters\models\Listsassign as NewslettersListsassign;
-use cinghie\newsletters\models\Statistics as NewslettersStatistics;
 use cinghie\traits\CreatedTrait;
 use cinghie\traits\EditorTrait;
 use cinghie\traits\FatturazioneElettronicaTrait;
@@ -90,9 +87,6 @@ use yii\helpers\Html;
  * @property string|null $pinterest
  *
  * @property Forms[] $contactsForms
- * @property NewslettersQueue[] $newsletterItemsQueues
- * @property NewslettersListsassign[] $newsletterListsAssignments
- * @property NewslettersStatistics[] $newsletterStats
  *
  * @property Countriescodes $vatCodePrefix
  * @property Countriescodes $faxCode
