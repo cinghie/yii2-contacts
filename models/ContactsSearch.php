@@ -23,7 +23,7 @@ class ContactsSearch extends Contacts
     /**
      * @var string
      */
-    public string $name;
+    public $name;
 
     /**
      * @inheritdoc
